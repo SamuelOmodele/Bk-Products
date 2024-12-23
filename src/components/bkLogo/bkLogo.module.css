@@ -1,0 +1,14 @@
+.logo-container{
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+.head-text{
+    font-weight: 600;
+    color: #5443EC;
+    /* color: #4368FA; */
+}
+.small-text{
+    text-wrap: nowrap;
+    margin-top: -6px;
+}

@@ -1,0 +1,26 @@
+.sidebar{
+    width: 100%;
+    height: 100%;
+    padding: 30px 20px 50px;
+    border-right: 1.5px solid #F3F3F5;
+}
+.sidebar-items{
+    margin-top: 50px;
+}
+.sidebar-items a{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    margin-bottom: 15px;
+    color: #49537B;
+    padding: 12px ;
+    border-radius: 10px;
+    font-weight: 500;
+    transform: .5s ;
+}
+.sidebar-items a.active, .sidebar-items a:hover{
+    background-color: #F4F5F6;
+    color: #5443EC;
+    /* color: #335AFA; */
+}
