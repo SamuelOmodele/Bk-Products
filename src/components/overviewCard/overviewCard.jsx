@@ -23,14 +23,15 @@ const OverviewCard = ({ name, amount }) => {
                     <MdOutlineShoppingCart size={28} style={{ color: '#389F70' }} />
                 </div>}
             {name === 'Sales' &&
-                <div className={styles['card-icon']} style={{backgroundColor: '#E8E6FC'}}><FaSackDollar size={26} style={{ color: '#5443EC' }} />
+                <div className={styles['card-icon']} style={{backgroundColor: '#E8E6FC'}}>
+                    <FaSackDollar size={26} style={{ color: '#5443EC' }} />
                 </div>}
                 
             {/* --- card text --- */}
             <div>
-                <p style={{ color: '#7A7A7A', fontSize: '14px' }}>Total {name}</p>
-                <p style={{ color: '#1D1D1D', fontSize: '28px', fontWeight: '600' }}>{amount}</p>
-                <div style={{ color: '#7A7A7A', fontSize: '12px', display: 'flex', gap: '5px'}}> <div style={{color: '#45945B', fontWeight: '500'}}>+27%</div> since last month</div>
+                <p className={styles['card-name-text']}>Total {name}</p>
+                <p className={styles['card-amount-text']}>{amount}</p>
+                <div className={styles['card-small-text']}> <div className={styles['card-percent-text']}>+27%</div> since last month</div>
             </div>
             <IoIosTrendingUp size={48} className={styles['trend']}/>
         </div>

@@ -30,3 +30,22 @@
     color: #45945B;
     /* bottom: 10px; */
 }
+.card-name-text{
+    color: #7A7A7A;
+    font-size: 14px;
+}
+.card-amount-text{
+    color: #1D1D1D;
+    font-size: 28px;
+    font-weight: 600;
+}
+.card-small-text{
+    color: #7A7A7A;
+    font-size: 12px;
+    display: flex;
+    gap: 5px;
+}
+.card-percent-text{
+    color: #45945B;
+    font-weight: 500;
+}

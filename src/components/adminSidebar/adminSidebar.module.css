@@ -36,3 +36,9 @@
     border-radius: 1px;
     width: 85%;
 }
+.main-menu-text{
+    margin-bottom: 15px;
+    color: #aaa;
+    font-size: 14px;
+    font-weight: 400;
+}

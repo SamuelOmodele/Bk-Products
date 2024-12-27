@@ -14,8 +14,7 @@ const AdminNavbar = () => {
                 <input type="text" placeholder='Search . . . ' />
                 <IoSearch size={20} className={styles['search-icon']}  />
             </div>
-            <IoNotificationsOutline size={21} style={{color: '#493C6F'}} />
-            {/* <FaRegUserCircle size={20} /> */}
+            <IoNotificationsOutline size={21} className={styles['notification-icon']} />
             <img src={profileImg} className={styles['profile-image']} alt="" />
         </div>
     </div>

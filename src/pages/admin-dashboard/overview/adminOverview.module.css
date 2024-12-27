@@ -14,7 +14,20 @@
     display: flex;
     justify-content: space-between;
 }
+.lower-content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
 .chart-container{
+    width: 65%;
+}
+.orders-overview-text, .top-product-text{
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+.chart-box{
     margin-top: 10px;
     width: 100%;
     height: fit-content;
@@ -23,11 +36,14 @@
     border-radius: 10px;
 }
 .top-product-container{
+    width: 32%;
+}
+.top-product-box{
     background-color: white;
     padding: 20px 20px 5px;
     border-radius: 10px;
 }
-.top-product-container .head-section{
+.top-product-box .head-section{
     display: flex;
     align-items: center;
     justify-content: space-between;

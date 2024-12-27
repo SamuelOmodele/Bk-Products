@@ -23,7 +23,7 @@ const AdminSidebar = () => {
       {/* -- Sidebar items --- */}
       
       <div className={styles['sidebar-items']}>
-        <p style={{marginBottom: '15px', color: '#aaa', fontSize: '14px', fontWeight: '400'}}>MAIN MENU</p>
+        <p className={styles['main-menu-text']}>MAIN MENU</p>
 
         <Link  className={(location === '/admin' || location === '/admin/' ? styles['active'] : styles[''])} to={'/admin/'}>
           <RxDashboard size={22}/> Overview
