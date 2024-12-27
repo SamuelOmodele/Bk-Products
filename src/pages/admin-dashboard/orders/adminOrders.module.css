@@ -1,0 +1,135 @@
+.order-page{
+    width: 100%;
+    padding: 30px;
+}
+.main-text{
+    color: #1a1a1a;
+    font-weight: 500;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+.order-table-container{
+    background-color: white;
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px 30px;
+}
+.order-filter-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 15px 0 5px;
+}
+.filter-input{
+    color: #1a1a1a;
+    border: 1.5px dotted #8a8a8a;
+    border-radius: 20px;
+    padding: 3px 15px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+.order-table-head{
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #F1F1F1;
+    margin-bottom: 15px;
+    padding: 15px 0;
+}
+.table-head-data{
+    /* flex-basis: 20%; */
+    color: #8F9395;
+    font-size: 14px;
+}
+.total-order-number{
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: #8a8a8a;
+    margin-left: auto;
+}
+.order-row{
+    width: 100%;
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    border-bottom: 1px solid #eae9f9;
+    padding-bottom: 15px;
+}
+.order-row-data{
+    /* flex-basis: 20%; */
+    font-size: 15px;
+    color: #2F3944;
+}
+.modal-header{
+    border-bottom: 1px solid #8F9395;
+    margin-bottom: 10px;
+}
+.user-info{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+.modal-tab{
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    border: 1.5px solid #E6E6E6;
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 25px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.modal-tab p{
+    width: calc((100% - 15px)/3);
+    padding: 12px 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.order-product{
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+.order-product img{
+    width: 50px;
+    border-radius: 5px;
+}
+.order-description p{
+    font-size: 13px;
+}
+.total-box{
+    border-top: 1px solid #8F9395;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+.order-price-text{
+    font-size: 14px;
+    color:  #2F3944;
+    margin-bottom: 10px;
+}
+.shipping-location{
+    padding: 10px;
+    border: 1px solid #eae9f9;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+}
+.map-image{
+    width: 90px;
+    border-radius: 10px;
+}

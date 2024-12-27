@@ -2,9 +2,9 @@
     width: 300px;
     height: fit-content;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 25px 15px;
-    border: 1px solid #F3F3F5;
+    border: 1px solid #EDEDED;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -27,6 +27,6 @@
 .trend{
     position: absolute;
     right: 25px;
-    color: #3FB594;
+    color: #45945B;
     /* bottom: 10px; */
 }

@@ -5,6 +5,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsive
 import { BsThreeDots } from 'react-icons/bs';
 import { IoIosArrowDown } from 'react-icons/io';
 import wallClock from '../../../assets/wall-clock.jpg'
+import wristWatch from '../../../assets/wrist-watch.jpg'
 
 
 const AdminOverview = () => {
@@ -34,20 +35,20 @@ const AdminOverview = () => {
         
         {/* -- BAR CHART -- */}
         <div style={{width: '65%'}}>
-          <p style={{ marginBottom: '15px', fontSize: '18px' }}>Sales Overview</p>
+          <p style={{ marginBottom: '15px', fontSize: '18px' }}>Orders Overview</p>
           <div className={styles['chart-container']}>
             
-          <div className={styles["month-box"]} style={{width: 'fit-content', marginLeft: 'auto', marginBottom: '10px'}} >6 months <IoIosArrowDown size={20} /></div>
+          <div className={styles["month-box"]} style={{width: 'fit-content', marginLeft: 'auto', marginBottom: '10px'}} >6 months <IoIosArrowDown size={18} /></div>
 
-            <ResponsiveContainer width="100%" height={273}>
+            <ResponsiveContainer width="100%" height={280}>
               <BarChart
                 data={data}
-                margin={{ top: 20, right: 0, left: -15, bottom: 5 }}
+                margin={{ top: 20, right: 0, left: -15, bottom: 0 }}
               >
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="name" style={{ fontSize: '14px', marginTop: '10px' }} />
                 <YAxis style={{ fontSize: '14px' }} />
-                <Bar dataKey="sales" fill="#7398FA" barSize={30} radius={[7, 7, 7, 7]} />
+                <Bar dataKey="sales" fill="#115FFC" barSize={27} radius={[5, 5, 5, 5]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -58,11 +59,28 @@ const AdminOverview = () => {
             <p style={{ marginBottom: '15px', fontSize: '18px' }}>Top Products</p>
             <div className={styles["top-product-container"]}>
               <div className={styles["head-section"]}>
-                <div className={styles["month-box"]} >January <IoIosArrowDown size={20} /></div>
+                <div className={styles["month-box"]} >January <IoIosArrowDown size={18} /></div>
                 <BsThreeDots size={15}/>
               </div>
               <div className={styles["top-product"]}>
-                <img src={wallClock} alt="" />
+                <img src={wristWatch} alt="" />
+                {/* <img src={wallClock} alt="" /> */}
+                <div className={styles["right-content"]}>
+                  <div className={styles["name-percent-container"]}>
+                    <p className={styles["name"]}>Wrist Watch</p>
+                    <div className={styles["percent-container"]}>
+                      <p>100/200</p>
+                      <div className={styles["percent"]}>50%</div>
+                    </div>
+                  </div>
+                  <div className={styles["outer-bar"]}>
+                    <div className={styles["inner-bar"]}></div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles["top-product"]}>
+                {/* <img src={wallClock} alt="" /> */}
+                <img src={wristWatch} alt="" />
                 <div className={styles["right-content"]}>
                   <div className={styles["name-percent-container"]}>
                     <p className={styles["name"]}>Wall Clock</p>
@@ -77,37 +95,8 @@ const AdminOverview = () => {
                 </div>
               </div>
               <div className={styles["top-product"]}>
-                <img src={wallClock} alt="" />
-                <div className={styles["right-content"]}>
-                  <div className={styles["name-percent-container"]}>
-                    <p className={styles["name"]}>Wall Clock</p>
-                    <div className={styles["percent-container"]}>
-                      <p>100/200</p>
-                      <div className={styles["percent"]}>50%</div>
-                    </div>
-                  </div>
-                  <div className={styles["outer-bar"]}>
-                    <div className={styles["inner-bar"]}></div>
-                  </div>
-                </div>
-              </div>
-              <div className={styles["top-product"]}>
-                <img src={wallClock} alt="" />
-                <div className={styles["right-content"]}>
-                  <div className={styles["name-percent-container"]}>
-                    <p className={styles["name"]}>Wall Clock</p>
-                    <div className={styles["percent-container"]}>
-                      <p>100/200</p>
-                      <div className={styles["percent"]}>50%</div>
-                    </div>
-                  </div>
-                  <div className={styles["outer-bar"]}>
-                    <div className={styles["inner-bar"]}></div>
-                  </div>
-                </div>
-              </div>
-              <div className={styles["top-product"]}>
-                <img src={wallClock} alt="" />
+              <img src={wristWatch} alt="" />
+                {/* <img src={wallClock} alt="" /> */}
                 <div className={styles["right-content"]}>
                   <div className={styles["name-percent-container"]}>
                     <p className={styles["name"]}>Wall Clock</p>
