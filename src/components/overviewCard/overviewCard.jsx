@@ -19,8 +19,8 @@ const OverviewCard = ({ name, amount }) => {
                     <AiOutlineProduct size={30} style={{ color: '#C8A823' }} />
                 </div>}
             {name === 'Orders' &&
-                <div className={styles['card-icon']} style={{backgroundColor: '#EDF9FC'}}>
-                    <MdOutlineShoppingCart size={28} style={{ color: '#389F70' }} />
+                <div className={styles['card-icon']} style={{backgroundColor: '#F1F5FF'}}>
+                    <MdOutlineShoppingCart size={28} style={{ color: '#115FFC' }} />
                 </div>}
             {name === 'Sales' &&
                 <div className={styles['card-icon']} style={{backgroundColor: '#E8E6FC'}}>

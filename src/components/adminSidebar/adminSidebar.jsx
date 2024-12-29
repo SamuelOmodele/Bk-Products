@@ -7,12 +7,12 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineProduct } from "react-icons/ai";
 import { FaRegUserCircle } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
-import { useLocation } from "react-router-dom";
 import { FaTruck } from "react-icons/fa";
+import { useSelector } from 'react-redux';
 
 const AdminSidebar = () => {
-
-  const location = useLocation().pathname;
+  
+  let sidebarMenu =useSelector((state) => (state.sidebar.activeSidebarMenu))
 
   return (
     <div className={styles['sidebar']}>
@@ -25,13 +25,13 @@ const AdminSidebar = () => {
       <div className={styles['sidebar-items']}>
         <p className={styles['main-menu-text']}>MAIN MENU</p>
 
-        <Link  className={(location === '/admin' || location === '/admin/' ? styles['active'] : styles[''])} to={'/admin/'}>
+        <Link  className={(sidebarMenu ==='overview' ? styles['active'] : styles[''])} to={'/admin/'}>
           <RxDashboard size={22}/> Overview
         </Link>
-        <Link to={'/admin/orders'} className={(location === '/admin/orders' || location === '/admin/orders/' ? styles['active'] : styles[''])}>
+        <Link to={'/admin/orders'} className={(sidebarMenu ==='orders' ? styles['active'] : styles[''])}>
           <MdOutlineShoppingCart size={22}/> Orders
         </Link>
-        <Link >
+        <Link to={'/admin/products'} className={(sidebarMenu ==='products' ? styles['active'] : styles[''])}>
           <AiOutlineProduct size={22} /> Products
         </Link>
         <Link >

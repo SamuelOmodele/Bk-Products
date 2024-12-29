@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './adminOverview.module.css'
 import OverviewCard from '../../../components/overviewCard/overviewCard'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, } from 'recharts';
@@ -6,9 +6,17 @@ import { BsThreeDots } from 'react-icons/bs';
 import { IoIosArrowDown } from 'react-icons/io';
 import wallClock from '../../../assets/wall-clock.jpg'
 import wristWatch from '../../../assets/wrist-watch.jpg'
+import { useDispatch } from 'react-redux';
+import { setActiveSidebarMenu } from '../../../redux/sidebarSlice';
 
 
 const AdminOverview = () => {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setActiveSidebarMenu('overview'));
+  }, []);
 
   const chart_data = [
     { name: 'January', sales: 3000 },

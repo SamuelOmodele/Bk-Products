@@ -1,0 +1,94 @@
+.product-form{
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+}
+.product-form-head{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.product-form-head-text{
+    font-size: 18px;
+    color: #1a1a1a;
+    font-weight: 500;
+}
+.product-form-head button{
+    color: white;
+    background-color: #115FFC;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+.product-form-body{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.product-form-body-left{
+    width: 60%;
+}
+.product-form-body-right{
+    width: 37%;
+}
+.form-group{
+    border: 1.5px solid rgba(234, 233, 249, 0.4);
+    border-radius: 10px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+}
+
+.form-group-text{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.form-field-box{
+    width: 100%;
+    margin-bottom: 15px;
+}
+.form-field-box label{
+    margin-bottom: 5px;
+    display: block;
+    font-size: 14px;
+}
+.form-field-box span{
+    font-size: 14px;
+    margin-left: 5px;
+}
+.form-field-box input[type="text"], .form-field-box input[type="number"], .form-field-box textarea{
+    background-color: #F8F8F8;
+    border: 1.5px solid #F3F3F3;
+    width: 100%;
+    font-size: 14px;
+    padding: 9px 15px;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+}
+.form-field-box input[type="text"]:focus, .form-field-box input[type="number"]:focus, .form-field-box textarea:focus{
+    border: 1.5px solid rgba(17, 95, 252, 0.5);
+}
+.active-product-image{
+    border: 1.5px solid rgba(234, 233, 249, 0.4);
+    margin-bottom: 20px;
+}
+.small-product-image-container{
+    overflow-x: scroll;
+    width: 100%;
+    display: flex;
+    /* gap: 20px; */
+}
+.small-product-image{
+    width: 100px;
+    border-radius: 5px;
+}
+.small-product-image img{
+    width: 100%;
+    border-radius: 5px;
+}

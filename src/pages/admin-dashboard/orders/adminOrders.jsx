@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './adminOrders.module.css'
 import { MdKeyboardArrowDown, MdOutlinePendingActions } from 'react-icons/md';
 import {
@@ -24,9 +24,18 @@ import map from '../../../assets/map2.jpg'
 import locationIcon from '../../../assets/location-icon.png'
 import { FaArrowsRotate } from 'react-icons/fa6';
 import { AiOutlineFileDone } from "react-icons/ai";
+import { useDispatch } from 'react-redux';
+import { setActiveSidebarMenu } from '../../../redux/sidebarSlice';
+
 
 
 const AdminOrders = () => {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setActiveSidebarMenu('orders'));
+  }, [])
 
   const orders = [
     { order_id: 'TDGN2L6BMY', customer_name: 'Omodele Samuel', payment_status: 'pending', amount: '$17,800', date: 'Dec 12' },
@@ -46,7 +55,7 @@ const AdminOrders = () => {
       <div className={styles['order-tab']}>
         <p className={orderTab === '1' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('1')}> <MdOutlinePendingActions size={22} />Pending Orders</p>
         <p className={orderTab === '2' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('2')}> <FaArrowsRotate size={18} /> Processing Orders</p>
-        <p className={orderTab === '3' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('3')}> <AiOutlineFileDone size={22}/> Shipped Orders</p>
+        <p className={orderTab === '3' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('3')}> <AiOutlineFileDone size={22} /> Shipped Orders</p>
       </div>
 
       <p className={styles['main-text']}>Orders</p>
@@ -59,7 +68,7 @@ const AdminOrders = () => {
         <div className={styles["order-filter-container"]}>
           <div className={styles['filter-input']} style={{ backgroundColor: '#115FFC', color: 'white', border: 'none' }}> Type <MdKeyboardArrowDown size={20} /></div>
           <div className={styles['filter-input']}> Status <MdKeyboardArrowDown size={20} /></div>
-          <div className={styles['filter-input']} style={{width: '140'}}> Order date <MdKeyboardArrowDown size={20} /></div>
+          <div className={styles['filter-input']} style={{ width: '140' }}> Order date <MdKeyboardArrowDown size={20} /></div>
           <p className={styles['total-order-number']}>Total : 50</p>
         </div>
 
@@ -93,14 +102,14 @@ const AdminOrders = () => {
         <ModalOverlay />
         <ModalContent sx={{ maxWidth: '450px' }} position="absolute" isCentered={false} right={4}>
           <ModalHeader className={styles['modal-header']}>Order no. TDGN2L6BMY </ModalHeader>
-          <ModalCloseButton className={styles['modal-close-button']}/>
+          <ModalCloseButton className={styles['modal-close-button']} />
           <ModalBody>
 
             {/* --- MODAL TAB --- */}
             <div className={styles['modal-tab-container']}>
-              <p className={ modalTab === '1' ? styles['active-modal-tab'] : styles['']}  onClick={() => setModalTab('1')}><FiInfo size={20} /> Order Info</p>
-              <p className={ modalTab === '2' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('2')}> <FaBoxOpen size={20} />Products</p>
-              <p className={ modalTab === '3' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('3')}> <FaShippingFast size={20} />Shipping</p>
+              <p className={modalTab === '1' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('1')}><FiInfo size={20} /> Order Info</p>
+              <p className={modalTab === '2' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('2')}> <FaBoxOpen size={20} />Products</p>
+              <p className={modalTab === '3' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('3')}> <FaShippingFast size={20} />Shipping</p>
             </div>
 
             {/* --- ORDER INFO TAB --- */}
@@ -139,60 +148,61 @@ const AdminOrders = () => {
               <div className={styles['order-info-tab-section']}>
                 <p className={styles['order-info-tab-heading']}>Items</p>
 
-                
-                <div className={styles['order-info-tab-label']} style={{alignItems: 'center', marginBottom: '20px'}}>
-                  <div style={{display: 'flex', gap: '10px'}}>
-                    <div style={{width: '60px'}}><img src={watchImage} alt="" className={styles['product-image']} /></div>
-                    
+
+                <div className={styles['order-info-tab-label']} style={{ alignItems: 'center', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <div style={{ width: '60px' }}><img src={watchImage} alt="" className={styles['product-image']} /></div>
+
                     <div>
-                      <p style={{fontSize: '15px', fontWeight: '500'}}>Wrist Watch</p>
-                      <p style={{fontSize: '13px'}}>Accessories</p>
-                      <p style={{fontSize: '13.5px'}}>$2,500/unit</p>
+                      <p style={{ fontSize: '15px', fontWeight: '500' }}>Wrist Watch</p>
+                      <p style={{ fontSize: '13px' }}>Accessories</p>
+                      <p style={{ fontSize: '13.5px' }}>$2,500/unit</p>
                     </div>
                   </div>
                   <p>2 units</p>
                   <p>$5,000</p>
                 </div>
-                <div className={styles['order-info-tab-label']} style={{alignItems: 'center', marginBottom: '20px'}}>
-                  <div style={{display: 'flex', gap: '10px'}}>
-                    <div style={{width: '60px'}}><img src={watchImage} alt="" className={styles['product-image']} /></div>
-                    
+                <div className={styles['order-info-tab-label']} style={{ alignItems: 'center', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <div style={{ width: '60px' }}><img src={watchImage} alt="" className={styles['product-image']} /></div>
+
                     <div>
-                      <p style={{fontSize: '15px', fontWeight: '500'}}>Wrist Watch</p>
-                      <p style={{fontSize: '13px'}}>Accessories</p>
-                      <p style={{fontSize: '13.5px'}}>$2,500/unit</p>
+                      <p style={{ fontSize: '15px', fontWeight: '500' }}>Wrist Watch</p>
+                      <p style={{ fontSize: '13px' }}>Accessories</p>
+                      <p style={{ fontSize: '13.5px' }}>$2,500/unit</p>
                     </div>
                   </div>
                   <p>2 units</p>
                   <p>$5,000</p>
                 </div>
-                <div className={styles['order-info-tab-label']} style={{alignItems: 'center', marginBottom: '20px'}}>
-                  <div style={{display: 'flex', gap: '10px'}}>
-                    <div style={{width: '60px'}}><img src={watchImage} alt="" className={styles['product-image']} /></div>
-                    
+                <div className={styles['order-info-tab-label']} style={{ alignItems: 'center', marginBottom: '20px' }}>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <div style={{ width: '60px' }}><img src={watchImage} alt="" className={styles['product-image']} /></div>
+
                     <div>
-                      <p style={{fontSize: '15px', fontWeight: '500'}}>Wrist Watch</p>
-                      <p style={{fontSize: '13px'}}>Accessories</p>
-                      <p style={{fontSize: '13.5px'}}>$2,500/unit</p>
+                      <p style={{ fontSize: '15px', fontWeight: '500' }}>Wrist Watch</p>
+                      <p style={{ fontSize: '13px' }}>Accessories</p>
+                      <p style={{ fontSize: '13.5px' }}>$2,500/unit</p>
                     </div>
                   </div>
                   <p>2 units</p>
                   <p>$5,000</p>
                 </div>
-                <div className={styles['order-info-tab-label']} style={{alignItems: 'center', fontSize: '15.5px', fontWeight: '500'}}>
-                  <p>Total Product amount:</p>
-                  <p>$15,000</p>
-                </div>
+
+              </div>
+              <div className={styles['order-info-tab-label']} style={{ alignItems: 'center', fontSize: '15.5px', fontWeight: '500', marginBottom: '15px' }}>
+                <p>Total Product amount:</p>
+                <p>$15,000</p>
               </div>
             </div>}
 
-            {modalTab  === '3' && <div style={{marginBottom: '15px', position: 'relative'}}>
-              <img src={map} alt=""  style={{height: '150px', width: '100%', borderRadius: '10px', marginBottom: '10px', border: '1.5px solid rgba(17, 95, 252, 0.2)'}}/>
-              <img src={locationIcon} alt=""  style={{position: 'absolute', top: '30px', left: '150px', width: '80px'}}/>
-              <p style={{fontSize: '20px', fontWeight: '600'}}>Lagos State</p>
-              <p style={{fontSize: '13px', padding: '5px 0'}}>18, Orelope Street, Egbeda, Lagos</p>
-              <p style={{fontSize: '13px', padding: '5px 0'}}>Delivery date: Jan 1 2025 (1:00PM)</p>
-              <p style={{fontSize: '16px', fontWeight: '500', display: 'flex', justifyContent: 'space-between', borderTop: '1.5px solid #E6E6E6', padding: '10px 0', marginTop: '10px'}}><span>Shipping Fee</span><span>$450</span></p>
+            {modalTab === '3' && <div style={{ marginBottom: '15px', position: 'relative' }}>
+              <img src={map} alt="" style={{ height: '150px', width: '100%', borderRadius: '10px', marginBottom: '10px', border: '1.5px solid rgba(17, 95, 252, 0.2)' }} />
+              <img src={locationIcon} alt="" style={{ position: 'absolute', top: '30px', left: '150px', width: '80px' }} />
+              <p style={{ fontSize: '20px', fontWeight: '600' }}>Lagos State</p>
+              <p style={{ fontSize: '13px', padding: '5px 0' }}>18, Orelope Street, Egbeda, Lagos</p>
+              <p style={{ fontSize: '13px', padding: '5px 0' }}>Delivery date: Jan 1 2025 (1:00PM)</p>
+              <p style={{ fontSize: '16px', fontWeight: '500', display: 'flex', justifyContent: 'space-between', borderTop: '1.5px solid #E6E6E6', padding: '10px 0', marginTop: '10px' }}><span>Shipping Fee</span><span>$450</span></p>
             </div>}
 
 
