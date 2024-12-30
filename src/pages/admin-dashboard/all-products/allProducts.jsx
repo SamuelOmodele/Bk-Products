@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IoSearch } from "react-icons/io5";
 import { LuFilter } from "react-icons/lu";
 import { IoIosArrowDown } from 'react-icons/io';
@@ -6,16 +6,20 @@ import { IoAdd } from "react-icons/io5";
 import watchImage from '../../../assets/wrist-watch.jpg'
 import styles from './allProducts.module.css'
 import { useNavigate } from 'react-router-dom';
+import { BiDotsVerticalRounded } from "react-icons/bi";
+import { FaBoxOpen } from "react-icons/fa";
+import { RiDeleteBin6Line, RiEditLine } from "react-icons/ri";
 
 const AllProducts = () => {
 
     const navigate = useNavigate();
+    const [activeProductId, setActiveProductId] = useState(null);
 
     const products  = [
         {id: 'RO9SJ7DS', name: 'Wrist Watch', image: watchImage, category: 'Accessories', price: '30,000', status: 'available in stock', stock: '130', date: 'Dec 15'},
-        {id: 'RO9SJ7DS', name: 'Wrist Watch', image: watchImage, category: 'Accessories', price: '30,000', status: 'available in stock', stock: '130', date: 'Dec 15'},
-        {id: 'RO9SJ7DS', name: 'Wrist Watch', image: watchImage, category: 'Accessories', price: '30,000', status: 'available in stock', stock: '130', date: 'Dec 15'},
-        {id: 'RO9SJ7DS', name: 'Wrist Watch', image: watchImage, category: 'Accessories', price: '30,000', status: 'available in stock', stock: '130', date: 'Dec 15'},
+        {id: 'RO9SJ7DT', name: 'Wrist Watch', image: watchImage, category: 'Accessories', price: '30,000', status: 'available in stock', stock: '130', date: 'Dec 15'},
+        {id: 'RO9SJ7DU', name: 'Wrist Watch', image: watchImage, category: 'Accessories', price: '30,000', status: 'available in stock', stock: '130', date: 'Dec 15'},
+        {id: 'RO9SJ7DV', name: 'Wrist Watch', image: watchImage, category: 'Accessories', price: '30,000', status: 'available in stock', stock: '130', date: 'Dec 15'},
     ]
     
     return (
@@ -36,7 +40,6 @@ const AllProducts = () => {
                     <div className={styles['filter-input-box']}><label htmlFor="">Category</label> <div><IoIosArrowDown className={styles['filter-input-icon']} /><input type="text" value='All Category' /></div></div>
                     <div className={styles['filter-input-box']}><label htmlFor="">Price</label><div><IoIosArrowDown className={styles['filter-input-icon']} /><input type="text" value='Price' /></div></div>
                     <div className={styles['filter-input-box']}><label htmlFor="">Status</label><div><IoIosArrowDown className={styles['filter-input-icon']} /><input type="text" value='Status' /></div></div>
-                    {/* <div className={styles['filter-input-box']}><label htmlFor="">Date</label><div><IoIosArrowDown className={styles['filter-input-icon']}/><input type="text" value='Date' /></div></div> */}
                     <div className={styles['filter-btn']}>
                         <LuFilter />
                         <div>Filter</div>
@@ -76,7 +79,13 @@ const AllProducts = () => {
                         <div className={styles['product-row-data']} style={{ width: '17%', textAlign: 'center' }}>{product.status}</div>
                         <div className={styles['product-row-data']} style={{ width: '12%', textAlign: 'center' }}>{product.stock}</div>
                         <div className={styles['product-row-data']} style={{ width: '10%', textAlign: 'center' }}>{product.date}</div>
-                        <div className={styles['product-row-data']} style={{ width: '8%', fontSize: '13px', color: '#115FFC', opacity: '0.7', cursor: 'pointer', textAlign: 'center' }}>view</div>
+                        <div className={styles['product-row-data']} style={{ width: '8%', display: 'flex', justifyContent: 'center'}}><BiDotsVerticalRounded style={{ color: '#115FFC', opacity: '0.7', cursor: 'pointer'}} size={20} onClick={() => {activeProductId ? setActiveProductId(null) : setActiveProductId(product.id)}}/></div>
+
+                        {(activeProductId === product.id) && <div className={styles['active-menu']}>
+                            <p onClick={() => navigate('/admin/products/view')}><FaBoxOpen /> View</p>
+                            <p onClick={() => navigate('/admin/products/edit')}><RiEditLine /> Edit</p>
+                            <p><RiDeleteBin6Line /> Delete</p>
+                        </div>}
                     </div>
                 ))}
 

@@ -6,6 +6,8 @@ import AdminOrders from './pages/admin-dashboard/orders/adminOrders';
 import AdminProducts from './pages/admin-dashboard/products/adminProducts';
 import AllProducts from './pages/admin-dashboard/all-products/allProducts';
 import AddProduct from './pages/admin-dashboard/add-product/addProduct';
+import EditProduct from './pages/admin-dashboard/edit-product/editProduct';
+import ViewProduct from './pages/admin-dashboard/view-product/viewProduct';
 
 
 
@@ -20,6 +22,8 @@ function App() {
           <Route path='products' element={<AdminProducts />}>
             <Route index element={<AllProducts />} />
             <Route path='add' element={<AddProduct />} />
+            <Route path='view' element={<ViewProduct />} />
+            <Route path='edit' element={<EditProduct />} />
           </Route>
           
         </Route>
