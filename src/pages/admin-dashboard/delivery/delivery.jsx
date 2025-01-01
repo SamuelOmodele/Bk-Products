@@ -4,6 +4,7 @@ import { setActiveSidebarMenu } from '../../../redux/sidebarSlice';
 import styles from './delivery.module.css'
 import { IoAdd } from "react-icons/io5";
 import map from '../../../assets/map2.jpg'
+import locationIcon from '../../../assets/location-icon.png'
 import { RiDeleteBin6Line, RiEditLine } from "react-icons/ri";
 import {
     Modal,
@@ -41,9 +42,15 @@ const Delivery = () => {
                     <p>Delivery Zones</p>
                     <button onClick={() => openModal('add')}><IoAdd size={20} /> Add Delivery Zone</button>
                 </div>
+                <div className={styles['filter-box']}>
+                    <input type="number" name="" id="" placeholder='Min Amount'/>
+                    <input type="number" name="" id="" placeholder='Max Amount'/>
+                    <button>Filter</button>
+                </div>
                 <div className={styles['delivery-content-box']}>
                     <div className={styles['single-delivery-box']}>
                         <img src={map} alt="" />
+                        <img src={locationIcon} className={styles['location-icon']} alt="" />
                         <div>
                             <p className={styles['delivery-title']}>Ikeja, Lagos State</p>
                             <p className={styles['delivery-description']}>Delivery takes between 4 to 5 working days</p>
@@ -56,6 +63,7 @@ const Delivery = () => {
                     </div>
                     <div className={styles['single-delivery-box']}>
                         <img src={map} alt="" />
+                        <img src={locationIcon} className={styles['location-icon']} alt="" />
                         <div>
                             <p className={styles['delivery-title']}>Ikeja, Lagos State</p>
                             <p className={styles['delivery-description']}>Delivery takes between 4 to 5 working days</p>
@@ -68,6 +76,7 @@ const Delivery = () => {
                     </div>
                     <div className={styles['single-delivery-box']}>
                         <img src={map} alt="" />
+                        <img src={locationIcon} className={styles['location-icon']} alt="" />
                         <div>
                             <p className={styles['delivery-title']}>Ikeja, Lagos State</p>
                             <p className={styles['delivery-description']}>Delivery takes between 4 to 5 working days</p>

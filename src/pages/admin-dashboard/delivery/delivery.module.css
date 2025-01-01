@@ -15,7 +15,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 10px 0 20px;
+    margin: 10px 0;
+    border-bottom: 1px solid #EDEDED;
+    padding-bottom: 20px;
 }
 .delivery-container-header p{
     font-size: 19px;
@@ -32,10 +34,35 @@
     transition: .2s ease;
 }
 .delivery-container-header button:hover{
-    transform: scale(0.96);
+    color: rgba(17, 95, 252, 0.8);
+}
+.filter-box{
+    display: flex;
+    margin: 30px 0;
+    gap: 20px;
+}
+.filter-box input{
+    border: 1px solid #EDEDED;
+    border-radius: 5px;
+    padding: 7px 15px;
+    width: 250px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    outline: none;
+}
+.filter-box button{
+    background-color: #115FFC;
+    color: white;
+    padding: 7px 20px;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: .2s;
+}
+.filter-box button:hover{
+    background-color: #317FFC;
 }
 .delivery-content-box{
-    margin-top: 40px;
+    margin-top: 20px;
 }
 .single-delivery-box{
     width: 100%;
@@ -51,6 +78,13 @@
 .single-delivery-box img{
     width: 200px;
     border-radius: 5px;
+}
+img.location-icon{
+    position: absolute;
+    top: 50%;
+    left: 80px;
+    transform: translateY(-45%);
+    width: 65px;
 }
 .single-delivery-action-box{
     position: absolute;
@@ -87,7 +121,6 @@
     margin-left: 5px;
 }
 .form-field-box input[type="text"], .form-field-box input[type="number"], .form-field-box textarea, .form-field-box select{
-    background-color: #FCFCFC;
     border: 1px solid #DDDDDD;
     width: 100%;
     font-size: 14px;

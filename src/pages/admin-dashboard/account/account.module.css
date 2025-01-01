@@ -17,7 +17,7 @@
     font-weight: 500;
     margin-bottom: 20px;
 }
-.box2, .box3{
+.box1, .box2{
     border: 1px solid #EDEDED;
     padding: 20px 25px;
     gap: 30px;
@@ -25,7 +25,7 @@
     margin-bottom: 30px;
     position: relative;
 }
-.box2 img{
+.box1 img{
     width: 150px;
     height: 150px;
     border-radius: 50%;
@@ -71,4 +71,56 @@
 .box-info p{
     font-size: 15px;
     font-weight: 500;
+}
+.modal-header{
+    text-align: center;
+    border-bottom: 1px solid #EDEDED;
+    margin-bottom: 10px;
+}
+.modal-image{
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+.modal-image img{
+    width: 230px;
+    border-radius: 50%;
+}
+.modal-form-row{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.form-field-box{
+    flex-basis: 48%;
+}
+.form-field-box label{
+    display: block;
+    font-size: 14.5px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.form-field-box input{
+    border: 1px solid #EDEDED;
+    border-radius: 5px;
+    padding: 7px 15px;
+    font-size: 14.5px;
+    outline: none;
+    width: 100%;
+}
+.form-field-box input:focus{
+    border: 1.5px solid rgba(17, 95, 252, 0.5);
+}
+.modal-button{
+    color: white;
+    background-color: #115FFC;
+    font-size: 15px;
+    padding: 6.5px 20px;
+    border-radius: 5px;
+    margin-bottom: 15px;
 }
