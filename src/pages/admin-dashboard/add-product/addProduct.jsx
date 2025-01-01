@@ -102,7 +102,7 @@ const AddProduct = () => {
             </div>
           </div>'
 
-          {/* --- SINGLE ORDER MODAL --- */}
+          {/* --- ADD CATEGORY MODAL --- */}
           <Modal isOpen={isOpen} onClose={onClose}  >
             <ModalOverlay />
             <ModalContent sx={{ maxWidth: '450px' }}>

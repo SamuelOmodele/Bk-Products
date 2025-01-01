@@ -1,0 +1,74 @@
+.account-page{
+    padding: 30px;
+}
+.main-text{
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.profile-container{
+    width: 100%;
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px;
+}
+.profile-text{
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.box2, .box3{
+    border: 1px solid #EDEDED;
+    padding: 20px 25px;
+    gap: 30px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    position: relative;
+}
+.box2 img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 30px;
+    display: block;
+}
+.box-text{
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.box-edit{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 1px solid #EEF3F9;
+    border-radius: 20px;
+    padding: 6px 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 14px;
+    transition: .2s;
+    cursor: pointer;
+}
+.box-edit:hover{
+    color: #115FFC;
+    border-color: rgba(17, 95, 252, 0.5);
+}
+.box-row{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+}
+.box-info{
+    width: 45%;
+}
+.box-info label{
+    font-size: 13px;
+    color: #555;
+}
+.box-info p{
+    font-size: 15px;
+    font-weight: 500;
+}

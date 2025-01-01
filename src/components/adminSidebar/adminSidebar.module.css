@@ -15,7 +15,6 @@
     text-decoration: none;
     margin-bottom: 15px;
     color: #6E6E6E;
-    /* color: #49537B; */
     padding: 12px ;
     border-radius: 10px;
     font-weight: 500;
@@ -24,10 +23,7 @@
 }
 .sidebar-items a.active, .sidebar-items a:hover{
     background-color: #F1F5FF;
-    /* background-color: #F4F5F6; */
     color: #115FFC;
-    /* color: #5443EC; */
-    /* color: #335AFA; */
 }
 .sidebar-items a.logout{
     position: absolute;

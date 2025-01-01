@@ -97,7 +97,7 @@ const AdminOrders = () => {
       </div>
 
 
-      {/* --- SINGLE ORDER MODAL --- */}
+      {/* --- ORDER MODAL --- */}
       <Modal isOpen={isOpen} onClose={onClose}  >
         <ModalOverlay />
         <ModalContent sx={{ maxWidth: '450px' }} position="absolute" isCentered={false} right={4}>
@@ -109,7 +109,7 @@ const AdminOrders = () => {
             <div className={styles['modal-tab-container']}>
               <p className={modalTab === '1' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('1')}><FiInfo size={20} /> Order Info</p>
               <p className={modalTab === '2' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('2')}> <FaBoxOpen size={20} />Products</p>
-              <p className={modalTab === '3' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('3')}> <FaShippingFast size={20} />Shipping</p>
+              <p className={modalTab === '3' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('3')}> <FaShippingFast size={20} />Delivery</p>
             </div>
 
             {/* --- ORDER INFO TAB --- */}

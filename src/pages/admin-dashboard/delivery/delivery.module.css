@@ -1,0 +1,123 @@
+.delivery-page{
+    padding: 30px;
+}
+.main-text{
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.delivery-container{
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+.delivery-container-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0 20px;
+}
+.delivery-container-header p{
+    font-size: 19px;
+    font-weight: 500;
+}
+.delivery-container-header button{
+    font-size: 14px;
+    border: 1.5px dashed rgba(17, 95, 252, 0.3);
+    color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 15px;
+    transition: .2s ease;
+}
+.delivery-container-header button:hover{
+    transform: scale(0.96);
+}
+.delivery-content-box{
+    margin-top: 40px;
+}
+.single-delivery-box{
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #eae9f9;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+.single-delivery-box img{
+    width: 200px;
+    border-radius: 5px;
+}
+.single-delivery-action-box{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+.delivery-title{
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.delivery-description{
+    color: #555;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+.delivery-price{
+    font-size: 16px;
+    font-weight: 500;
+}
+.form-field-box{
+    width: 100%;
+    margin-bottom: 10px;
+}
+.form-field-box label{
+    margin-bottom: 5px;
+    display: block;
+    font-size: 14px;
+}
+.form-field-box span{
+    font-size: 14px;
+    margin-left: 5px;
+}
+.form-field-box input[type="text"], .form-field-box input[type="number"], .form-field-box textarea, .form-field-box select{
+    background-color: #FCFCFC;
+    border: 1px solid #DDDDDD;
+    width: 100%;
+    font-size: 14px;
+    padding: 9px 15px;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+    appearance: none;
+}
+.form-field-box input[type="text"]:focus, .form-field-box input[type="number"]:focus, .form-field-box textarea:focus, .form-field-box select:focus{
+    border: 1.5px solid rgba(17, 95, 252, 0.5);
+}
+.form-field-box input[type="text"]::placeholder, .form-field-box input[type="number"]::placeholder, .form-field-box textarea::placeholder{
+    color: #555;
+}
+.modal-button{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: block;
+    padding: 8px 15px;
+    background-color: #115FFC;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+}
+.action-icon{
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.action-icon:hover{
+    background-color: #efefef;
+}

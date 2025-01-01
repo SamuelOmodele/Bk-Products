@@ -34,11 +34,11 @@ const AdminSidebar = () => {
         <Link to={'/admin/products'} className={(sidebarMenu ==='products' ? styles['active'] : styles[''])}>
           <AiOutlineProduct size={22} /> Products
         </Link>
-        <Link >
-          <FaTruck size={22} /> Shipping
+        <Link to={'/admin/delivery'} className={(sidebarMenu ==='delivery' ? styles['active'] : styles[''])}>
+          <FaTruck size={22} /> Delivery
         </Link>
-        <Link >
-          <FaRegUserCircle size={22}/> My Account
+        <Link to={'/admin/account'} className={(sidebarMenu ==='account' ? styles['active'] : styles[''])}>
+          <FaRegUserCircle size={22}/> Account
         </Link>
         <Link className={styles['logout']}>
           <BiLogOutCircle size={22} /> Logout
