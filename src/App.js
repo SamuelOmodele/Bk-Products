@@ -9,7 +9,7 @@ import AddProduct from './pages/admin-dashboard/add-product/addProduct';
 import EditProduct from './pages/admin-dashboard/edit-product/editProduct';
 import ViewProduct from './pages/admin-dashboard/view-product/viewProduct';
 import Delivery from './pages/admin-dashboard/delivery/delivery';
-import Account from './pages/admin-dashboard/account/account';
+import Settings from './pages/admin-dashboard/settings/settings';
 
 
 
@@ -29,7 +29,7 @@ function App() {
           </Route>
 
           <Route path='delivery' element={<Delivery />} />
-          <Route path='account' element={<Account />} />
+          <Route path='settings' element={<Settings />} />
           
         </Route>
       </Routes>

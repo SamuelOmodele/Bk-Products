@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setActiveSidebarMenu } from '../../../redux/sidebarSlice';
 import profilePic from '../../../assets/profile-image-crop.jpg'
 import { RiEditLine } from "react-icons/ri";
-import styles from './account.module.css'
+import styles from './settings.module.css'
 import {
     Modal,
     ModalOverlay,
@@ -16,7 +16,7 @@ import {
     useDisclosure,
 } from '@chakra-ui/react';
 
-const Account = () => {
+const Settings = () => {
 
     const dispatch = useDispatch();
 
@@ -29,12 +29,12 @@ const Account = () => {
     }
 
     useEffect(() => {
-        dispatch(setActiveSidebarMenu('account'));
+        dispatch(setActiveSidebarMenu('settings'));
     }, [])
 
     return (
         <div className={styles['account-page']}>
-            <p className={styles['main-text']}>Account</p>
+            <p className={styles['main-text']}>Settings</p>
             <div className={styles['profile-container']}>
                 <p className={styles['profile-text']}>My Profile</p>
                 <div className={styles['content-box']}>
@@ -74,32 +74,6 @@ const Account = () => {
                             </div>
                         </div>
                     </div>
-
-                    {/* --- Account Details Section --- */}
-                    <div className={styles['box2']}>
-                        <p className={styles['box-text']}>Account Details</p>
-                        <div className={styles['box-edit']} onClick={() => openModal('account-details')}>
-                            Edit
-                            <RiEditLine />
-                        </div>
-                        <div className={styles['box-row']}>
-                            <div className={styles['box-info']}>
-                                <label htmlFor="">Account Name</label>
-                                <p>Samuel Omodele</p>
-                            </div>
-                            <div className={styles['box-info']}>
-                                <label htmlFor="">Account Number</label>
-                                <p>9028377492</p>
-                            </div>
-                        </div>
-                        <div className={styles['box-row']}>
-                            <div className={styles['box-info']}>
-                                <label htmlFor="">Bank Name</label>
-                                <p>Opay</p>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
@@ -108,7 +82,7 @@ const Account = () => {
                 <ModalOverlay />
 
                 {/* -- Personal Information Modal -- */}
-                {(modalAction === 'personal-information') && <ModalContent sx={{ maxWidth: '600px' }}>
+                <ModalContent sx={{ maxWidth: '600px' }}>
                     <ModalHeader className={styles['modal-header']}>Personal Information</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
@@ -146,34 +120,7 @@ const Account = () => {
                         <button className={styles['modal-button']}>Save</button>
 
                     </ModalBody>
-                </ModalContent>}
-
-                {/* -- Account Details Modal -- */}
-                {(modalAction === 'account-details') && <ModalContent sx={{ maxWidth: '600px' }}>
-                    <ModalHeader className={styles['modal-header']}>Account Details</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <div className={styles['modal-form-row']}>
-                            <div className={styles['form-field-box']}>
-                                <label htmlFor="">Bank Name</label>
-                                <input type="text" placeholder='Enter Bank Name' />
-                            </div>
-                            <div className={styles['form-field-box']}>
-                                <label htmlFor="">Account Number</label>
-                                <input type="number" placeholder='Enter Account Number' />
-                            </div>
-                        </div>
-                        <div className={styles['modal-form-row']}>
-                            <div className={styles['form-field-box']} style={{flexBasis: '100%'}}>
-                                <label htmlFor="">Account Name</label>
-                                <input type="text" placeholder='Enter Account Name' />
-                            </div>
-                        </div>
-                        <button className={styles['modal-button']}>Save</button>
-
-                    </ModalBody>
-                </ModalContent>}
-
+                </ModalContent>
 
             </Modal>
 
@@ -181,4 +128,4 @@ const Account = () => {
     )
 }
 
-export default Account
+export default Settings

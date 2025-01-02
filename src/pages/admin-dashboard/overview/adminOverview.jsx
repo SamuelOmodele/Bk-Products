@@ -8,6 +8,7 @@ import wallClock from '../../../assets/wall-clock.jpg'
 import wristWatch from '../../../assets/wrist-watch.jpg'
 import { useDispatch } from 'react-redux';
 import { setActiveSidebarMenu } from '../../../redux/sidebarSlice';
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 
 const AdminOverview = () => {
@@ -31,7 +32,15 @@ const AdminOverview = () => {
     { image: wristWatch, product_name: 'Wrist Watch', fraction: '100/200', percentage: '50%' },
     { image: wristWatch, product_name: 'Wrist Watch', fraction: '100/200', percentage: '50%' },
     { image: wristWatch, product_name: 'Wrist Watch', fraction: '100/200', percentage: '50%' },
+    { image: wristWatch, product_name: 'Wrist Watch', fraction: '100/200', percentage: '50%' },
   ];
+
+  const orders = [
+    { order_id: 'TDGN2L6BMY', customer_name: 'Omodele Samuel', payment_status: 'pending', amount: '$17,800', date: 'Dec 12' },
+    { order_id: 'TDGN2L6BMY', customer_name: 'Omodele Samuel', payment_status: 'pending', amount: '$17,800', date: 'Dec 12' },
+    { order_id: 'TDGN2L6BMY', customer_name: 'Omodele Samuel', payment_status: 'verified', amount: '$17,800', date: 'Dec 12' },
+
+  ]
 
 
 
@@ -48,7 +57,6 @@ const AdminOverview = () => {
 
       {/* --- LOWER CONTENT --- */}
       <div className={styles['lower-content']}>
-
         {/* -- BAR CHART CONTAINER -- */}
         <div className={styles['chart-container']}>
           <p className={styles['orders-overview-text']}>Orders Overview</p>
@@ -57,7 +65,7 @@ const AdminOverview = () => {
             <div className={styles["month-box"]} style={{ width: 'fit-content', marginLeft: 'auto', marginBottom: '10px' }} >6 months <IoIosArrowDown size={18} /></div>
 
             {/* -- bar chart -- */}
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={288.5}>
               <BarChart data={chart_data} margin={{ top: 20, right: 0, left: -15, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="name" style={{ fontSize: '14px', marginTop: '10px' }} />
@@ -99,6 +107,38 @@ const AdminOverview = () => {
             ))}
           </div>
         </div>
+      </div>
+
+      {/* --- ORDER HISTORY --- */}
+      <div className={styles['order-history']}>
+        <p className={styles['order-history-text']}>Orders History</p>
+
+        <div className={styles['order-table-container']}>
+
+
+          {/* --- Table Head --- */}
+          <div className={styles["order-table-head"]}>
+            <div className={styles["table-head-data"]} style={{ width: '20%', display: 'flex', alignItems: 'center', gap: '20px' }}> <input type="checkbox" name="" id="" />Order Id</div>
+            <div className={styles["table-head-data"]} style={{ width: '25%', textAlign: 'center' }}>Customer</div>
+            <div className={styles["table-head-data"]} style={{ width: '25%', textAlign: 'center' }}>Payment status</div>
+            <div className={styles["table-head-data"]} style={{ width: '15%', textAlign: 'center' }}>Amount</div>
+            <div className={styles["table-head-data"]} style={{ width: '15%', textAlign: 'center' }}>Date</div>
+          </div>
+
+          {/* -- Order Data --- */}
+          {orders.map((order, index) => (
+            <div className={styles['order-row']} key={index}>
+              <div className={styles['order-row-data']} style={{ width: '20%', display: 'flex', alignItems: 'center', gap: '20px' }}> <input type="checkbox" name="" id="" />{order.order_id}</div>
+              <div className={styles['order-row-data']} style={{ width: '25%', textAlign: 'center' }}>{order.customer_name}</div>
+              <div className={styles['order-row-data']} style={{ width: '25%', textAlign: 'center', color: order.payment_status === 'verified' ? '#21A168' : '#F77C27', fontSize: '14px', fontWeight: '300' }}>{order.payment_status}</div>
+              <div className={styles['order-row-data']} style={{ width: '15%', textAlign: 'center' }}>{order.amount}</div>
+              <div className={styles['order-row-data']} style={{ width: '15%', textAlign: 'center' }}>{order.date}</div>
+              {/* <div className={styles['order-row-data']} style={{ width: '5%', fontSize: '13px', color: '#115FFC', opacity: '0.7', cursor: 'pointer' }}>view</div> */}
+            </div>
+          ))}
+          <span className={styles['view-all-text']}>view all <FaLongArrowAltRight size={16} /></span>
+        </div>
+
       </div>
 
     </div>

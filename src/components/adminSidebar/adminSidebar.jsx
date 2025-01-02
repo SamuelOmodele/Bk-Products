@@ -9,6 +9,7 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
 import { FaTruck } from "react-icons/fa";
 import { useSelector } from 'react-redux';
+import { IoSettingsOutline } from "react-icons/io5";
 
 const AdminSidebar = () => {
   
@@ -37,8 +38,8 @@ const AdminSidebar = () => {
         <Link to={'/admin/delivery'} className={(sidebarMenu ==='delivery' ? styles['active'] : styles[''])}>
           <FaTruck size={22} /> Delivery
         </Link>
-        <Link to={'/admin/account'} className={(sidebarMenu ==='account' ? styles['active'] : styles[''])}>
-          <FaRegUserCircle size={22}/> Account
+        <Link to={'/admin/settings'} className={(sidebarMenu ==='settings' ? styles['active'] : styles[''])}>
+          <IoSettingsOutline size={22}/> Settings
         </Link>
         <Link className={styles['logout']}>
           <BiLogOutCircle size={22} /> Logout

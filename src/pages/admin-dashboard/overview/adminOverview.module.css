@@ -26,6 +26,7 @@
 .orders-overview-text, .top-product-text{
     margin-bottom: 15px;
     font-size: 18px;
+    font-weight: 500;
 }
 .chart-box{
     margin-top: 10px;
@@ -37,6 +38,7 @@
 }
 .top-product-container{
     width: 32%;
+    margin-bottom: 20px;
 }
 .top-product-box{
     background-color: white;
@@ -102,4 +104,64 @@
     background-color: #115FFC;
     margin-top: 10px;
     border-radius: 5px;
+}
+.order-history{
+    margin-top: 10px;
+}
+.order-history-text{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.order-table-container{
+    background-color: white;
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px 30px;
+}
+.view-all-text{
+    font-size: 13px;
+    margin-right: 12px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: fit-content;
+    color: #115FFC;
+    cursor: pointer;
+}
+.view-all-text:hover{
+    color: #419FFC;
+}
+.order-table-head{
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid #F1F1F1;
+    margin-bottom: 15px;
+    padding: 15px 0;
+}
+.table-head-data{
+    /* flex-basis: 20%; */
+    color: #8F9395;
+    font-size: 14px;
+}
+.total-order-number{
+    font-size: 13px;
+    margin-bottom: 10px;
+    color: #8a8a8a;
+    margin-left: auto;
+}
+.order-row{
+    width: 100%;
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    border-bottom: 1px solid #eae9f9;
+    padding-bottom: 15px;
+    /* background-color: red; */
+}
+.order-row-data{
+    /* flex-basis: 20%; */
+    font-size: 15px;
+    color: #2F3944;
 }

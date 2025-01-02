@@ -22,7 +22,8 @@
     padding: 20px 25px;
     gap: 30px;
     border-radius: 10px;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
+    width: 60%;
     position: relative;
 }
 .box1 img{
