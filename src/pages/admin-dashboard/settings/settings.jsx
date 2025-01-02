@@ -15,16 +15,17 @@ import {
     Button,
     useDisclosure,
 } from '@chakra-ui/react';
+import { RiBankFill } from "react-icons/ri";
+import { FaRegUserCircle } from "react-icons/fa";
 
 const Settings = () => {
 
     const dispatch = useDispatch();
 
-    const [modalAction, setModalAction] = useState(null);
+    const [settingsTab, setSettingsTab] = useState('profile');
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    const openModal = (action) => {
-        setModalAction(action);
+    const openModal = () => {
         onOpen();
     }
 
@@ -35,44 +36,76 @@ const Settings = () => {
     return (
         <div className={styles['account-page']}>
             <p className={styles['main-text']}>Settings</p>
-            <div className={styles['profile-container']}>
-                <p className={styles['profile-text']}>My Profile</p>
-                <div className={styles['content-box']}>
+            <div className={styles['settings-container']}>
+                <div className={styles['settings-sidebar']}>
+                    <p className={settingsTab === 'profile' ? styles['active'] : styles['']} onClick={() => setSettingsTab('profile')}> <FaRegUserCircle size={20} /> Profile</p>
+                    <p className={settingsTab === 'bank-details' ? styles['active'] : styles['']} onClick={() => setSettingsTab('bank-details')}><RiBankFill size={20}/> Bank Details</p>
+                </div>
+                <div className={styles['settings-content']}>
+                    <p className={styles['profile-text']}>{settingsTab ==='profile' && 'My Profile'} {settingsTab ==='bank-details' && 'Bank Details'}</p>
+                    <div className={styles['content-box']}>
 
-                    {/* --- Personal Information Section --- */}
-                    <div className={styles['box1']}>
-                        <p className={styles['box-text']}>Personal Information</p>
-                        <div className={styles['box-edit']} onClick={() => openModal('personal-information')}>
-                            Edit
-                            <RiEditLine />
-                        </div>
-                        <img src={profilePic} alt="" />
-                        <div className={styles['box-row']}>
-                            <div className={styles['box-info']}>
-                                <label htmlFor=""> First Name</label>
-                                <p>Samuel</p>
+                        {/* --- Profile / Personal Information --- */}
+                        {(settingsTab ==='profile') && <div className={styles['box1']}>
+                            <p className={styles['box-text']}>Personal Information</p>
+                            <div className={styles['box-edit']} onClick={() => openModal()}>
+                                Edit
+                                <RiEditLine />
                             </div>
-                            <div className={styles['box-info']}>
-                                <label htmlFor=""> Last Name</label>
-                                <p>Omodele</p>
+                            <img src={profilePic} alt="" />
+                            <div className={styles['box-row']}>
+                                <div className={styles['box-info']}>
+                                    <label htmlFor=""> First Name</label>
+                                    <p>Samuel</p>
+                                </div>
+                                <div className={styles['box-info']}>
+                                    <label htmlFor=""> Last Name</label>
+                                    <p>Omodele</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className={styles['box-row']}>
-                            <div className={styles['box-info']}>
-                                <label htmlFor="">Email</label>
-                                <p>abc@gmail.com</p>
+                            <div className={styles['box-row']}>
+                                <div className={styles['box-info']}>
+                                    <label htmlFor="">Email</label>
+                                    <p>abc@gmail.com</p>
+                                </div>
+                                <div className={styles['box-info']}>
+                                    <label htmlFor="">Phone no.</label>
+                                    <p>08012345678</p>
+                                </div>
                             </div>
-                            <div className={styles['box-info']}>
-                                <label htmlFor="">Phone no.</label>
-                                <p>08012345678</p>
+                            <div className={styles['box-row']}>
+                                <div className={styles['box-info']}>
+                                    <label htmlFor="">Bio</label>
+                                    <p>Manager</p>
+                                </div>
                             </div>
-                        </div>
-                        <div className={styles['box-row']}>
-                            <div className={styles['box-info']}>
-                                <label htmlFor="">Bio</label>
-                                <p>Manager</p>
+                        </div>}
+
+                        {/* --- Bank Account Details --- */}
+                        {(settingsTab ==='bank-details') && <div className={styles['box1']}>
+                            <p className={styles['box-text']}>Account Details</p>
+                            <div className={styles['box-edit']} onClick={() => openModal()}>
+                                Edit
+                                <RiEditLine />
                             </div>
-                        </div>
+                            <div className={styles['box-row']}>
+                                <div className={styles['box-info']}>
+                                    <label htmlFor="">Account Name</label>
+                                    <p>BK PRODUCTS</p>
+                                </div>
+                                <div className={styles['box-info']}>
+                                    <label htmlFor=""> Account Number</label>
+                                    <p>0123456789</p>
+                                </div>
+                            </div>
+                            <div className={styles['box-row']}>
+                                <div className={styles['box-info']}>
+                                    <label htmlFor="">Bank Name</label>
+                                    <p>First Bank PLC</p>
+                                </div>
+                            </div>
+                        </div>}
+                        {(settingsTab ==='bank-details') && <p style={{color: '#ED3E4B', fontSize: '12px', fontWeight: '400', marginTop: '15px'}}>Bank details can only be modified by a super-admin</p>}
                     </div>
                 </div>
             </div>
@@ -82,7 +115,7 @@ const Settings = () => {
                 <ModalOverlay />
 
                 {/* -- Personal Information Modal -- */}
-                <ModalContent sx={{ maxWidth: '600px' }}>
+                {settingsTab === 'profile' && <ModalContent sx={{ maxWidth: '600px' }}>
                     <ModalHeader className={styles['modal-header']}>Personal Information</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
@@ -101,7 +134,7 @@ const Settings = () => {
                             </div>
                         </div>
                         <div className={styles['modal-form-row']}>
-                            <div className={styles['form-field-box']} style={{flexBasis: '100%'}}>
+                            <div className={styles['form-field-box']} style={{ flexBasis: '100%' }}>
                                 <label htmlFor="">Email</label>
                                 <input type="text" placeholder='Enter Email' />
                             </div>
@@ -120,7 +153,33 @@ const Settings = () => {
                         <button className={styles['modal-button']}>Save</button>
 
                     </ModalBody>
-                </ModalContent>
+                </ModalContent>}
+
+                {/* -- Account Details Modal -- */}
+                {settingsTab === 'bank-details' && <ModalContent sx={{ maxWidth: '500px' }}>
+                    <ModalHeader className={styles['modal-header']}>Edit Bank Details</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <div className={styles['modal-form-row']}>
+                            <div className={styles['form-field-box']}>
+                                <label htmlFor="">Bank Name</label>
+                                <input type="text" placeholder='Enter First Name' />
+                            </div>
+                            <div className={styles['form-field-box']}>
+                                <label htmlFor="">Account Number</label>
+                                <input type="text" placeholder='Enter Account Number' />
+                            </div>
+                        </div>
+                        <div className={styles['modal-form-row']}>
+                            <div className={styles['form-field-box']} style={{ flexBasis: '100%' }}>
+                                <label htmlFor="">Account Name</label>
+                                <input type="text" placeholder='Enter Account Name' />
+                            </div>
+                        </div>
+                        <button className={styles['modal-button']}>Save</button>
+
+                    </ModalBody>
+                </ModalContent>}
 
             </Modal>
 

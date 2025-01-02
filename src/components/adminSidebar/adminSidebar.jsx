@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import {RxDashboard} from "react-icons/rx";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { AiOutlineProduct } from "react-icons/ai";
-import { FaRegUserCircle } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
 import { FaTruck } from "react-icons/fa";
 import { useSelector } from 'react-redux';
