@@ -7,7 +7,7 @@ const BkLogo = ({imageSize, headTextSize, smallTextSize}) => {
         <img src="/BK_logo.png" alt="logo" style={{width: imageSize, height: imageSize}} />
         <div className={styles['logo-texts']}>
           <p className={styles['head-text']} style={{fontSize: headTextSize}}>BK Products</p>
-          <p className={styles['small-text']} style={{fontSize: smallTextSize}}> -experience innovation with BK -</p>
+          <p className={styles['small-text']} style={{fontSize: smallTextSize}}>experience innovation with BK -</p>
         </div>
     </div>
   )

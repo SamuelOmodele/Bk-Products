@@ -200,18 +200,10 @@ const AdminOrders = () => {
               <img src={map} alt="" style={{ height: '150px', width: '100%', borderRadius: '10px', marginBottom: '10px', border: '1.5px solid rgba(17, 95, 252, 0.2)' }} />
               <img src={locationIcon} alt="" style={{ position: 'absolute', top: '30px', left: '150px', width: '80px' }} />
               <p style={{ fontSize: '20px', fontWeight: '600' }}>Lagos State</p>
-              <p style={{ fontSize: '13px', padding: '5px 0' }}>18, Orelope Street, Egbeda, Lagos</p>
-              <p style={{ fontSize: '13px', padding: '5px 0' }}>Delivery date: Jan 1 2025 (1:00PM)</p>
+              <p style={{ fontSize: '13px', padding: '5px 0' }}>Delivery takes 4 - 5 working days </p>
+              {/* <p style={{ fontSize: '13px', padding: '5px 0' }}>Delivery date: Jan 1 2025 (1:00PM)</p> */}
               <p style={{ fontSize: '16px', fontWeight: '500', display: 'flex', justifyContent: 'space-between', borderTop: '1.5px solid #E6E6E6', padding: '10px 0', marginTop: '10px' }}><span>Shipping Fee</span><span>$450</span></p>
             </div>}
-
-
-            {/* line color #F0F1F5 */}
-            {/* text color #747A8B */}
-            {/* black text color #2C3035 */}
-            {/* line color #E6E6E6 */}
-            {/* p text color #5E6675 */}
-            {/* p text rght color #8E939D */}
 
           </ModalBody>
         </ModalContent>

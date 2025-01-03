@@ -40,7 +40,7 @@ const AdminSidebar = () => {
         <Link to={'/admin/settings'} className={(sidebarMenu ==='settings' ? styles['active'] : styles[''])}>
           <IoSettingsOutline size={22}/> Settings
         </Link>
-        <Link className={styles['logout']}>
+        <Link to={'/sign-in'} className={styles['logout']}>
           <BiLogOutCircle size={22} /> Logout
         </Link>
       </div>

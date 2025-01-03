@@ -1,11 +1,12 @@
 .logo-container{
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
 }
 .head-text{
     font-weight: 600;
     color: #115FFC;
+    margin-top: -5px;
     /* color: #5443EC; */
     /* color: #4368FA; */
 }
