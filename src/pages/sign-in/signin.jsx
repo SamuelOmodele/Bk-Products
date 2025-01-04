@@ -1,8 +1,12 @@
 import React from 'react'
 import styles from './signin.module.css'
 import Navbar from '../../components/navbar/navbar'
+import { useNavigate } from 'react-router-dom'
 
 const SignIn = () => {
+
+  const navigate = useNavigate();
+
   return (
     <div className={styles['sign-in-page']}>
       <Navbar />
@@ -20,7 +24,7 @@ const SignIn = () => {
           </div>
           <button>Sign in</button>
           <div>
-            <p>Don't have an account ? <span>Sign up</span></p>
+            <p>Don't have an account ? <span onClick={() => navigate('/sign-up')}>Sign up</span></p>
           </div>
         </div>
       </div>

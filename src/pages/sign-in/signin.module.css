@@ -16,7 +16,7 @@
     padding: 30px 25px;
     text-align: center;
     width: 500px;
-    margin: 50px 0;
+    margin: 80px 0;
 }
 .form h4{
     margin-bottom: 10px;
@@ -59,4 +59,15 @@
     color: white;
     border-radius: 10px;
     margin: 15px 0;
+    transition: .2s ease-in-out;
+}
+.form button:hover{
+    transform: scale(0.97);
+}
+.form span{
+    color: #115FFC;
+}
+.form span:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }

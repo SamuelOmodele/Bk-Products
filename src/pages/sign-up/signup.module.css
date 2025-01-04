@@ -1,0 +1,79 @@
+.sign-in-page{
+    width: 100%;
+}
+.content{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F3F3F3;
+    min-height: 100vh;
+    padding-top: 80px;
+}
+.form{
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px 25px;
+    /* text-align: center; */
+    width: 600px;
+    margin: 80px 0;
+}
+.form h4{
+    margin-bottom: 10px;
+    font-size: 28px;
+    font-weight: 600;
+}
+.form p{
+    margin-bottom: 30px;
+    font-size: 14.5px;
+    color: #777;
+}
+.form-content{
+    flex-wrap: wrap;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.input-box{
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: left;
+}
+.input-box label{
+    display: block;
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #777;
+}
+.input-box input{
+    border: 1.5px solid #EDEDED;
+    padding: 12px 20px;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 15px;
+    outline: none;
+}
+.input-box input:focus{
+    border: 1.5px solid rgba(17, 95, 252, 0.6);
+}
+.form button{
+    background-color: #115FFC;
+    width: 100%;
+    padding: 15px 0;
+    font-size: 16px;
+    color: white;
+    border-radius: 10px;
+    margin: 15px 0;
+    transition: .2s ease-in-out;
+}
+.form button:hover{
+    transform: scale(0.97);
+}
+.form span{
+    color: #115FFC;
+}
+.form span:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}

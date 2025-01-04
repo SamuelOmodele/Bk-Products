@@ -9,11 +9,13 @@ import wristWatch from '../../../assets/wrist-watch.jpg'
 import { useDispatch } from 'react-redux';
 import { setActiveSidebarMenu } from '../../../redux/sidebarSlice';
 import { FaLongArrowAltRight } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 
 const AdminOverview = () => {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(setActiveSidebarMenu('overview'));
@@ -136,7 +138,7 @@ const AdminOverview = () => {
               {/* <div className={styles['order-row-data']} style={{ width: '5%', fontSize: '13px', color: '#115FFC', opacity: '0.7', cursor: 'pointer' }}>view</div> */}
             </div>
           ))}
-          <span className={styles['view-all-text']}>view all <FaLongArrowAltRight size={16} /></span>
+          <span onClick={() => navigate('/admin/orders')} className={styles['view-all-text']}>view all <FaLongArrowAltRight size={16} /></span>
         </div>
 
       </div>
