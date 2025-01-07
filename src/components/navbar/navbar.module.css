@@ -20,6 +20,13 @@
     gap: 40px;
     font-size: 15px;
 }
+.menu-box p{
+    cursor: pointer;
+    transition: .2s;
+}
+.menu-box p:hover{
+    color: #115FFC;
+}
 .signin-cart-box{
     display: flex;
     gap: 15px;
@@ -34,9 +41,13 @@
     padding: 6px 18px;
     border-radius: 20px;
     font-size: 15px;
+    transition: .2s ease;
 }
 .signin-cart-box button.signin{
     background-color: white;
     border: 1.5px solid rgba(17, 95, 252, 0.7);
     color: #115FFC;
+}
+.signin-cart-box button:hover{
+    transform: scale(0.95);
 }

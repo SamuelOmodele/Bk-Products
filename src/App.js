@@ -12,6 +12,7 @@ import Delivery from './pages/admin-dashboard/delivery/delivery';
 import Settings from './pages/admin-dashboard/settings/settings';
 import SignIn from './pages/sign-in/signin';
 import SignUp from './pages/sign-up/signup';
+import Home from './pages/home/home';
 
 
 
@@ -19,6 +20,9 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        {/* -- CLIENT ROUTES --- */}
+        <Route path='/' element={<Home />} />
+
         {/* -- ADMIN DASHBOARD ROUTES -- */}
         <Route path='/admin' element={<AdminLayout />}>
           <Route index element={<AdminOverview />} />

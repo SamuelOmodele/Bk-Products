@@ -1,0 +1,76 @@
+.home-page{
+    padding: 80px 0 50px;
+}
+.hero-section{
+    background-image: url(../../assets/hero-bg2.jpeg);
+    background-size: cover;
+    background-position: 0 -50px ;
+    background-repeat: no-repeat;
+    /* background-color: #EEECEF; */
+    padding: 70px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 500px;
+    position: relative;
+}
+.hero-section::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: linear-gradient(90deg,  rgba(0, 0, 0, 0.8) 40%,  rgba(17, 95, 252, 0.15) 90%);
+
+}
+.hero-section .hero-text{
+    flex-basis: 60%;
+    z-index: 1000;
+}
+p.hanging-text{
+    position: relative;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    padding: 5px 20px;
+}
+.hanging-text::before{
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background-color: #115FFC;
+    border-radius: 10px;
+}
+.hero-section .hero-text h2{
+    display: block;
+    width: 80%;
+    font-size: 44px;
+    font-weight: 600;
+    line-height: 1.2;
+    color: white;
+}
+.hero-section .hero-text p{
+    margin-top: 20px;
+    width: 90%;
+    font-weight: 400;
+    color: white;
+}
+.hero-text button{
+    background-color: #115FFC;
+    color: white;
+    font-size: 15px;
+    padding: 8px 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+.hero-section .hero-image{
+    flex-basis: 40%;
+}
+.hero-section .hero-image img{
+    width: 100%;
+}
