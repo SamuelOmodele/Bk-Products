@@ -4,7 +4,7 @@
     background-position: 0 -50px ;
     background-repeat: no-repeat;
     /* background-color: #EEECEF; */
-    padding: 110px 50px 70px;
+    padding: 130px 50px 70px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -46,13 +46,14 @@ p.hanging-text{
 .hero-section .hero-text h2{
     display: block;
     width: 80%;
-    font-size: 46px;
+    font-size: 47px;
     font-weight: 600;
     line-height: 1.2;
     color: white;
 }
 .gold{
-    color: #FCE663;;
+    /* color: #FCE663;; */
+    color: #115FFC;
 }
 .hero-section .hero-text p{
     margin-top: 20px;

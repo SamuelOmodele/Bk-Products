@@ -3,6 +3,7 @@ import styles from './home.module.css'
 import Navbar from '../../components/navbar/navbar'
 import Hero from '../../components/hero/hero'
 import HomeFeatures from '../../components/homeFeatures/homeFeatures'
+import FeaturedProducts from '../../components/featuredProducts/featuredProducts'
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <div className={styles['home-page']}>
                 <Hero />
                 <HomeFeatures />
+                <FeaturedProducts />
             </div>
 
         </div>
