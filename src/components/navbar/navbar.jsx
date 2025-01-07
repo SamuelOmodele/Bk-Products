@@ -4,7 +4,7 @@ import styles from './navbar.module.css'
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({active}) => {
 
   const navigate = useNavigate();
 
@@ -15,10 +15,10 @@ const Navbar = () => {
       </div>
 
       <div className={styles['menu-box']}>
-        <p onClick={() => navigate('/')}>Home</p>
-        <p>Shop</p>
-        <p>About</p>
-        <p>Contact</p>
+        <p onClick={() => navigate('/')} className= {active ==='home' ? styles['active'] : ''} >Home</p>
+        <p className= {active ==='shop' ? styles['active'] : ''}>Shop</p>
+        <p className= {active ==='about' ? styles['active'] : ''}>About</p>
+        <p className= {active ==='contact' ? styles['active'] : ''}>Contact</p>
       </div>
 
       <div className={styles['signin-cart-box']}>
