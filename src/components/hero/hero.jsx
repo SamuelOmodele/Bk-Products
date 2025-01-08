@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './hero.module.css'
+import image from '../../assets/couple-image.png'
 
 const Hero = () => {
     return (
@@ -9,6 +10,7 @@ const Hero = () => {
                 <p>Shop from the comfort of your home and enjoy a stress-free experience. Explore a world of endless options and find exactly what you need in just a few clicks!</p>
                 <button>Shop now</button>
             </div>
+            <img src={image} alt="" />
         </div>
     )
 }

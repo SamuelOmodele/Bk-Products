@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './productCard.module.css'
 import { FaRegHeart } from "react-icons/fa";
-import product_img from '../../assets/hoodie.jpg'
+import product_img from '../../assets/cloth.png'
 
 const ProductCard = () => {
   return (
