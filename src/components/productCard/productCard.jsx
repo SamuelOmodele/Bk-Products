@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './productCard.module.css'
 import { FaRegHeart } from "react-icons/fa";
-import product_img from '../../assets/cloth.png'
+import product_img from '../../assets/phone.jpg'
 
 const ProductCard = () => {
   return (
@@ -11,8 +11,8 @@ const ProductCard = () => {
             <FaRegHeart className={styles['like-icon']}/>
         </div>
         <div className={styles['name-price']}>
-            <p className={styles['name']}>T Shirt</p>
-            <div className={styles['category']}>clothing</div>
+            <p className={styles['name']}>Google Pixel 9</p>
+            <div className={styles['category']}>phone</div>
         </div>
         <div className={styles['description']}>Lorem ipsum dolor sit amet consectetur.</div>
         
