@@ -4,14 +4,16 @@ import image from '../../assets/couple-image.png'
 
 const Hero = () => {
     return (
+        <>
         <div className={styles['hero-section']}>
             <div className={styles['hero-text']}>
                 <h2>Effortless <span className={styles['gold']}>Shopping</span>, Pure Convienence</h2>
-                <p>Shop from the comfort of your home and enjoy a stress-free experience. Explore a world of endless options and find exactly what you need in just a few clicks!</p>
+                <p>Shop with BK Products from the comfort of your home, and enjoy a seamless and stress-free experience!</p>
                 <button>Shop now</button>
             </div>
-            <img src={image} alt="" />
         </div>
+        <div className={styles['blue']}></div>
+        </>
     )
 }
 
