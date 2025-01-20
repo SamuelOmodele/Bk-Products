@@ -12,7 +12,7 @@ const Hero = () => {
                 <button>Shop now</button>
             </div>
         </div>
-        <div className={styles['blue']}></div>
+        <div className={styles['sliding-text']}><p>Experience the best deals and quality products at BK Products! Shop with us today . . .</p></div>
         </>
     )
 }

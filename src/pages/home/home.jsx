@@ -6,6 +6,9 @@ import HomeFeatures from '../../components/homeFeatures/homeFeatures'
 import FeaturedProducts from '../../components/featuredProducts/featuredProducts'
 import NewProducts from '../../components/newProducts/newProducts'
 import SearchBar from '../../components/searchBar/searchBar'
+import AboutUs from '../../components/aboutUs/aboutUs'
+import StayUpdated from '../../components/stayUpdated/stayUpdated'
+import Footer from '../../components/footer/footer'
 
 const Home = () => {
     return (
@@ -14,9 +17,11 @@ const Home = () => {
             <div className={styles['home-page']}>
                 <Hero />
                 <SearchBar />
-                {/* <HomeFeatures /> */}
                 <FeaturedProducts />
                 <NewProducts />
+                <AboutUs />
+                <StayUpdated />
+                <Footer />
             </div>
 
         </div>

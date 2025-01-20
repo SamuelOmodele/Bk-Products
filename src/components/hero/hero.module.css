@@ -73,8 +73,25 @@ p.hanging-text{
     border-radius: 5px;
     margin-top: 20px;
 }
-.blue{
+.sliding-text{
     width: 100%;
     background-color: #AAA;
     height: 25px;
+    font-size: 13px;
+    line-height: 25px;
+    overflow: hidden;
 }
+.sliding-text p{
+    animation: slide-left 30s linear infinite;
+    color: #222;
+    width: 600px;
+    text-wrap: nowrap;
+}
+@keyframes slide-left {
+    from {
+      margin-left: 100%;
+    }
+    to {
+       margin-left: -600px;
+    }
+  }
