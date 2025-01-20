@@ -10,7 +10,7 @@ const Footer = () => {
     <div className={styles['footer-section']}>
         <div className={styles['upper-section']}>
             <div className={styles['left']}>
-                <img src="/BK_Logo.png" alt="logo" />
+                <img src="/BK_logo.png" alt="logo" />
                 <h4>BK Products</h4>
                 <p>Experience innovation with BK</p>
             </div>
