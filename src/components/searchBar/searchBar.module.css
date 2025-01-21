@@ -4,20 +4,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 0 50px;
 }
 .search-box{
-    width: 60%;
+    width: 65%;
     display: flex;
 }
 .search-box input{
-    width: 90%;
+    width: calc(100% - 50px);
     outline: none;
     border: 1px solid #cac9d9;
     height: 50px;
     padding: 0 20px;
 }
 .search-icon{
-    width: 10%;
+    width: 50px;
     background-color: #115FFC;
     color: white;
     height: 50px;
@@ -27,4 +28,18 @@
 }
 .search-icon:hover{
     background-color: #217FFC;
+}
+@media screen and (max-width: 700px){
+    .search-box{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 530px){
+    .search-box input{
+        height: 45px;
+    }
+    .search-icon{
+        height: 45px;
+        padding: 9px;
+    }
 }

@@ -11,7 +11,7 @@ const ProductCard = () => {
             <FaRegHeart className={styles['like-icon']}/>
         </div>
         <div className={styles['name-price']}>
-            <p className={styles['name']}>Plain T-Shirt</p>
+            <p className={styles['name']}>SUN8 Generic Men Wrist Watch</p>
             <div className={styles['category']}>clothing</div>
         </div>
         <div className={styles['description']}>Lorem ipsum dolor sit amet consectetur.</div>

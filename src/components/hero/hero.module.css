@@ -29,22 +29,7 @@
     flex-basis: 60%;
     z-index: 1000;
 }
-p.hanging-text{
-    position: relative;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    padding: 5px 20px;
-}
-.hanging-text::before{
-    position: absolute;
-    content: '';
-    left: 0;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background-color: white;
-    border-radius: 10px;
-}
+
 .hero-section .hero-text h2{
     display: block;
     width: 80%;
@@ -95,3 +80,47 @@ p.hanging-text{
        margin-left: -600px;
     }
   }
+
+@media screen and (max-width: 1100px){
+    .hero-section .hero-text{
+        flex-basis: 70%;
+    }
+}
+@media screen and (max-width: 950px){
+    .hero-section .hero-text{
+        flex-basis: 80%;
+    }
+}
+@media screen and (max-width: 850px){
+    .hero-section{
+        background-size: auto 600px;
+    }
+    .hero-section .hero-text{
+        flex-basis: 90%;
+    }
+
+}
+@media screen and (max-width: 755px){
+    .hero-section .hero-text{
+        flex-basis: 100%;
+    }
+    
+}
+@media screen and (max-width: 700px){
+    .hero-section .hero-text h2{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 600px){
+    .hero-section .hero-text h2{
+        font-size: 42px;
+    }
+}
+@media screen and (max-width: 450px){
+    .hero-section .hero-text h2{
+        font-size: 32px;
+    }
+    .hero-section .hero-text p{
+        font-size: 14px;
+    }
+}
