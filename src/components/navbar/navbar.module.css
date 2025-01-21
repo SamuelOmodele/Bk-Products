@@ -31,8 +31,8 @@
     padding: 10px 0;
 }
 
-.menu-box p:hover,
-.menu-box p.active {
+.menu-box p:hover, .mobile-menu p:hover,
+.menu-box p.active, .mobile-menu p.active{
     color: #115FFC;
 }
 
