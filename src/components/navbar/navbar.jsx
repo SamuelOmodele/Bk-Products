@@ -31,7 +31,7 @@ const Navbar = ({ active }) => {
         <button className={styles['signin']} onClick={() => navigate('/sign-in')}>Sign in</button>
       </div>
 
-      <IoMenu size={36} className={styles['menu-icon']} onClick={() => setMobileMenu(mobileMenu => !mobileMenu)}/>
+      <IoMenu size={30} className={styles['menu-icon']} onClick={() => setMobileMenu(mobileMenu => !mobileMenu)}/>
 
       {/* --- side menu for small screen --- */}
       {mobileMenu && 

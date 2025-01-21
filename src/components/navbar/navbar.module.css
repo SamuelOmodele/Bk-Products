@@ -133,3 +133,10 @@ p.active::before {
         display: block;
     }
 }
+@media screen and (max-width: 500px) {
+
+    .navbar {
+        padding: 0 25px;
+    
+    }
+}
