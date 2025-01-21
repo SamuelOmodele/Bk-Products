@@ -11,20 +11,24 @@
     text-align: center;
 }
 .content h2{
+    display: inline-block;
     font-size: 30px;
     font-weight: 600;
-    margin-bottom: 10px;
-    display: flex;
+    
+    /* display: flex; */
     align-items: center;
     gap: 10px;
     width: fit-content;
     margin: auto;
+    margin-bottom: 10px;
 }
 .icon{
+    display: inline;
     background-color: #115ffc;
     padding: 8px;
     border-radius: 50%;
     color: white;
+    margin-bottom: -10px;
 }
 .content p{
     font-size: 14px;
@@ -48,4 +52,24 @@
     color: white;
     font-weight: 500;
     cursor: pointer;
+}
+@media screen and (max-width: 650px){
+    .content{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 500px){
+    .content h2{
+        font-size: 24px;
+    }
+    .stay-updated{
+        padding: 0 25px;
+    }
+    .content .form input{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .content .form button{
+        border-radius: 5px;
+    }
 }

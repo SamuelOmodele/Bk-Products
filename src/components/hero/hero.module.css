@@ -116,6 +116,11 @@
         font-size: 42px;
     }
 }
+@media screen and (max-width: 500px){
+    .hero-section{
+        padding: 100px 25px 70px;
+    }
+}
 @media screen and (max-width: 450px){
     .hero-section .hero-text h2{
         font-size: 32px;

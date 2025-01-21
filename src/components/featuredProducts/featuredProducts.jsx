@@ -11,7 +11,7 @@ const FeaturedProducts = () => {
 
         <h2>Featured Products</h2>
         <div className={styles['view-all-text']}>
-          View all 
+          View all Products
           <GoArrowRight size={22} />
         </div>
       </div>
@@ -21,6 +21,7 @@ const FeaturedProducts = () => {
         <ProductCard />
         <ProductCard />
       </div>
+      <button className={styles['view-all-btn']}>View all Products</button>
     </div>
   )
 }

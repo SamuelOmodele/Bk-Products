@@ -20,6 +20,7 @@ const NewProducts = () => {
                 <ProductCard />
                 <ProductCard />
             </div>
+            <button className={styles['view-all-btn']}>View all Products</button>
         </div>
     )
 }

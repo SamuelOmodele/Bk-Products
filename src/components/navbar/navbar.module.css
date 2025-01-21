@@ -93,6 +93,7 @@ p.active::before {
     border-top: 1px solid #cac9d9;
     text-align: center;
     padding: 20px 0;
+    border-bottom: 1px solid #cac9d9;
     
 }
 
