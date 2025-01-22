@@ -137,6 +137,9 @@ p.active::before {
 
     .navbar {
         padding: 0 25px;
-    
+        height: 65px;
+    }
+    .mobile-menu {
+        top: 65px;
     }
 }
