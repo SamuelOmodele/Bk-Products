@@ -66,9 +66,9 @@ button.view-all-btn{
         padding: 0 25px;
     }
 }
-@media screen and (max-width: 430px){
+/* @media screen and (max-width: 430px){
     .product-card-container{
         grid-template-columns: auto;
     }
     
-}
+} */
