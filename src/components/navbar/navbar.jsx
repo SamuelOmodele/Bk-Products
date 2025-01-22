@@ -16,10 +16,11 @@ const Navbar = ({ active }) => {
         <BkLogo imageSize={'50px'} headTextSize={'21px'} smallTextSize={'11px'} />
       </div>
 
+      {/* --- INLINE MENU --- */}
       <div className={styles['menu-box']}>
         <p onClick={() => navigate('/')} className={active === 'home' ? styles['active'] : ''} >Home</p>
-        <p className={active === 'shop' ? styles['active'] : ''}>Shop</p>
-        <p className={active === 'about' ? styles['active'] : ''}>About</p>
+        <p onClick={() => navigate('/shop')} className={active === 'shop' ? styles['active'] : ''}>Shop</p>
+        <p onClick={() => navigate('/about')} className={active === 'about' ? styles['active'] : ''}>About</p>
         <p className={active === 'contact' ? styles['active'] : ''}>Contact</p>
       </div>
 
@@ -33,12 +34,12 @@ const Navbar = ({ active }) => {
 
       <IoMenu size={30} className={styles['menu-icon']} onClick={() => setMobileMenu(mobileMenu => !mobileMenu)}/>
 
-      {/* --- side menu for small screen --- */}
+      {/* --- BLOCK MENU --- */}
       {mobileMenu && 
       <div className={styles['mobile-menu']}>
         <p onClick={() => navigate('/')} className={active === 'home' ? styles['active'] : ''} >Home</p>
-        <p className={active === 'shop' ? styles['active'] : ''}>Shop</p>
-        <p className={active === 'about' ? styles['active'] : ''}>About</p>
+        <p onClick={() => navigate('/shop')} className={active === 'shop' ? styles['active'] : ''}>Shop</p>
+        <p onClick={() => navigate('/about')} className={active === 'about' ? styles['active'] : ''}>About</p>
         <p className={active === 'contact' ? styles['active'] : ''}>Contact</p>
         <button>
           <MdOutlineShoppingCart size={18} />

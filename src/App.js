@@ -13,6 +13,9 @@ import Settings from './pages/admin-dashboard/settings/settings';
 import SignIn from './pages/sign-in/signin';
 import SignUp from './pages/sign-up/signup';
 import Home from './pages/home/home';
+import Shop from './pages/shop/shop';
+import About from './pages/about/about';
+import Search from './pages/search/search';
 
 
 
@@ -22,6 +25,9 @@ function App() {
       <Routes>
         {/* -- CLIENT ROUTES --- */}
         <Route path='/' element={<Home />} />
+        <Route path='/shop' element={<Shop />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/search' element={<Search />} />
 
         {/* -- ADMIN DASHBOARD ROUTES -- */}
         <Route path='/admin' element={<AdminLayout />}>

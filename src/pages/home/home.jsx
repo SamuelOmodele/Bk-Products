@@ -9,14 +9,21 @@ import SearchBar from '../../components/searchBar/searchBar'
 import AboutUs from '../../components/aboutUs/aboutUs'
 import StayUpdated from '../../components/stayUpdated/stayUpdated'
 import Footer from '../../components/footer/footer'
+import { useNavigate } from 'react-router-dom'
 
 const Home = () => {
+
+    const navigate = useNavigate();
+
     return (
         <div>
             <Navbar active={'home'}/>
-            <div className={styles['home-page']}>
+            <div className={styles['content-page']}>
                 <Hero />
-                <SearchBar />
+                <div onClick={() => navigate('/search')}>
+                    <SearchBar top='50px' />
+                </div>
+                
                 <FeaturedProducts />
                 <NewProducts />
                 <AboutUs />
