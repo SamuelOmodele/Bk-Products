@@ -28,6 +28,11 @@
     font-size: 14.5px;
     color: #777;
 }
+.error-msg{
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
 .form-content{
     flex-wrap: wrap;
     width: 100%;
@@ -66,6 +71,8 @@
     border-radius: 10px;
     margin: 15px 0;
     transition: .2s ease-in-out;
+    display: flex;
+    justify-content: center;
 }
 .form button:hover{
     transform: scale(0.97);
