@@ -10,7 +10,7 @@
     align-items: center;
     position: relative;
 }
-.contact-us-upper-section img{
+.contact-us-upper-section > img{
     height: 120%;
     position: absolute;
     right: 0;
@@ -20,6 +20,9 @@
 .section-text{
     margin-left: 14%;
     z-index: 1000;
+}
+.logo-img{
+    width: 70px;
 }
 .section-text h3{
     font-size: 36px;
@@ -74,7 +77,7 @@ p.bold{
     }
 }
 @media screen and (max-width: 950px) {
-    .contact-us-upper-section img{
+    .contact-us-upper-section > img{
         display: none;
     }
     .contact-us-upper-section{
@@ -83,6 +86,9 @@ p.bold{
     .section-text{
         margin-left: 0;
         text-align: center;
+    }
+    .logo-img{
+        margin: auto;
     }
 }
 @media screen and (max-width: 850px) {
@@ -96,6 +102,9 @@ p.bold{
         align-items: center;
         gap: 80px;
         padding-bottom: 30px;
+    }
+    .contact-us-card{
+        box-shadow: 0px 0px 2.5px 1.5px rgba(0, 0, 0, 0.1);
     }
 }
 @media screen and (max-width: 500px) {
@@ -123,4 +132,5 @@ p.bold{
     p.card-main-text{
         font-size: 18px;
     }
+    
 }

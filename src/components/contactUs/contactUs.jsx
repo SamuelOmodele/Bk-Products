@@ -3,13 +3,14 @@ import styles from './contactUs.module.css'
 import customer_support from '../../assets/customer-support.jpg';
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
-import { MdOutlineMailOutline } from "react-icons/md";
 
 const ContactUs = () => {
   return (
     <div className={styles['contact-us']}>
+        
         <div className={styles['contact-us-upper-section']}>
             <div className={styles['section-text']}>
+                <img src={'BK_logo.png'} className={styles['logo-img']} alt="logo" />
                 <h3>Get in touch</h3>
                 <p>Want to get in touch? We'd love to hear from you.</p>
                 <p>Reach out to us through any of our contacts </p>

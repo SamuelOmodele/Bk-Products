@@ -57,6 +57,12 @@
     font-size: 14px;
     font-weight: 500;
     border-radius: 5px;
+    transition: .14s;
+}
+.product-card button:hover{
+    background-color: #354666;
+    color: white;
+    transform: scale(0.99);
 }
 .price{
     margin-top: 5px;
