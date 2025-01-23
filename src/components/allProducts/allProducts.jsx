@@ -25,12 +25,12 @@ const AllProducts = () => {
   return (
     <>
       <div className={styles['banner']}>Shop with us Today !</div>
-      <div className={styles['all-product']}>
-        <div onClick={() => navigate('/search')}>
-          <SearchBar top='50px'/>
-        </div>
-        
+      
+      <div onClick={() => navigate('/search')}>
+        <SearchBar top='50px' />
+      </div>
 
+      <div className={styles['all-product']}>
         <div className={styles['filter']}>
           <div>Category <IoIosArrowDown size={17.5} /></div>
           <div>Price <IoIosArrowDown size={17.5} /></div>
@@ -53,28 +53,28 @@ const AllProducts = () => {
 
           {/* --- PAGINATION --- */}
           <div className={styles['pagination']}>
-            <IoIosArrowBack size={24} onClick={prevPage}/>
+            <IoIosArrowBack size={24} onClick={prevPage} />
 
             {lastPage === 1 && <div className={styles['pagination-content']}>
-              <div className={styles['page-number-box']} id={ currentPage === 1 ? styles['active-page-number-box'] : ''}>1</div>
+              <div className={styles['page-number-box']} id={currentPage === 1 ? styles['active-page-number-box'] : ''}>1</div>
             </div>}
 
             {lastPage === 2 && <div className={styles['pagination-content']}>
-              <div className={styles['page-number-box']} id={ currentPage === 1 ? styles['active-page-number-box'] : ''}>1</div>
-              <div className={styles['page-number-box']} id={ currentPage === 2 ? styles['active-page-number-box'] : ''}>2</div>
+              <div className={styles['page-number-box']} id={currentPage === 1 ? styles['active-page-number-box'] : ''}>1</div>
+              <div className={styles['page-number-box']} id={currentPage === 2 ? styles['active-page-number-box'] : ''}>2</div>
             </div>}
 
             {lastPage >= 3 && <div className={styles['pagination-content']}>
-              <div className={styles['page-number-box']} id={ currentPage === 1 ? styles['active-page-number-box'] : ''}>1</div>
+              <div className={styles['page-number-box']} id={currentPage === 1 ? styles['active-page-number-box'] : ''}>1</div>
               <p>. . .</p>
               {currentPage > 1 && currentPage < lastPage && <div className={styles['pagination-content']}>
                 <div className={styles['page-number-box']} id={styles['active-page-number-box']}>{currentPage}</div>
                 <p>. . .</p>
               </div>}
-              <div className={styles['page-number-box']} id={ currentPage === lastPage ? styles['active-page-number-box'] : ''}>{lastPage}</div>
+              <div className={styles['page-number-box']} id={currentPage === lastPage ? styles['active-page-number-box'] : ''}>{lastPage}</div>
             </div>}
 
-            <IoIosArrowForward size={24} onClick={nextPage}/>
+            <IoIosArrowForward size={24} onClick={nextPage} />
           </div>
         </div>
       </div>

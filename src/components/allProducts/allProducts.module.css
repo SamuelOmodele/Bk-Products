@@ -93,13 +93,28 @@
     
 }
 @media screen and (max-width: 500px){
+    .banner{
+        height: 25px;
+        line-height: 25px;
+        font-size: 12px;
+        padding: 0 10px;
+    }
+    .all-product{
+        padding: 0px 10px;
+    }
     .product-container{
         grid-template-columns: auto auto;
     }
+    .filter > div{
+        padding: 6px 15px;
+        font-size: 13px;
+    }
     .filter > div.button{
         padding: 6px 15px;
+        font-size: 13px;
     }
     .filter{
         margin-top: 30px;
+        gap: 10px;
     }
 }
