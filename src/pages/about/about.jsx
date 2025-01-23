@@ -9,14 +9,14 @@ import Footer from '../../components/footer/footer'
 const About = () => {
   return (
     <div>
-            <Navbar active={'about'} />
-            <div className={styles['content-page']}>
-                <AboutUs />
-                <StayUpdated />
-                <Footer />
-            </div>
+      <Navbar active={'about'} />
+      <div className={styles['content-page']}>
+        <AboutUs />
+        <StayUpdated />
+        <Footer />
+      </div>
 
-        </div>
+    </div>
   )
 }
 

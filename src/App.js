@@ -16,6 +16,7 @@ import Home from './pages/home/home';
 import Shop from './pages/shop/shop';
 import About from './pages/about/about';
 import Search from './pages/search/search';
+import Contact from './pages/contact/contact';
 
 
 
@@ -27,7 +28,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/shop' element={<Shop />} />
         <Route path='/about' element={<About />} />
-        <Route path='/search' element={<Search />} />
+        <Route path='/contact' element={<Contact />} />
 
         {/* -- ADMIN DASHBOARD ROUTES -- */}
         <Route path='/admin' element={<AdminLayout />}>
