@@ -63,7 +63,7 @@
         font-size: 24px;
     }
     .stay-updated{
-        padding: 0 25px;
+        padding: 0 15px;
     }
     .content .form input{
         width: 100%;
@@ -71,5 +71,8 @@
     }
     .content .form button{
         border-radius: 5px;
+    }
+    .content h2{
+        font-size: 24px;
     }
 }

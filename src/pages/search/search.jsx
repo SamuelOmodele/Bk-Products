@@ -11,7 +11,8 @@ const Search = () => {
         window.scrollTo({
             top: 0
         })
-    ), [])
+    ), []);
+    
     return (
         <div>
             <Navbar active={'shop'} />

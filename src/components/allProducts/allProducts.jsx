@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './allProducts.module.css'
 import SearchBar from '../searchBar/searchBar'
 import ProductCard from '../productCard/productCard'
@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 const AllProducts = () => {
 
   const navigate = useNavigate();
-
   const [lastPage, setLastPage] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -21,17 +20,23 @@ const AllProducts = () => {
     setCurrentPage(currentPage => currentPage > 1 ? currentPage - 1 : currentPage)
   }
 
+  useEffect(() => (
+    window.scrollTo({
+      top: 0
+    })
+  ), []);
 
   return (
     <>
       <div className={styles['banner']}>Shop with us Today !</div>
-      
+
       <div onClick={() => navigate('/search')}>
         <SearchBar top='50px' />
       </div>
 
       <div className={styles['all-product']}>
         <div className={styles['filter']}>
+          <p>Filter by</p>
           <div>Category <IoIosArrowDown size={17.5} /></div>
           <div>Price <IoIosArrowDown size={17.5} /></div>
           <div className={styles['button']}>Filter</div>

@@ -1,7 +1,7 @@
 
 .banner{
     width: 100%;
-    background-color: #115ffc;
+    background-color: #013fcc;
     height: 40px;
     color: white;
     line-height: 40px;
@@ -14,10 +14,16 @@
 }
 .filter{
     display: flex;
+    align-items: center;
     gap: 20px;
     margin-top: 70px;
     margin-bottom: 30px;
     width: 100%;
+}
+.filter > p{
+    font-size: 15.5px;
+    font-weight: 500;
+    color: #253656;
 }
 .filter > div{
     display: flex;
@@ -38,9 +44,10 @@
     width: 100%;
 }
 .all-product-content h3{
-    margin-bottom: 25px;
-    font-size: 26px;
+    margin-bottom: 30px;
+    font-size: 30px;
     font-weight: 600;
+    color: #253656;
 }
 .product-container{
     display: grid;
@@ -113,8 +120,15 @@
         padding: 6px 15px;
         font-size: 13px;
     }
+    .filter > p{
+        display: none;
+    }
     .filter{
         margin-top: 30px;
         gap: 10px;
+    }
+    .all-product-content h3{
+        margin-bottom: 15px;
+        font-size: 20px;
     }
 }
