@@ -103,14 +103,16 @@
     .banner{
         height: 25px;
         line-height: 25px;
-        font-size: 12px;
+        font-size: 10.5px;
         padding: 0 10px;
+        font-weight: 300;
     }
     .all-product{
         padding: 0px 10px;
     }
     .product-container{
         grid-template-columns: auto auto;
+        gap: 10px;
     }
     .filter > div{
         padding: 6px 15px;
