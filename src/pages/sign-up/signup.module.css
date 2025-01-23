@@ -39,19 +39,24 @@
     display: flex;
     justify-content: space-between;
 }
+.half-input-box{
+    width: 48%;
+    margin-bottom: 20px;
+    text-align: left;
+}
 .input-box{
     margin-bottom: 20px;
     width: 100%;
     text-align: left;
 }
-.input-box label{
+.input-box label, .half-input-box label{
     display: block;
     margin-bottom: 5px;
     font-size: 15px;
     font-weight: 500;
     color: #777;
 }
-.input-box input{
+.input-box input, .half-input-box input{
     border: 1.5px solid #EDEDED;
     padding: 12px 20px;
     border-radius: 10px;
@@ -59,7 +64,7 @@
     font-size: 15px;
     outline: none;
 }
-.input-box input:focus{
+.input-box input:focus, .half-input-box input:focus{
     border: 1.5px solid rgba(17, 95, 252, 0.6);
 }
 .form button{
@@ -83,4 +88,33 @@
 .form span:hover{
     text-decoration: underline;
     cursor: pointer;
+}
+
+@media screen and (max-width: 630px) {
+    .content{
+        padding: 80px 10px 0;
+    }
+}
+@media screen and (max-width: 550px) {
+    
+    .form{
+        width: 100%;
+        padding: 30px 17px;
+    }
+    .form h4{
+        font-size: 24px;
+    }
+    .form p{
+        margin-bottom: 15px;
+        font-size: 13px;
+    }
+    .input-box input, .half-input-box input{
+        border-radius: 5px;
+    }
+    .form-content{
+        flex-direction: column;
+    }
+    .half-input-box{
+        width: 100%;
+    }
 }

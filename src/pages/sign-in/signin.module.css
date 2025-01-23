@@ -72,3 +72,22 @@
     text-decoration: underline;
     cursor: pointer;
 }
+@media screen and (max-width: 550px) {
+    .content{
+        padding: 80px 10px 0;
+    }
+    .form{
+        width: 100%;
+        padding: 30px 17px;
+    }
+    .form h4{
+        font-size: 24px;
+    }
+    .form p{
+        margin-bottom: 15px;
+        font-size: 13px;
+    }
+    .input-box input{
+        border-radius: 5px;
+    }
+}

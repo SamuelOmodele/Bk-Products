@@ -150,11 +150,11 @@ const SignUp = () => {
           <p>Have an account already ? <span onClick={() => navigate('/sign-in')}>Sign in</span></p>
           {error && <div className={styles["error-msg"]}>{errorMsg}</div>}
           <div className={styles['form-content']}>
-            <div className={styles['input-box']} style={{width: '48%'}}>
+            <div className={styles['half-input-box']}>
               <label htmlFor="">First Name</label>
               <input type="text" placeholder='Enter your first name' value={firstName} onChange={(e) => setFirstName(e.target.value)} />
             </div>
-            <div className={styles['input-box']} style={{width: '48%'}}>
+            <div className={styles['half-input-box']}>
               <label htmlFor="">Last Name</label>
               <input type="text" placeholder='Enter your last name' value={lastName} onChange={(e) => setLastName(e.target.value)} />
             </div>
@@ -162,19 +162,19 @@ const SignUp = () => {
               <label htmlFor="">Email</label>
               <input type="email" placeholder='Enter your email' value={email} onChange={(e) => setEmail(e.target.value)} />
             </div>
-            <div className={styles['input-box']} style={{width: '48%'}}>
+            <div className={styles['half-input-box']}>
               <label htmlFor="">Password</label>
               <input type="password" placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            <div className={styles['input-box']} style={{width: '48%'}}>
+            <div className={styles['half-input-box']}>
               <label htmlFor="">Confirm Password</label>
               <input type="password" placeholder='confirm password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
             </div>
-            <div className={styles['input-box']} style={{width: '48%'}}>
+            <div className={styles['half-input-box']}>
               <label htmlFor="">Phone no.</label>
               <input type="number" placeholder='Enter your phone number' value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)}/>
             </div>
-            <div className={styles['input-box']} style={{width: '48%'}}>
+            <div className={styles['half-input-box']}>
               <label htmlFor="">Role</label>
               <input type="text" placeholder='Enter role' value={role} onChange={(e) => setRole(e.target.value)} />
             </div>

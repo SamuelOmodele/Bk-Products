@@ -13,7 +13,7 @@ const SignIn = () => {
       <div className={styles['content']}>
         <div className={styles['form']}>
           <h4>Sign In</h4>
-          <p>Welcome. Enter email and password to continue</p>
+          <p>Welcome, Enter email and password to continue</p>
           <div className={styles['input-box']}>
             <label htmlFor="">Email</label>
             <input type="email" placeholder='Enter your email' />
