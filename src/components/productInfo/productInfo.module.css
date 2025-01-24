@@ -5,9 +5,9 @@
 
 .product-info-section {
     display: grid;
-    grid-template-columns: 43% calc(57% - 40px);
-    gap: 40px;
-    margin-bottom: 50px;
+    grid-template-columns: 42% calc(58% - 50px);
+    gap: 50px;
+    margin-bottom: 80px;
 }
 
 .left-section > p {
@@ -34,6 +34,7 @@
 .product-images .smaller-images img {
     border-radius: 10px;
     cursor: pointer;
+    border: 2px solid #F8F8F8;
 }
 
 .right-section {
@@ -62,6 +63,7 @@
     font-weight: 600;
     padding-bottom: 20px;
     border-bottom: 1.5px solid #F2F2F2;
+    color: #354666;
 }
 
 .quantity-stock {
@@ -116,7 +118,7 @@
     font-size: 30px;
     font-weight: 600;
     color: #253656;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .similar-product-card-container {

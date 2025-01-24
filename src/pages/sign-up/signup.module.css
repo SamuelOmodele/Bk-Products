@@ -118,3 +118,25 @@
         width: 100%;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .content{
+        padding: 65px 10px 0;
+    }
+    .form{
+        margin: 30px 0;
+        border-radius: 5px;
+    }
+    .input-box label, .half-input-box label{
+        font-size: 13.5px;
+    }
+    .input-box input, .half-input-box input{
+        font-size: 13px;
+        padding: 10px 15px;
+    }
+    .form button{
+        margin: 5px 0 0;
+        padding: 10px 0;
+        border-radius: 5px;
+    }
+}

@@ -52,7 +52,9 @@ const ProductInfo = () => {
                 </div>
                 <div className={styles['right-section']}>
                     <h3 className={styles['product-name']}>SUN8 Generic Mens Wrist Watch</h3>
-                    <p className={styles['product-description']}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores debitis voluptatum impedit porro autem ad qui consequuntur ullam suscipit itaque?</p>
+                    <p className={styles['product-description']}>
+                        Luxury Gold and Black Wristwatch with Day and Date Display
+                    </p>
                     <p className={styles['product-price']}>$250.00</p>
                     <div className={styles['quantity-stock']}>
                         <div className={styles['quantity']}>
