@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import styles from './productInfo.module.css'
 import product_image1 from '../../assets/wrist-watch.jpg'
-import product_image2 from '../../assets/phone2.jpg'
-import product_image3 from '../../assets/cloth.png'
+import product_image2 from '../../assets/watch2.jpeg'
+import product_image3 from '../../assets/watch3.avif'
+import product_image4 from '../../assets/watch4.webp'
+import product_image5 from '../../assets/watch5.jpg'
 import { FaRegHeart } from 'react-icons/fa6'
 import ProductCard from '../productCard/productCard'
 import { FiMinus } from "react-icons/fi";
@@ -16,7 +18,7 @@ const ProductInfo = () => {
         });
     }, []);
 
-    const [images, setImages] = useState([product_image1, product_image2, product_image3, product_image1, product_image2])
+    const [images, setImages] = useState([product_image1, product_image2, product_image3, product_image4, product_image5])
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const availableQuantity = 20;
     const [selectedQuantity, setSelectedQualtity] = useState(1);
