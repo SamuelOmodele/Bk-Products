@@ -17,6 +17,7 @@ import Shop from './pages/shop/shop';
 import About from './pages/about/about';
 import Search from './pages/search/search';
 import Contact from './pages/contact/contact';
+import Error404 from './pages/error404/error404';
 
 
 
@@ -49,6 +50,9 @@ function App() {
         {/* -- SIGN IN & SIGN UP ROUTES -- */}
         <Route path='/sign-in' element={<SignIn />}/>
         <Route path='/sign-up' element={<SignUp />}/>
+
+        {/* -- PAGE NOT FOUND -- */}
+        <Route path='*' element={<Error404 />}/>
 
       </Routes>
     </div>
