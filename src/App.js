@@ -18,6 +18,7 @@ import About from './pages/about/about';
 import Search from './pages/search/search';
 import Contact from './pages/contact/contact';
 import Error404 from './pages/error404/error404';
+import ProductDetails from './pages/product-details/productDetails';
 
 
 
@@ -28,6 +29,7 @@ function App() {
         {/* -- CLIENT ROUTES --- */}
         <Route path='/' element={<Home />} />
         <Route path='/shop' element={<Shop />} />
+        <Route path='/product-detail' element={<ProductDetails />} />
         <Route path='/about' element={<About />} />
         <Route path='/search' element={<Search />} />
         <Route path='/contact' element={<Contact />} />
