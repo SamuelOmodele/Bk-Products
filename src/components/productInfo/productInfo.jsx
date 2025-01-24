@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './productInfo.module.css'
 import product_image1 from '../../assets/wrist-watch.jpg'
 import product_image2 from '../../assets/phone2.jpg'
@@ -10,19 +10,32 @@ import { FiPlus } from "react-icons/fi";
 
 const ProductInfo = () => {
 
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+    // Update the state whenever the window is resized
+    useEffect(() => {
+        const handleResize = () => setScreenWidth(window.innerWidth);
+
+        // Add event listener
+        window.addEventListener('resize', handleResize);
+
+        // Clean up the event listener on component unmount
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const [images, setImages] = useState([product_image1, product_image2, product_image3, product_image1, product_image2])
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const availableQuantity = 20;
     const [selectedQuantity, setSelectedQualtity] = useState(1);
 
     const incrementQuantity = () => {
-        if (selectedQuantity < availableQuantity){
+        if (selectedQuantity < availableQuantity) {
             setSelectedQualtity(selectedQuantity => selectedQuantity + 1);
         }
     }
 
     const decrementQuantity = () => {
-        if (selectedQuantity > 1){
+        if (selectedQuantity > 1) {
             setSelectedQualtity(selectedQuantity => selectedQuantity - 1);
         }
     }
@@ -31,14 +44,14 @@ const ProductInfo = () => {
         <div className={styles['product-info-page']}>
             <div className={styles['product-info-section']}>
                 <div className={styles['left-section']}>
-                    <p>Products {'>'} Gadgets</p>
+                    <p>Products {'>'} Gadgets {screenWidth}</p>
                     <div className={styles['product-images']}>
-                        <img src={images[currentImageIndex]} alt="" className={styles['main-image']}/>
+                        <img src={images[currentImageIndex]} alt="" className={styles['main-image']} />
                         <div className={styles['smaller-images']}>
                             {images.map((image, index) => (
-                                <img src={image} key={index} alt="" onClick={() => setCurrentImageIndex(index)} style={{border: (currentImageIndex === index) ? "2px solid #354666" : ''}}/>
+                                <img src={image} key={index} alt="" onClick={() => setCurrentImageIndex(index)} style={{ border: (currentImageIndex === index) ? "2px solid #354666" : '' }} />
                             ))}
-                            
+
                         </div>
                     </div>
                 </div>
@@ -50,7 +63,7 @@ const ProductInfo = () => {
                         <div className={styles['quantity']}>
                             <p><FiMinus onClick={decrementQuantity} className={styles['icon']} /></p>
                             <p>{selectedQuantity}</p>
-                            <p><FiPlus onClick={incrementQuantity} className={styles['icon']}/></p>
+                            <p><FiPlus onClick={incrementQuantity} className={styles['icon']} /></p>
                         </div>
                         <p className={styles['stock']}> <span className={styles['stock-no']}>20 items</span> available in stock</p>
                     </div>

@@ -165,6 +165,7 @@
     
 
     .product-images .smaller-images {
+        grid-template-columns: calc((100% - 40px)/5) calc((100% - 40px)/5) calc((100% - 40px)/5) calc((100% - 40px)/5) calc((100% - 40px)/5);
         gap: 10px;
     }
 
