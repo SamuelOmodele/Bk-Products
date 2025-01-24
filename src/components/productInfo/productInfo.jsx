@@ -5,11 +5,27 @@ import product_image2 from '../../assets/phone2.jpg'
 import product_image3 from '../../assets/cloth.png'
 import { FaRegHeart } from 'react-icons/fa6'
 import ProductCard from '../productCard/productCard'
+import { FiMinus } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 
 const ProductInfo = () => {
 
     const [images, setImages] = useState([product_image1, product_image2, product_image3, product_image1, product_image2])
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const availableQuantity = 20;
+    const [selectedQuantity, setSelectedQualtity] = useState(1);
+
+    const incrementQuantity = () => {
+        if (selectedQuantity < availableQuantity){
+            setSelectedQualtity(selectedQuantity => selectedQuantity + 1);
+        }
+    }
+
+    const decrementQuantity = () => {
+        if (selectedQuantity > 1){
+            setSelectedQualtity(selectedQuantity => selectedQuantity - 1);
+        }
+    }
 
     return (
         <div className={styles['product-info-page']}>
@@ -32,9 +48,9 @@ const ProductInfo = () => {
                     <p className={styles['product-price']}>$250.00</p>
                     <div className={styles['quantity-stock']}>
                         <div className={styles['quantity']}>
-                            <p>-</p>
-                            <p>1</p>
-                            <p>+</p>
+                            <p><FiMinus onClick={decrementQuantity} className={styles['icon']} /></p>
+                            <p>{selectedQuantity}</p>
+                            <p><FiPlus onClick={incrementQuantity} className={styles['icon']}/></p>
                         </div>
                         <p className={styles['stock']}> <span className={styles['stock-no']}>20 items</span> available in stock</p>
                     </div>

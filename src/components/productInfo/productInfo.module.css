@@ -77,6 +77,11 @@
     gap: 25px;
     border-radius: 30px;
     align-items: center;
+    user-select: none;
+}
+
+.quantity .icon{
+    cursor: pointer;
 }
 
 .stock-no{
