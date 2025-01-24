@@ -27,18 +27,13 @@
     width: 100%;
     display: grid;
     gap: 15px;
-    grid-template-columns: auto auto auto auto auto;
+    grid-template-columns: calc((100% - 60px)/5) calc((100% - 60px)/5) calc((100% - 60px)/5) calc((100% - 60px)/5) calc((100% - 60px)/5);
 
 }
 
 .product-images .smaller-images img {
     border-radius: 10px;
-
-}
-
-.product-images .smaller-images img:first-child {
-    border: 2px solid #354666;
-
+    cursor: pointer;
 }
 
 .right-section {

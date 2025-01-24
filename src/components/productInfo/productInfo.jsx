@@ -1,23 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './productInfo.module.css'
-import product_image from '../../assets/wrist-watch.jpg'
+import product_image1 from '../../assets/wrist-watch.jpg'
+import product_image2 from '../../assets/phone2.jpg'
+import product_image3 from '../../assets/cloth.png'
 import { FaRegHeart } from 'react-icons/fa6'
 import ProductCard from '../productCard/productCard'
 
 const ProductInfo = () => {
+
+    const [images, setImages] = useState([product_image1, product_image2, product_image3, product_image1, product_image2])
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
     return (
         <div className={styles['product-info-page']}>
             <div className={styles['product-info-section']}>
                 <div className={styles['left-section']}>
                     <p>Products {'>'} Gadgets</p>
                     <div className={styles['product-images']}>
-                        <img src={product_image} alt="" className={styles['main-image']}/>
+                        <img src={images[currentImageIndex]} alt="" className={styles['main-image']}/>
                         <div className={styles['smaller-images']}>
-                            <img src={product_image} alt="" />
-                            <img src={product_image} alt="" />
-                            <img src={product_image} alt="" />
-                            <img src={product_image} alt="" />
-                            <img src={product_image} alt="" />
+                            {images.map((image, index) => (
+                                <img src={image} key={index} alt="" onClick={() => setCurrentImageIndex(index)} style={{border: (currentImageIndex === index) ? "2px solid #354666" : ''}}/>
+                            ))}
+                            
                         </div>
                     </div>
                 </div>
