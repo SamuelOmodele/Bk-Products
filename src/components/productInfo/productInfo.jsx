@@ -10,17 +10,10 @@ import { FiPlus } from "react-icons/fi";
 
 const ProductInfo = () => {
 
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-    // Update the state whenever the window is resized
     useEffect(() => {
-        const handleResize = () => setScreenWidth(window.innerWidth);
-
-        // Add event listener
-        window.addEventListener('resize', handleResize);
-
-        // Clean up the event listener on component unmount
-        return () => window.removeEventListener('resize', handleResize);
+        window.scrollTo({
+            top: 0
+        });
     }, []);
 
     const [images, setImages] = useState([product_image1, product_image2, product_image3, product_image1, product_image2])
@@ -44,7 +37,7 @@ const ProductInfo = () => {
         <div className={styles['product-info-page']}>
             <div className={styles['product-info-section']}>
                 <div className={styles['left-section']}>
-                    <p>Products {'>'} Gadgets {screenWidth}</p>
+                    <p>Products {'>'} Gadgets </p>
                     <div className={styles['product-images']}>
                         <img src={images[currentImageIndex]} alt="" className={styles['main-image']} />
                         <div className={styles['smaller-images']}>
