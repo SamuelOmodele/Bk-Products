@@ -22,6 +22,13 @@ const ProductInfo = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const availableQuantity = 20;
     const [selectedQuantity, setSelectedQualtity] = useState(1);
+    const product_features = [
+        "Dial Design: Black dial with luminous hands and elegant markers for easy readability.",
+        "Day and Date Functionality: Stay organized with a clear day and date display at the 3 o'clock position.",
+        "Material: High-quality stainless steel strap with a polished gold and silver finish.",
+        "Water-Resistant: Built to withstand everyday splashes and brief water exposure.",
+        "Precision Movement: Powered by a reliable quartz movement for accurate timekeeping."
+      ]
 
     const incrementQuantity = () => {
         if (selectedQuantity < availableQuantity) {
@@ -54,6 +61,13 @@ const ProductInfo = () => {
                     <h3 className={styles['product-name']}>SUN8 Generic Mens Wrist Watch</h3>
                     <p className={styles['product-description']}>
                         Luxury Gold and Black Wristwatch with Day and Date Display
+                    </p>
+                    <p className={styles['product-features']}>
+                        <p className={styles['features-head']}>Features</p>
+                        {product_features.map((feature, index) => (
+                            <li key={index} className={styles['each-feature']}>{feature}</li>
+                        ))}
+                        
                     </p>
                     <p className={styles['product-price']}>$250.00</p>
                     <div className={styles['quantity-stock']}>
