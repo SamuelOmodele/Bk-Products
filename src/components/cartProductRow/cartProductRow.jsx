@@ -6,7 +6,8 @@ import { FiMinus, FiPlus } from 'react-icons/fi'
 const CartProductRow = () => {
 
     const availableQuantity = 20;
-    const [selectedQuantity, setSelectedQualtity] = useState(2);
+    const initialQuantity = 2;
+    const [selectedQuantity, setSelectedQualtity] = useState(initialQuantity);
 
     const incrementQuantity = () => {
         if (selectedQuantity < availableQuantity) {
@@ -27,6 +28,7 @@ const CartProductRow = () => {
                 <div>
                     <p className={styles['product-category']}>Gadgets</p>
                     <p className={styles['product-name']}>SUN8 Generic Mens Wrist Watch</p>
+                    <p className={styles['stock-amount']}><span>{availableQuantity} items</span> available in stock</p>
                 </div>
             </div>
             <div className={styles['product-price']}>$250.00</div>
@@ -34,6 +36,7 @@ const CartProductRow = () => {
                 <FiMinus className={styles['quantity-icon']} onClick={decrementQuantity}/>
                 {selectedQuantity}
                 <FiPlus className={styles['quantity-icon']} onClick={incrementQuantity}/>
+                {selectedQuantity !== initialQuantity && <button className={styles['save']}>Save</button>}
             </div>
             <div className={styles['product-total-price']}>$500.00</div>
         </div>

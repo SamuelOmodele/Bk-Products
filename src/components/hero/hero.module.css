@@ -27,7 +27,7 @@
 }
 .hero-section .hero-text{
     flex-basis: 60%;
-    z-index: 1000;
+    z-index: 100;
 }
 
 .hero-section .hero-text h2{

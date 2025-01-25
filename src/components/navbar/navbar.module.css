@@ -6,10 +6,8 @@
     padding: 0 40px;
     justify-content: space-between;
     position: fixed;
-    /* border-bottom: 1px solid #EDEDED; */
-    z-index: 10000;
+    z-index: 200;
     background-color: white;
-    /* background-color: red; */
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
     user-select: none;
 

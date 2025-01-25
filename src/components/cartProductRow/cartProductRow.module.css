@@ -25,6 +25,21 @@ div.product-data{
     gap: 10px;
     width: 25%;
     display: flex;
+    position: relative;
+}
+button.save{
+    position: absolute;
+    bottom: -35px;
+    background-color: #115ffc;
+    font-size: 12px;
+    color: white;
+    padding: 3px 13px;
+    border-radius: 5px;
+    transition: .1s;
+    cursor: pointer;
+}
+button.save:hover{
+    background-color: #4b86fd;
 }
 .product-total-price{
     width: 15%;
@@ -45,10 +60,19 @@ div.product-data{
     border-radius: 5px;
     padding: 3px 10px;
     width: fit-content;
+    margin-bottom: 7px;
 }
 .product-name{
     font-size: 17px;
     font-weight: 600;
+}
+.stock-amount{
+    margin-top: 5px;
+    font-size: 12px;
+}
+.stock-amount > span{
+    font-weight: 600;
+    color: #115ffc;
 }
 .quantity-icon{
     border: 1.5px solid #858585;
@@ -64,5 +88,19 @@ div.product-data{
     }
     .product-name{
         font-size: 15px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .product-name{
+        font-size: 13px;
+        font-weight: 600;
+    }
+    .product-category{
+        font-size: 9px;
+        font-weight: 400;
+    }
+    .stock-amount{
+        font-size: 8px;
+        margin-top: 5px;
     }
 }
