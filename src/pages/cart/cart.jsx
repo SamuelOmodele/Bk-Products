@@ -47,7 +47,7 @@ const Cart = () => {
                 <option value="lagos">Lagos</option>
                 <option value="Oyo">Oyo</option>
               </select>
-              <p className={styles['delivery-fee']}>{deliveryZone && <p>Delivery fee is <span className={styles['bold-blue']}>$20.00</span></p>}</p>
+              <div className={styles['delivery-fee']}>{deliveryZone && <p>Delivery fee is <span className={styles['bold-blue']}>$20.00</span></p>}</div>
               <button>Proceed to Checkout</button>
             </div>
           </div>

@@ -169,12 +169,6 @@ span.bold-blue{
     .checkout-container h3{
         font-size: 16px;
     }
-    .checkout-container select{
-        font-size: 13px;
-    }
-    .checkout-container button{
-        font-size: 14px;
-    }
 }
 @media screen and (max-width: 460px) {
     .checkout-container{
