@@ -69,7 +69,7 @@ const ProductInfo = () => {
                         ))}
                         
                     </p>
-                    <p className={styles['product-price']}>$250.00</p>
+                    <p className={styles['product-price']}>$250.00 <span className={styles['per-unit-text']}>per unit</span></p>
                     <div className={styles['quantity-stock']}>
                         <div className={styles['quantity']}>
                             <p><FiMinus onClick={decrementQuantity} className={styles['icon']} /></p>

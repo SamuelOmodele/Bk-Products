@@ -1,6 +1,6 @@
 .product-info-page {
     width: 100%;
-    padding: 25px 50px 50px;
+    padding: 35px 50px 50px;
 }
 
 .product-info-section {
@@ -91,8 +91,11 @@
     color: #354666;
 }
 
-
-
+.per-unit-text{
+    color: #222;
+    font-weight: 400;
+    font-size: 15px;
+}
 .quantity-stock {
     display: flex;
     gap: 20px;
@@ -192,7 +195,6 @@
         padding: 25px 10px 50px;
     }
     
-
     .product-images .smaller-images {
         grid-template-columns: calc((100% - 40px)/5) calc((100% - 40px)/5) calc((100% - 40px)/5) calc((100% - 40px)/5) calc((100% - 40px)/5);
         gap: 10px;
@@ -219,6 +221,9 @@
     
     .right-section .product-price {
         font-size: 22px;
+    }
+    .per-unit-text{
+        font-size: 13px;
     }
     .stock{
         font-size: 14px;

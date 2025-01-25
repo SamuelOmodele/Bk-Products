@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AiOutlineCustomerService } from 'react-icons/ai';
 import { BiCheckShield } from "react-icons/bi";
 import { MdOutlineLocalShipping } from 'react-icons/md';
 import styles from './aboutUs.module.css'
 
 const AboutUs = () => {
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0
+        });
+    }, []);
+
     return (
         <div className={styles['about-us-section']}>
             <h2>About Us</h2>
