@@ -19,6 +19,7 @@ import Search from './pages/search/search';
 import Contact from './pages/contact/contact';
 import Error404 from './pages/error404/error404';
 import ProductDetails from './pages/product-details/productDetails';
+import Cart from './pages/cart/cart';
 
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route path='/about' element={<About />} />
         <Route path='/search' element={<Search />} />
         <Route path='/contact' element={<Contact />} />
+        <Route path='/cart' element={<Cart />} />
 
         {/* -- ADMIN DASHBOARD ROUTES -- */}
         <Route path='/admin' element={<AdminLayout />}>

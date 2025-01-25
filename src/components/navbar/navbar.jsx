@@ -25,7 +25,7 @@ const Navbar = ({ active }) => {
       </div>
 
       <div className={styles['signin-cart-box']}>
-        <button>
+        <button onClick={() => navigate('/cart')}>
           <MdOutlineShoppingCart size={18} />
           Cart
         </button>
@@ -41,7 +41,7 @@ const Navbar = ({ active }) => {
         <p onClick={() => navigate('/shop')} className={active === 'shop' ? styles['active'] : ''}>Shop</p>
         <p onClick={() => navigate('/about')} className={active === 'about' ? styles['active'] : ''}>About</p>
         <p onClick={() => navigate('/contact')} className={active === 'contact' ? styles['active'] : ''}>Contact</p>
-        <button>
+        <button onClick={() => navigate('/cart')}>
           <MdOutlineShoppingCart size={18} />
           Cart
         </button>

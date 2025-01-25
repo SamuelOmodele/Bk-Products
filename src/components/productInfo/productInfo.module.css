@@ -171,14 +171,12 @@
         gap: 15px;
         grid-template-columns: auto auto auto;
     }
-}
-
-@media screen and (max-width: 800px) {
     .product-info-section {
         grid-template-columns: auto;
         gap: 0px;
     }
 }
+
 
 @media screen and (max-width: 700px) {
     .similar-product-container h3 {
