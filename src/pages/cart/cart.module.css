@@ -143,6 +143,7 @@ span.bold-blue{
 
     .product-container{
         min-width: 540px;
+        box-shadow: none;
     }
     .product-overflow-container{
         overflow-x: auto;
@@ -154,7 +155,25 @@ span.bold-blue{
         padding: 65px 0 0;
     }
     .cart-page{
-        padding: 30px 10px;
+        padding: 20px 10px;
+    }
+    .head-container .left h3{
+        font-size: 20px;
+    }
+    .head-container .left p{
+        font-size: 13px;
+    }
+    .head-container button{
+        font-size: 14px;
+    }
+    .checkout-container h3{
+        font-size: 16px;
+    }
+    .checkout-container select{
+        font-size: 13px;
+    }
+    .checkout-container button{
+        font-size: 14px;
     }
 }
 @media screen and (max-width: 460px) {
