@@ -23,6 +23,9 @@
 }
 @media screen and (max-width: 500px) {
     .content-page{
-        padding: 65px 0 0;
+        padding: 65px 0 0px;
+    }
+    .orders-page{
+        height: fit-content;
     }
 }
