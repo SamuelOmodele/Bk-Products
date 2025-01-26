@@ -119,8 +119,8 @@ span.bold-blue{
 .cart-summary h3{
     color: #253656;
     font-weight: 600;
-    font-size: 20px;
-    text-align: center;
+    font-size: 18px;
+    /* text-align: center; */
     margin-bottom: 10px;
 }
 .cart-summary > div{
