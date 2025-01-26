@@ -89,6 +89,9 @@ button.save:hover{
     .product-name{
         font-size: 15px;
     }
+    .product-name{
+        padding-right: 5px;
+    }
 }
 @media screen and (max-width: 500px) {
     .product-category{
@@ -96,4 +99,5 @@ button.save:hover{
         font-weight: 400;
         display: none;
     }
+    
 }

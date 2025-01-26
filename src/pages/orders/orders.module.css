@@ -1,0 +1,28 @@
+.content-page{
+    padding: 80px 0 0px;
+}
+.orders-page{
+    width: 100%;
+    background-color: #F3F3F3;
+    height: calc(100vh - 80px);
+    display: flex;
+}
+.orders-page-sidebar{
+    width: 20%;
+}
+.orders-page-content{
+    width: 80%;
+}
+@media screen and (max-width: 900px) {
+    .orders-page-sidebar{
+        display: none;
+    }
+    .orders-page-content{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 500px) {
+    .content-page{
+        padding: 65px 0 0;
+    }
+}

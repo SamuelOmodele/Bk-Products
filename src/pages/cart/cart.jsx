@@ -13,6 +13,7 @@ import {
   Button,
   useDisclosure,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
 
@@ -21,6 +22,8 @@ const Cart = () => {
   const [selectedZonePrice, setSelectedZonePrice] = useState();
   const [selectedZoneName, setSelectedZoneName] = useState();
   const [zoneError, setZoneError] = useState(false);
+
+  const navigate = useNavigate();
 
   const deliveryZones = [
     {
@@ -75,7 +78,7 @@ const Cart = () => {
               <h3>Shopping Cart</h3>
               <p><span className={styles['bold-blue']}>2 items</span> in your cart.</p>
             </div>
-            <button>My Orders</button>
+            <button onClick={() => navigate('/orders')}>My Orders</button>
           </div>
 
           {/* --- Lower content --- */}

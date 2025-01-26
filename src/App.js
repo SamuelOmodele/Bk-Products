@@ -20,6 +20,10 @@ import Contact from './pages/contact/contact';
 import Error404 from './pages/error404/error404';
 import ProductDetails from './pages/product-details/productDetails';
 import Cart from './pages/cart/cart';
+import Orders from './pages/orders/orders';
+import AllOrders from './pages/orders/components/orderContent/allOrders';
+import OpenOrders from './pages/orders/components/orderContent/openOrders';
+import ClosedOrders from './pages/orders/components/orderContent/closedOrders';
 
 
 
@@ -35,6 +39,11 @@ function App() {
         <Route path='/search' element={<Search />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/orders' element={<Orders />}>
+          <Route index element={<AllOrders />} />
+          <Route path='open' element={<OpenOrders />} />
+          <Route path='closed' element={<ClosedOrders />} />
+        </Route>
 
         {/* -- ADMIN DASHBOARD ROUTES -- */}
         <Route path='/admin' element={<AdminLayout />}>
