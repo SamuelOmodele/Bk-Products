@@ -91,16 +91,9 @@ button.save:hover{
     }
 }
 @media screen and (max-width: 500px) {
-    .product-name{
-        font-size: 13px;
-        font-weight: 600;
-    }
     .product-category{
         font-size: 9px;
         font-weight: 400;
-    }
-    .stock-amount{
-        font-size: 8px;
-        margin-top: 5px;
+        display: none;
     }
 }

@@ -28,7 +28,7 @@ const CartProductRow = () => {
                 <div>
                     <p className={styles['product-category']}>Gadgets</p>
                     <p className={styles['product-name']}>SUN8 Generic Mens Wrist Watch</p>
-                    <p className={styles['stock-amount']}><span>{availableQuantity} items</span> available in stock</p>
+                    <p className={styles['stock-amount']}><span>{availableQuantity} items</span> left</p>
                 </div>
             </div>
             <div className={styles['product-price']}>$250.00</div>

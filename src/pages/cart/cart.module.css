@@ -41,7 +41,6 @@ span.bold-blue{
 }
 .product-container{
     width: 100%;
-    min-width: 700px;
     padding: 30px;
     background-color: white;
     border-radius: 15px;
@@ -153,6 +152,7 @@ div.total{
 @media screen and (max-width: 1100px) {
     .lower-content{
         grid-template-columns: auto;
+        gap: 30px;
     }
     .checkout-container{
         width: 400px;
@@ -161,11 +161,7 @@ div.total{
 
 @media screen and (max-width: 800px) {
     .product-container-head{
-        font-size: 14px;
-        font-weight: 500;
-    }
-    .product-container{
-        min-width: 0px;
+        font-size: 15.5px;
     }
 }
 
@@ -204,6 +200,9 @@ div.total{
     }
     .head-container button{
         font-size: 14px;
+    }
+    .lower-content{
+        gap: 20px;
     }
     .checkout-container h3{
         font-size: 16px;
