@@ -237,7 +237,10 @@
     }
 
     .similar-product-container {
-        margin: 30px 0 85px;
+        margin: 0;
     }
-
+    
+    .product-info-section {
+        margin-bottom: 30px;
+    }
 }

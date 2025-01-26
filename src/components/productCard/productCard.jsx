@@ -8,6 +8,15 @@ const ProductCard = () => {
 
   const navigate = useNavigate();
 
+  const product_description = 'Luxury Gold and Black Wristwatch with Day and Date Display';
+  // const product_description = 'Lorem ipsum dolor sit amet consectetur.';
+
+  const cropDescription = (description) => {
+    const words = description.split(" ");
+    return words.length > 5 ? words.slice(0, 5).join(" ") + " . . ." : description;
+  };
+
+
   return (
     <div className={styles['product-card']}>
         <div className={styles['card-image']}>
@@ -18,7 +27,7 @@ const ProductCard = () => {
             <p className={styles['name']}>SUN8 Generic Men Wrist Watch</p>
             <div className={styles['category']}>clothing</div>
         </div>
-        <div className={styles['description']}>Lorem ipsum dolor sit amet consectetur.</div>
+        <div className={styles['description']}>{cropDescription(product_description)}</div>
         
         <p className={styles['price']}>$250.00</p>
         <button onClick={() => navigate('/product-detail')}>View Product</button>

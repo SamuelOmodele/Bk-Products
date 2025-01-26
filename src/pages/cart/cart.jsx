@@ -26,27 +26,27 @@ const Cart = () => {
     {
       id: 1,
       name: 'Ikeja, Lagos State', 
-      price: '$20.00'
+      price: '20.00'
     },
     {
       id: 2,
       name: 'Victoria Island, Lagos State', 
-      price: '$30.00'
+      price: '30.00'
     },
     {
       id: 3,
       name: 'Ikorodu, Lagos State', 
-      price: '$25.00'
+      price: '25.00'
     },
     {
       id: 4,
       name: 'Ikoyi, Lagos State', 
-      price: '$35.00'
+      price: '35.00'
     },
     {
       id: 5,
       name: 'Ibadan, Oyo State', 
-      price: '$50.00'
+      price: '50.00'
     },
   ]
 
@@ -105,7 +105,7 @@ const Cart = () => {
                   <option key={index} value={zone.id}>{zone.name}</option>
                 ))}
               </select>
-              <div className={styles['delivery-fee']}>{selectedZoneId && <p>Delivery fee is <span className={styles['bold-blue']}>{deliveryZones.find((zone) => zone.id === Number(selectedZoneId))?.price || "N/A"}</span></p>} {zoneError && !selectedZoneId && <p style={{color: 'red'}}>Select a Zone</p>}</div>
+              <div className={styles['delivery-fee']}>{selectedZoneId && <p>Delivery fee is <span className={styles['bold-blue']}>{`$${deliveryZones.find((zone) => zone.id === Number(selectedZoneId))?.price}` || "N/A"}</span></p>} {zoneError && !selectedZoneId && <p style={{color: 'red'}}>Select a Zone</p>}</div>
               <button onClick={confirmCheckout}>Proceed to Checkout</button>
             </div>
           </div>
@@ -124,7 +124,7 @@ const Cart = () => {
                 <div><p>Cart Subtotal: </p><p>$1000.00</p></div>
                 <div><p>Delivery fee: </p><p>{selectedZonePrice || "N/A"}</p></div>
                 <div><p>Delivery Zone: </p><p>{selectedZoneName || "Nil"}</p></div>
-                <div className={styles['total']}><p>Cart Total: </p><p>{`$${1000.00 + Number(deliveryZones.find((zone) => zone.id === Number(selectedZoneId))?.price)}`}</p></div>
+                <div className={styles['total']}><p>Cart Total: </p><p>{`$${(1000.00 + Number(selectedZonePrice)).toFixed(2)}`}</p></div>
                 <button>Check Out</button>
               </div>
 
