@@ -1,10 +1,17 @@
 import React from 'react'
 import styles from './orderContent.module.css'
+import { useNavigate } from 'react-router-dom';
 
 const AllOrders = () => {
+    const navigate = useNavigate();
 
   return (
     <div className={styles['orders-content-page']}>
+        <div className={styles['orders-nav']}>
+            <p onClick={() => navigate('/orders')} className={styles['active-tab']}>All</p>
+            <p onClick={() => navigate('/orders/open')}>Open</p>
+            <p onClick={() => navigate('/orders/closed')}>Closed</p>
+        </div>
         <h3>All Orders</h3>
         <div className={styles['orders-box']}>
             <div className={styles['single-order-box']}>
