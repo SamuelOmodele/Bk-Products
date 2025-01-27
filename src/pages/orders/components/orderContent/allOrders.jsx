@@ -1,9 +1,59 @@
 import React from 'react'
 import styles from './orderContent.module.css'
 import { useNavigate } from 'react-router-dom';
+import SingleOrderBox from './singleOrderBox';
 
 const AllOrders = () => {
     const navigate = useNavigate();
+
+    const orders = [
+        {
+            orderId: '#1MAS029D8',
+            orderStatus: 'pending',
+            numOfProduct: 2,
+            orderDate: '12 Dec, 2024',
+            deliveryZone: 'Ikeja, Lagos State',
+            paymentStatus: 'pending',
+            totalPrice: '$2,000.00'
+        },
+        {
+            orderId: '#2MAS029D8',
+            orderStatus: 'pending',
+            numOfProduct: 2,
+            orderDate: '12 Dec, 2024',
+            deliveryZone: 'Ikeja, Lagos State',
+            paymentStatus: 'submitted',
+            totalPrice: '$2,000.00'
+        },
+        {
+            orderId: '35MAS029D8',
+            orderStatus: 'pending',
+            numOfProduct: 2,
+            orderDate: '12 Dec, 2024',
+            deliveryZone: 'Ikeja, Lagos State',
+            paymentStatus: 'declined',
+            totalPrice: '$2,000.00'
+        },
+        {
+            orderId: '#4MAS029D8',
+            orderStatus: 'processing',
+            numOfProduct: 2,
+            orderDate: '12 Dec, 2024',
+            deliveryZone: 'Ikeja, Lagos State',
+            paymentStatus: 'verified',
+            totalPrice: '$2,000.00'
+        },
+        {
+            orderId: '#5MAS029D8',
+            orderStatus: 'delivered',
+            numOfProduct: 2,
+            orderDate: '12 Dec, 2024',
+            deliveryZone: 'Ikeja, Lagos State',
+            paymentStatus: 'verified',
+            totalPrice: '$2,000.00'
+        },
+    ]
+    
 
   return (
     <div className={styles['orders-content-page']}>
@@ -14,89 +64,10 @@ const AllOrders = () => {
         </div>
         <h3>All Orders</h3>
         <div className={styles['orders-box']}>
-            <div className={styles['single-order-box']}>
-                <div className={styles['box-header']}>
-                    <div>
-                        <h4>ORDER ID: #5MAS029D8</h4>
-                        <p className={styles['status']}>Status: pending</p>
-                    </div>
-                    
-                    
-                    <button>Track Order</button>
-                </div>
-                <div className={styles['box-row1']}>
-                    <p>2 Products</p>
-                    <p>12 Dec</p>
-                </div>
-                <div className={styles['box-row2']}>
-                    <p>Shipping Zone: Ikeja, Lagos State</p>
-                    
-                    <p>Payment : pending</p>
-                </div>
-                <div className={styles['box-total']}>
-                    <p>Total : $2,000.00</p>
-                    <div className={styles['box-buttons']}>
-                        <button>Pay</button>
-                        <button>View Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <div className={styles['single-order-box']}>
-                <div className={styles['box-header']}>
-                    <div>
-                        <h4>ORDER ID: #5MAS029D8</h4>
-                        <p className={styles['status']}>Status: pending</p>
-                    </div>
-                    
-                    
-                    <button>Track Order</button>
-                </div>
-                <div className={styles['box-row1']}>
-                    <p>2 Products</p>
-                    <p>12 Dec</p>
-                </div>
-                <div className={styles['box-row2']}>
-                    <p>Shipping Zone: Ikeja, Lagos State</p>
-                    
-                    <p>Payment : pending</p>
-                </div>
-                <div className={styles['box-total']}>
-                    <p>Total : $2,000.00</p>
-                    <div className={styles['box-buttons']}>
-                        <button>Pay</button>
-                        <button>View Details</button>
-                    </div>
-                </div>
-            </div>
-
-            <div className={styles['single-order-box']}>
-                <div className={styles['box-header']}>
-                    <div>
-                        <h4>ORDER ID: #5MAS029D8</h4>
-                        <p className={styles['status']}>Status: pending</p>
-                    </div>
-                    
-                    
-                    <button>Track Order</button>
-                </div>
-                <div className={styles['box-row1']}>
-                    <p>2 Products</p>
-                    <p>12 Dec</p>
-                </div>
-                <div className={styles['box-row2']}>
-                    <p>Shipping Zone: Ikeja, Lagos State</p>
-                    
-                    <p>Payment : pending</p>
-                </div>
-                <div className={styles['box-total']}>
-                    <p>Total : $2,000.00</p>
-                    <div className={styles['box-buttons']}>
-                        <button>Pay</button>
-                        <button>View Details</button>
-                    </div>
-                </div>
-            </div>
+            {orders.map((order, index) => (
+                <SingleOrderBox order={order} key={index}/>
+            ))}
+            
         </div>
     </div>
   )

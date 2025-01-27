@@ -63,10 +63,9 @@
     font-size: 18px;
     font-weight: 500;
 }
-.status{
-    color: #F77C27;
+.order-status{
+    color: #6e6e6e;
     font-size: 11px;
-    font-weight: 400;
     padding: 3px 6px;
     margin-top: 5px;
     font-weight: 500;
@@ -97,12 +96,7 @@
     border-radius: 5px;
 }
 .box-row2 p{
-    color: #6e6e6e;
-    font-size: 13px;
-    font-weight: 400;
     padding: 6px 14px;
-    border: 1px solid #cac9d9;
-    border-radius: 5px;
 }
 
 .box-total{
@@ -128,6 +122,65 @@
     padding: 6px 15px;
     border-radius: 5px;
 }
+/* --- order status classes --- */
+.orange{
+    color: #F77C27;
+}
+.blue{
+    color: #115FFC;
+}
+.green{
+    color: #21A168;
+}
+.red{
+    color: red;
+}
+.modal-body{
+    margin-top: -10px;
+}
+.track-message{
+    background-color: #f2f2f2;
+    font-size: 14.5px;
+    padding: 6px 10px;
+    border-radius: 5px;
+}
+.payment-message{
+    width: 100%;
+    padding-bottom: 5px;
+}
+.account-info{
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.account-info > p:nth-child(2){
+    font-size: 15px;
+    font-weight: 600;
+}
+.upload-section{
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1.5px solid #f2f2f2;
+    font-size: 14px;
+}
+.upload-section .upload-btn{
+    width: fit-content;
+    padding: 4px 10px;
+    background-color: #115FFC;
+    color: white;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: block;
+}
+
+/* --- to take away later --- */
+
+
 @media screen and (max-width: 900px) {
     .orders-nav{
         display: flex;
@@ -148,6 +201,10 @@
     .orders-nav p{
         padding-bottom: 10px;
         font-size: 15px;
+    }
+    .modal-body{
+        padding: 10px;
+        margin-top: -15px;
     }
 }
 @media screen and (max-width: 400px) {
