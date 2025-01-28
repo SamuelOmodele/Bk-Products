@@ -14,12 +14,27 @@ import {
 import OrderDetails from '../orderDetails/orderDetails';
 
 const SingleOrderBox = ({ order }) => {
+    const [customMargin, setCustomMargin] = useState(); 
+
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [modalType, setModalType] = useState();
+    
     const [paymentReceipt, setPaymentReceipt] = useState(null);
 
+
     const openModal = (modal_type) => {
+
+        if (modal_type === 'track'){
+            setCustomMargin('auto');
+        } else if (modal_type === 'view'){
+            setCustomMargin('50px auto')
+        } else if (modal_type === 'pay' && !paymentReceipt){
+            setCustomMargin('auto')
+        } else if (modal_type ==='pay' && paymentReceipt){
+            setCustomMargin('50px auto');
+        }
+        
         setModalType(modal_type);
         onOpen();
     }
@@ -35,7 +50,7 @@ const SingleOrderBox = ({ order }) => {
 
     return (
         <div className={styles['single-order-box']}>
-            
+
             <div className={styles['box-header']}>
                 <div>
                     <h4>ORDER ID: {order?.orderId}</h4>
@@ -61,16 +76,16 @@ const SingleOrderBox = ({ order }) => {
             </div>
 
             {/* --- MODAL --- */}
-            <Modal isOpen={isOpen} onClose={onClose} isCentered={modalType === 'track' ? true : false}>
+            <Modal isOpen={isOpen} onClose={onClose} >
                 <ModalOverlay />
-                <ModalContent style={{margin: '30px 0'}} >
-                    <ModalHeader style={{textAlign: 'center'}}>
+                <ModalContent margin={customMargin}>
+                    <ModalHeader style={{ textAlign: 'center' }}>
                         {modalType === 'track' && 'Track Order'}
                         {modalType === 'pay' && 'Make Payment'}
                         {modalType === 'view' && 'Order Details'}
                     </ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody style={{padding: '10px', marginTop: '-10px', borderTop: '1.5px solid #f2f2f2'}}>
+                    <ModalBody style={{ padding: '10px', marginTop: '-10px', borderTop: '1.5px solid #f2f2f2' }}>
 
                         {modalType === 'track' && <div className={styles['track-message']}>
                             {order.orderStatus === 'pending' && order.paymentStatus === 'pending' && <div>
@@ -94,7 +109,7 @@ const SingleOrderBox = ({ order }) => {
                             <div className={styles['account-info']}><p>Account Name:</p><p>BK PRODUCTS </p></div>
                             <div className={styles['account-info']}><p>Account Number:</p><p>0123456789 </p></div>
                             <div className={styles['account-info']}><p>Bank Name:</p><p>GT Bank </p></div>
-                            
+
                             <div className={styles['upload-section']}>
                                 <div className={styles['payment-amount-message']}>Pay the sum of $2,000.00 to the account above</div>
                                 {paymentReceipt && <img src={paymentReceipt} alt="" />}
@@ -108,7 +123,7 @@ const SingleOrderBox = ({ order }) => {
                             </div>
 
                             <input type="file" name="" id="upload" onChange={handleFileChange} style={{ display: 'none' }} />
-                        
+
                         </div>}
 
                         {modalType === 'view' &&
