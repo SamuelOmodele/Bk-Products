@@ -61,7 +61,7 @@ const SingleOrderBox = ({ order }) => {
             </div>
 
             {/* --- MODAL --- */}
-            <Modal isOpen={isOpen} onClose={onClose} isCentered={modalType === 'view' ? false : true}>
+            <Modal isOpen={isOpen} onClose={onClose} isCentered={modalType === 'track' ? true : false}>
                 <ModalOverlay />
                 <ModalContent style={{margin: '30px 0'}} >
                     <ModalHeader style={{textAlign: 'center'}}>
@@ -70,7 +70,7 @@ const SingleOrderBox = ({ order }) => {
                         {modalType === 'view' && 'Order Details'}
                     </ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody className={styles['modal-body']}>
+                    <ModalBody style={{padding: '10px', marginTop: '-10px', borderTop: '1.5px solid #f2f2f2'}}>
 
                         {modalType === 'track' && <div className={styles['track-message']}>
                             {order.orderStatus === 'pending' && order.paymentStatus === 'pending' && <div>
@@ -94,8 +94,10 @@ const SingleOrderBox = ({ order }) => {
                             <div className={styles['account-info']}><p>Account Name:</p><p>BK PRODUCTS </p></div>
                             <div className={styles['account-info']}><p>Account Number:</p><p>0123456789 </p></div>
                             <div className={styles['account-info']}><p>Bank Name:</p><p>GT Bank </p></div>
+                            
                             <div className={styles['upload-section']}>
-                                <img src={paymentReceipt} alt="" />
+                                <div className={styles['payment-amount-message']}>Pay the sum of $2,000.00 to the account above</div>
+                                {paymentReceipt && <img src={paymentReceipt} alt="" />}
                                 {!paymentReceipt && <>
                                     <p>Upload your bank transfer receipt</p>
                                     <label htmlFor="upload" className={styles['upload-btn']}>Select File</label>
@@ -104,13 +106,14 @@ const SingleOrderBox = ({ order }) => {
                                 {paymentReceipt && <button className={styles['upload-btn']}>upload</button>}
 
                             </div>
+
                             <input type="file" name="" id="upload" onChange={handleFileChange} style={{ display: 'none' }} />
+                        
                         </div>}
 
                         {modalType === 'view' &&
                             <OrderDetails />
                         }
-
                     </ModalBody>
                 </ModalContent>
             </Modal>
