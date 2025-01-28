@@ -14,7 +14,7 @@ import {
 import OrderDetails from '../orderDetails/orderDetails';
 
 const SingleOrderBox = ({ order }) => {
-    const [customMargin, setCustomMargin] = useState(); 
+    const [customMargin, setCustomMargin] = useState('auto'); 
 
 
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,16 +24,6 @@ const SingleOrderBox = ({ order }) => {
 
 
     const openModal = (modal_type) => {
-
-        if (modal_type === 'track'){
-            setCustomMargin('auto');
-        } else if (modal_type === 'view'){
-            setCustomMargin('50px auto')
-        } else if (modal_type === 'pay' && !paymentReceipt){
-            setCustomMargin('auto')
-        } else if (modal_type ==='pay' && paymentReceipt){
-            setCustomMargin('50px auto');
-        }
         
         setModalType(modal_type);
         onOpen();
