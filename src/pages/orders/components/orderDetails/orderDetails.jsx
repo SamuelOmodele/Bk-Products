@@ -79,21 +79,26 @@ const OrderDetails = () => {
             {modalTab === '2' && <div>
                 <div className={styles['product-section']}>
                     <h3>Items</h3>
-                    {products.map((product, index) => (
-                        <div key={index} className={styles['single-product']}>
-                            <div className={styles['product-image']}><img src={product.image} alt="" /></div>
-                            <p className={styles['product-name']}>{product.name}</p>
-                            <p className={styles['category']}>{product.category}</p>
-                            <p className={styles['product-priceperunit']}>{product.pricePerUnit}/unit</p>
-                            <p className={styles['unit']}>{product.numOfUnit} units</p>
-                            <p className={styles['product-price']}>{product.totalPrice}</p>
-                        </div>
-                    ))}
+                    <div className={styles['product-container']}>
+                        {products.map((product, index) => (
+                            <div key={index} className={styles['single-product']}>
+                                <div className={styles['product-image']}><img src={product.image} alt="" /></div>
+                                <p className={styles['product-name']}>{product.name}</p>
+                                <div style={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
+                                    <p className={styles['category']}>{product.category}</p>
+                                    <p className={styles['product-priceperunit']}>{product.pricePerUnit}/unit</p>
+                                    <p className={styles['unit']}>{product.numOfUnit} units</p>
+                                </div>
+                                <p className={styles['product-price']}>{product.totalPrice}</p>
+                            </div>
+                        ))}
+
+                    </div>
 
                 </div>
                 <div className={styles['total']}>
                     <p>Total Product amount:</p>
-                    <p style={{fontWeight: '600'}}>$2,000.00</p>
+                    <p style={{ fontWeight: '600' }}>$2,000.00</p>
                 </div>
             </div>}
 

@@ -158,3 +158,23 @@
     border-radius: 5px;
     margin-bottom: 15px;
 }
+.add-admin-input{
+    outline: none;
+    margin-top: -5px;
+    border: 1px solid #cac9d9;
+    padding: 12px 25px;
+    width: 100%;
+    border-radius: 10px;
+}
+.add-admin-button{
+    background-color: #115FFC;
+    color: white;
+    padding: 5px 15px;
+    font-size: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    transition: .2s;
+}
+.add-admin-button:hover{
+    background-color: #4482fd;
+}

@@ -92,6 +92,43 @@
 .form-field-box input[type="text"]::placeholder, .form-field-box input[type="number"]::placeholder, .form-field-box textarea::placeholder{
     color: #555;
 }
+.add-feature-input-box{
+    position: relative;
+}
+.add-feature-input-box button{
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #115FFC;
+    color: white;
+    font-size: 14px;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+#add-feature-input{
+    padding-right: 60px;
+}
+.features-list{
+    margin-top: 10px;
+}
+
+.features-list li{
+    font-size: 14px;
+    margin-bottom: 5px;
+    position: relative;
+    width: fit-content;
+    max-width: calc(100% - 45px);
+    /* background-color: red; */
+}
+.features-list li .remove{
+    position: absolute;
+    right: -45px;
+    top: 55%;
+    transform: translateY(-50%);
+    color: red;
+    cursor: pointer;
+}
 .active-product-image{
     border: 1.5px dashed rgba(17, 95, 252, 0.3);
     border-radius: 10px;

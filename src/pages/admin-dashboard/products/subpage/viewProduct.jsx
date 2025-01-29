@@ -1,16 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './viewProduct.module.css'
 import { useNavigate } from 'react-router-dom'
 import { MdOutlineDone } from "react-icons/md";
-import upload_pic from '../../../assets/upload.png'
-import product_image from '../../../assets/cloth.png'
-import { IoAdd } from "react-icons/io5";
+import product_image from '../../../../assets/cloth.png'
+import { IoAdd, IoCloseCircle } from "react-icons/io5";
 import { IoArrowBack } from "react-icons/io5";
 import { RiEditLine } from 'react-icons/ri';
 
 const ViewProduct = () => {
 
   const navigate = useNavigate();
+
+    const [feature, setFeature] = useState('');
+    const [featureList, setFeatureList] = useState(['feature1', 'feature2', 'feature3']);
+  
+    const addFeature = () => {
+      if (feature) {
+        setFeatureList(currentFeatures => [...currentFeatures, feature]);
+      }
+      setFeature('');
+    }
+  
+    const removeFeature = (index) => {
+      setFeatureList(featureList.filter((_, i) => i !== index));
+    };
 
   return (
     <div className={styles['product-form']}>
@@ -30,12 +43,18 @@ const ViewProduct = () => {
               <label htmlFor="">Product Description</label>
               <textarea name="" id="" placeholder='Product description' value={'Good quality T shirt'} rows={8}></textarea>
             </div>
+
+            <p className={styles['form-group-text']}>Product Features</p>
             <div className={styles['form-field-box']}>
-              <label htmlFor="" style={{marginBottom: '10px'}}> Gender </label>
-              <input type="radio" name="" id="" checked/> <span>male</span>
-              <input type="radio" name="" id="" style={{marginLeft: '20px'}} /> <span>female</span>
-              <input type="radio" name="" id="" style={{marginLeft: '20px'}}/><span>all</span>
+              {featureList && <div className={styles['features-list']}>
+                {featureList.map((feature, index) => (
+                  <li key={index}>{feature}</li>
+                ))}
+              </div>}
+
+
             </div>
+            
           </div>
           <div className={styles['form-group']}>
             <p className={styles['form-group-text']}>Pricing and Stock</p>
@@ -48,6 +67,10 @@ const ViewProduct = () => {
               <input type="number" placeholder='Stock amount' value={'58'} />
             </div>
           </div>
+
+          {/* <div className={styles['form-group']}>
+            
+          </div> */}
 
         </div>
         <div className={styles['product-form-body-right']}>

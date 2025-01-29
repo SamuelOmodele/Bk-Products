@@ -22,6 +22,7 @@ const SignIn = () => {
             <label htmlFor="">Password</label>
             <input type="password" placeholder='Enter your password' />
           </div>
+          <span onClick={() => navigate('/forgot-password')} style={{float: 'right', fontWeight: '500', fontSize: '14px'}}>Forgot Password</span>
           <button>Sign in</button>
           <div>
             <p>Don't have an account ? <span onClick={() => navigate('/sign-up')}>Sign up</span></p>

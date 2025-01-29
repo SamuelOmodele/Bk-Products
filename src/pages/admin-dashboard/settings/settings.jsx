@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react';
 import { RiBankFill } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
+import { RiAdminLine } from "react-icons/ri";
 
 const Settings = () => {
 
@@ -39,14 +40,15 @@ const Settings = () => {
             <div className={styles['settings-container']}>
                 <div className={styles['settings-sidebar']}>
                     <p className={settingsTab === 'profile' ? styles['active'] : styles['']} onClick={() => setSettingsTab('profile')}> <FaRegUserCircle size={20} /> Profile</p>
-                    <p className={settingsTab === 'bank-details' ? styles['active'] : styles['']} onClick={() => setSettingsTab('bank-details')}><RiBankFill size={20}/> Bank Details</p>
+                    <p className={settingsTab === 'bank-details' ? styles['active'] : styles['']} onClick={() => setSettingsTab('bank-details')}><RiBankFill size={20} /> Bank Details</p>
+                    <p className={settingsTab === 'add-admin' ? styles['active'] : styles['']} onClick={() => setSettingsTab('add-admin')}><RiAdminLine size={20} /> Add Admin</p>
                 </div>
                 <div className={styles['settings-content']}>
-                    <p className={styles['profile-text']}>{settingsTab ==='profile' && 'My Profile'} {settingsTab ==='bank-details' && 'Bank Details'}</p>
+                    <p className={styles['profile-text']}>{settingsTab === 'profile' && 'My Profile'} {settingsTab === 'bank-details' && 'Bank Details'} {settingsTab === 'add-admin' && 'Add Admin'} </p>
                     <div className={styles['content-box']}>
 
                         {/* --- Profile / Personal Information --- */}
-                        {(settingsTab ==='profile') && <div className={styles['box1']}>
+                        {(settingsTab === 'profile') && <div className={styles['box1']}>
                             <p className={styles['box-text']}>Personal Information</p>
                             <div className={styles['box-edit']} onClick={() => openModal()}>
                                 Edit
@@ -82,7 +84,7 @@ const Settings = () => {
                         </div>}
 
                         {/* --- Bank Account Details --- */}
-                        {(settingsTab ==='bank-details') && <div className={styles['box1']}>
+                        {(settingsTab === 'bank-details') && <div className={styles['box1']}>
                             <p className={styles['box-text']}>Account Details</p>
                             <div className={styles['box-edit']} onClick={() => openModal()}>
                                 Edit
@@ -105,7 +107,14 @@ const Settings = () => {
                                 </div>
                             </div>
                         </div>}
-                        {(settingsTab ==='bank-details') && <p style={{color: '#ED3E4B', fontSize: '12px', fontWeight: '400', marginTop: '15px'}}>Bank details can only be modified by a super-admin</p>}
+                        {(settingsTab === 'bank-details') && <p style={{ color: '#ED3E4B', fontSize: '12px', fontWeight: '400', marginTop: '15px' }}>Bank details can only be modified by a super-admin</p>}
+
+                        {/* --- Add Admin --- */}
+                        {(settingsTab === 'add-admin') && <div className={styles['box1']}>
+                            <p className={styles['box-text']}>Add Admin</p>
+                            <input type="text" placeholder='Enter Email' className={styles['add-admin-input']} />
+                            <button className={styles['add-admin-button']}>Add Admin</button>
+                        </div>}
                     </div>
                 </div>
             </div>

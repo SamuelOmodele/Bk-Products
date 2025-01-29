@@ -1,7 +1,6 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { MdOutlineDone } from "react-icons/md";
-import upload_pic from '../../../assets/upload.png'
-import product_image from '../../../assets/cloth.png'
+import upload_pic from '../../../../assets/upload.png'
 import { IoAdd } from "react-icons/io5";
 import styles from './addProduct.module.css'
 import { IoArrowBack } from "react-icons/io5";
@@ -17,6 +16,7 @@ import {
   Button,
   useDisclosure,
 } from '@chakra-ui/react';
+import { IoCloseCircle } from "react-icons/io5";
 
 
 const AddProduct = () => {
@@ -24,6 +24,20 @@ const AddProduct = () => {
   const fileInputRef = useRef(null);
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [feature, setFeature] = useState('');
+  const [featureList, setFeatureList] = useState([]);
+
+  const addFeature = () => {
+    if (feature) {
+      setFeatureList(currentFeatures => [...currentFeatures, feature]);
+    }
+    setFeature('');
+  }
+
+  const removeFeature = (index) => {
+    setFeatureList(featureList.filter((_, i) => i !== index));
+  };
 
   return (
     <div className={styles['product-form']}>
@@ -47,15 +61,25 @@ const AddProduct = () => {
             </div>
             <div className={styles['form-field-box']}>
               <label htmlFor="">Product Description</label>
-              <textarea name="" id="" placeholder='Product description' rows={8}></textarea>
+              <textarea name="" id="" placeholder='Product description' rows={4}></textarea>
             </div>
+
+            <p className={styles['form-group-text']}>Product Features</p>
             <div className={styles['form-field-box']}>
-              <label htmlFor="" style={{ marginBottom: '10px' }}> Gender </label>
-              <input type="radio" name="" id="" /> <span>male</span>
-              <input type="radio" name="" id="" style={{ marginLeft: '20px' }} /> <span>female</span>
-              <input type="radio" name="" id="" style={{ marginLeft: '20px' }} /><span>all</span>
+              <label htmlFor="">Add Feature</label>
+              <div className={styles['add-feature-input-box']}>
+                <input type="text" placeholder='Enter Product Feature' id={styles['add-feature-input']} value={feature} onChange={(e) => setFeature(e.target.value)} />
+                {feature && <button onClick={addFeature}>Add</button>}
+              </div>
+              {featureList && <div className={styles['features-list']}>
+                {featureList.map((feature, index) => (
+                  <li key={index}>{feature} <IoCloseCircle size={20} className={styles['remove']} onClick={() => removeFeature(index)} /></li>
+                ))}
+              </div>}
             </div>
           </div>
+
+
           <div className={styles['form-group']}>
             <p className={styles['form-group-text']}>Pricing and Stock</p>
             <div className={styles['form-field-box']}>
@@ -100,7 +124,7 @@ const AddProduct = () => {
               </select>
               <button className={styles['add-category']} onClick={onOpen}>Add Category</button>
             </div>
-          </div>'
+          </div>
 
           {/* --- ADD CATEGORY MODAL --- */}
           <Modal isOpen={isOpen} onClose={onClose}  >
@@ -112,9 +136,9 @@ const AddProduct = () => {
 
                 <div className={styles['form-field-box']}>
                   <label htmlFor="">Enter Category</label>
-                  <input type="text" placeholder='Enter Category'/>
+                  <input type="text" placeholder='Enter Category' />
                 </div>
-                <button className={styles['add-category']} style={{margin: '0 0 15px'}}>Add Category</button>
+                <button className={styles['add-category']} style={{ margin: '0 0 15px' }}>Add Category</button>
 
               </ModalBody>
             </ModalContent>

@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './editProduct.module.css'
 import { MdOutlineDone } from "react-icons/md";
-import upload_pic from '../../../assets/upload.png'
-import product_image from '../../../assets/cloth.png'
-import { IoAdd } from "react-icons/io5";
+import upload_pic from '../../../../assets/upload.png'
+import product_image from '../../../../assets/cloth.png'
+import { IoAdd, IoCloseCircle } from "react-icons/io5";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 
 const EditProduct = () => {
 
   const navigate = useNavigate();
+
+  const [feature, setFeature] = useState('');
+  const [featureList, setFeatureList] = useState([]);
+
+  const addFeature = () => {
+    if (feature) {
+      setFeatureList(currentFeatures => [...currentFeatures, feature]);
+    }
+    setFeature('');
+  }
+
+  const removeFeature = (index) => {
+    setFeatureList(featureList.filter((_, i) => i !== index));
+  };
 
   return (
     <div className={styles['product-form']}>
@@ -27,15 +41,25 @@ const EditProduct = () => {
             </div>
             <div className={styles['form-field-box']}>
               <label htmlFor="">Product Description</label>
-              <textarea name="" id="" placeholder='Product description' rows={8}></textarea>
+              <textarea name="" id="" placeholder='Product description' rows={4}></textarea>
             </div>
+
+            <p className={styles['form-group-text']}>Product Features</p>
             <div className={styles['form-field-box']}>
-              <label htmlFor="" style={{ marginBottom: '10px' }}> Gender </label>
-              <input type="radio" name="" id="" /> <span>male</span>
-              <input type="radio" name="" id="" style={{ marginLeft: '20px' }} /> <span>female</span>
-              <input type="radio" name="" id="" style={{ marginLeft: '20px' }} /><span>all</span>
+              <label htmlFor="">Add Feature</label>
+              <div className={styles['add-feature-input-box']}>
+                <input type="text" placeholder='Enter Product Feature' id={styles['add-feature-input']} value={feature} onChange={(e) => setFeature(e.target.value)} />
+                {feature && <button onClick={addFeature}>Add</button>}
+              </div>
+              {featureList && <div className={styles['features-list']}>
+                {featureList.map((feature, index) => (
+                  <li key={index}>{feature} <IoCloseCircle size={20} className={styles['remove']} onClick={() => removeFeature(index)} /></li>
+                ))}
+              </div>}
             </div>
+
           </div>
+
           <div className={styles['form-group']}>
             <p className={styles['form-group-text']}>Pricing and Stock</p>
             <div className={styles['form-field-box']}>

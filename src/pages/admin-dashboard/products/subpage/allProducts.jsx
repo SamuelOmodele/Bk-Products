@@ -3,7 +3,7 @@ import { IoSearch } from "react-icons/io5";
 import { LuFilter } from "react-icons/lu";
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoAdd } from "react-icons/io5";
-import watchImage from '../../../assets/wrist-watch.jpg'
+import watchImage from '../../../../assets/wrist-watch.jpg'
 import styles from './allProducts.module.css'
 import { useNavigate } from 'react-router-dom';
 import { BiDotsVerticalRounded } from "react-icons/bi";

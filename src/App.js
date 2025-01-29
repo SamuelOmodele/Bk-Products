@@ -4,10 +4,6 @@ import AdminLayout from './pages/admin-dashboard/adminLayout';
 import AdminOverview from './pages/admin-dashboard/overview/adminOverview';
 import AdminOrders from './pages/admin-dashboard/orders/adminOrders';
 import AdminProducts from './pages/admin-dashboard/products/adminProducts';
-import AllProducts from './pages/admin-dashboard/all-products/allProducts';
-import AddProduct from './pages/admin-dashboard/add-product/addProduct';
-import EditProduct from './pages/admin-dashboard/edit-product/editProduct';
-import ViewProduct from './pages/admin-dashboard/view-product/viewProduct';
 import Delivery from './pages/admin-dashboard/delivery/delivery';
 import Settings from './pages/admin-dashboard/settings/settings';
 import SignIn from './pages/sign-in/signin';
@@ -24,6 +20,11 @@ import Orders from './pages/orders/orders';
 import AllOrders from './pages/orders/components/orderContent/allOrders';
 import OpenOrders from './pages/orders/components/orderContent/openOrders';
 import ClosedOrders from './pages/orders/components/orderContent/closedOrders';
+import AllProducts from './pages/admin-dashboard/products/subpage/allProducts';
+import AddProduct from './pages/admin-dashboard/products/subpage/addProduct'
+import EditProduct from './pages/admin-dashboard/products/subpage/editProduct'
+import ViewProduct from './pages/admin-dashboard/products/subpage/viewProduct'
+import ForgotPassword from './pages/forgot-password/forgotPassword';
 
 
 
@@ -63,6 +64,7 @@ function App() {
         {/* -- SIGN IN & SIGN UP ROUTES -- */}
         <Route path='/sign-in' element={<SignIn />}/>
         <Route path='/sign-up' element={<SignUp />}/>
+        <Route path='/forgot-password' element={<ForgotPassword />}/>
 
         {/* -- PAGE NOT FOUND -- */}
         <Route path='*' element={<Error404 />}/>
