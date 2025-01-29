@@ -172,14 +172,14 @@
     width: 100%;
 }
 .payment-amount-message{
-    background-color: #F1F5FF;
-    color: #115FFC;
-    font-size: 14.5px;
+    background-color: #F2F2F2;
+    color: #333;
+    font-size: 14px;
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 5px;
     font-weight: 400;
-    text-align: center;
+    /* text-align: center; */
 }
 .upload-section .upload-btn{
     width: fit-content;

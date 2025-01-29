@@ -20,7 +20,8 @@ const SingleOrderBox = ({ order }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [modalType, setModalType] = useState();
     
-    const [paymentReceipt, setPaymentReceipt] = useState(null);
+    const [paymentReceiptPreview, setPaymentReceiptPreview] = useState(null);
+    const [paymentReceiptImage, setPaymentReceiptImage] = useState(null);
 
 
     const openModal = (modal_type) => {
@@ -30,11 +31,13 @@ const SingleOrderBox = ({ order }) => {
     }
 
     const handleFileChange = (e) => {
+
         const file = e.target.files[0];
         if (file) {
-            // Create a preview URL for the uploaded file
+            
             const fileURL = URL.createObjectURL(file);
-            setPaymentReceipt(fileURL); // Update state with the file URL
+            setPaymentReceiptPreview(fileURL);
+            setPaymentReceiptImage(file);
         }
     };
 
@@ -79,19 +82,19 @@ const SingleOrderBox = ({ order }) => {
 
                         {modalType === 'track' && <div className={styles['track-message']}>
                             {order.orderStatus === 'pending' && order.paymentStatus === 'pending' && <div>
-                                <p>Your Order is pending. Click <span onClick={() => openModal('pay')} style={{ color: '#115ffc', textDecoration: 'underline', cursor: 'pointer' }}>Make payment</span> to proceed.</p>
+                                <p>Your order is pending. Click <span onClick={() => openModal('pay')} style={{ color: '#115ffc', textDecoration: 'underline', cursor: 'pointer' }}>Make payment</span> to proceed.</p>
                             </div>}
                             {order.orderStatus === 'pending' && order.paymentStatus === 'submitted' && <div>
-                                <p>Your Order is pending, and your payment is being validated. Please check back later.</p>
+                                <p>Your order is currently pending as we validate your payment. Please check back later for an update.</p>
                             </div>}
                             {order.orderStatus === 'pending' && order.paymentStatus === 'declined' && <div>
-                                <p>Your order is pending. Your payment was rejected. Please confirm your bank transfer and re-upload your payment receipt.</p>
+                                <p>Your payment was rejected, and your order is still pending. Please verify your bank transfer and re-upload your payment receipt.</p>
                             </div>}
                             {order.orderStatus === 'processing' && order.paymentStatus === 'verified' && <div>
-                                <p>Your payment has been verified, and your order is being processed. Our dispatch riders will reach out to you soon via phone call. Please be reachable.</p>
+                                <p>Your payment has been verified, and your order is now being processed. Our dispatch riders will contact you soon via phone call, so please stay reachable.</p>
                             </div>}
                             {order.orderStatus === 'delivered' && order.paymentStatus === 'verified' && <div>
-                                <p>Your order has been delivered and hence closed.</p>
+                                <p>Your order has been successfully delivered and marked as closed.</p>
                             </div>}
                         </div>}
 
@@ -101,14 +104,17 @@ const SingleOrderBox = ({ order }) => {
                             <div className={styles['account-info']}><p>Bank Name:</p><p>GT Bank </p></div>
 
                             <div className={styles['upload-section']}>
-                                <div className={styles['payment-amount-message']}>Pay the sum of $2,000.00 to the account above</div>
-                                {paymentReceipt && <img src={paymentReceipt} alt="" />}
-                                {!paymentReceipt && <>
+                                <div className={styles['payment-amount-message']}>Your Order amount is <span style={{fontWeight: '600', color: '#115ffc', fontSize: '15px'}}>{order.totalPrice}</span>. Proceed to make a bank transfer to the account above and incude your order ID - <span style={{fontWeight: '600', color: '#115ffc', fontSize: '15px'}}>{order.orderId}</span> in the description.</div>
+                                {paymentReceiptPreview && <img src={paymentReceiptPreview} alt="" />}
+                                {!paymentReceiptPreview && <>
                                     <p>Upload your bank transfer receipt</p>
                                     <label htmlFor="upload" className={styles['upload-btn']}>Select File</label>
                                 </>}
 
-                                {paymentReceipt && <button className={styles['upload-btn']}>upload</button>}
+                                {paymentReceiptPreview && <div style={{display: 'flex', gap: '10px'}}>
+                                    <label htmlFor="upload" className={styles['upload-btn']}>Select another File</label>
+                                    <button className={styles['upload-btn']}>upload</button>
+                                </div>}
 
                             </div>
 
