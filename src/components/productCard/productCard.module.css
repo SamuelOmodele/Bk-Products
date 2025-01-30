@@ -15,7 +15,7 @@
 .card-image img{
     max-height: 100%;
     max-width: 100%;
-    border-radius: 0px;
+    border-radius: 5px;
 }
 .like-icon{
     position: absolute;

@@ -85,7 +85,7 @@ const OrderDetails = () => {
                                 <div className={styles['product-image']}><img src={product.image} alt="" /></div>
                                 <p className={styles['product-name']}>{product.name}</p>
                                 <div style={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
-                                    <p className={styles['category']}>{product.category}</p>
+                                    {/* <p className={styles['category']}>{product.category}</p> */}
                                     <p className={styles['product-priceperunit']}>{product.pricePerUnit}/unit</p>
                                     <p className={styles['unit']}>{product.numOfUnit} units</p>
                                 </div>

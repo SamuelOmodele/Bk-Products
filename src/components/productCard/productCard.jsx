@@ -25,7 +25,7 @@ const ProductCard = () => {
         </div>
         <div className={styles['name-price']}>
             <p className={styles['name']}>SUN8 Generic Men Wrist Watch</p>
-            <div className={styles['category']}>clothing</div>
+            <div className={styles['category']}>gadgets</div>
         </div>
         <div className={styles['description']}>{cropDescription(product_description)}</div>
         
