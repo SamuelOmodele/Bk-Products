@@ -1,17 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import AdminSidebar from '../../components/adminSidebar/adminSidebar'
 import styles from './adminLayout.module.css'
 import AdminNavbar from '../../components/adminNavbar/adminNavbar'
 
 const AdminLayout = () => {
+
+  const [showSidebar, setShowSidebar] = useState(false)
+
   return (
     <div className={styles['page']}>
-      <div className={styles['sidebar-container']}>
-        <AdminSidebar />
+      <div style={{marginLeft: showSidebar ? '0' : ''}} className={styles['sidebar-container']}>
+        <AdminSidebar setShowSidebar={setShowSidebar} />
       </div>
       <div className={styles['outlet-container']}>
-        <AdminNavbar />
+        <AdminNavbar setShowSidebar={setShowSidebar} />
         <div className={styles['component-container']}>
           <Outlet />
         </div>

@@ -25,16 +25,41 @@
     background-color: #F1F5FF;
     color: #115FFC;
 }
-.sidebar-items a.logout{
+.sidebar-items p.logout{
     position: absolute;
     bottom: 0px;
     left: 20px;
     border-radius: 1px;
     width: 85%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    color: #6E6E6E;
+    padding: 12px ;
+    border-radius: 10px;
+    font-weight: 500;
+    transform: .5s ;
+    font-size: 15px;
+    cursor: pointer;
 }
 .main-menu-text{
     margin-bottom: 15px;
     color: #aaa;
     font-size: 14px;
     font-weight: 400;
+}
+.close-icon{
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border: 1px solid #6E6E6E;
+    border-radius: 3px;
+    padding: 1px;
+}
+@media screen and (max-width: 1200px) {
+    .close-icon{
+        display: block;
+    }
 }

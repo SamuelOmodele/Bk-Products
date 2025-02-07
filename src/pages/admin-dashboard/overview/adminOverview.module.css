@@ -1,34 +1,41 @@
-.overview-container{
+.overview-container {
     width: 100%;
     padding: 30px;
 }
-.section-name{
+
+.section-name {
     color: #1D1D1D;
     /* color: #212D5A; */
     font-weight: 500;
     font-size: 19px;
     margin-bottom: 20px;
 }
-.overview-card-container{
+
+.overview-card-container {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
-.lower-content{
+
+.lower-content {
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
 }
-.chart-container{
+
+.chart-container {
     width: 65%;
 }
-.orders-overview-text, .top-product-text{
+
+.orders-overview-text,
+.top-product-text {
     margin-bottom: 15px;
     font-size: 18px;
     font-weight: 500;
 }
-.chart-box{
+
+.chart-box {
     margin-top: 10px;
     width: 100%;
     height: fit-content;
@@ -36,22 +43,26 @@
     padding: 15px;
     border-radius: 10px;
 }
-.top-product-container{
+
+.top-product-container {
     width: 32%;
     margin-bottom: 20px;
 }
-.top-product-box{
+
+.top-product-box {
     background-color: white;
     padding: 20px 20px 5px;
     border-radius: 10px;
 }
-.top-product-box .head-section{
+
+.top-product-box .head-section {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 40px;
 }
-.month-box{
+
+.month-box {
     border: 1px solid rgba(202, 201, 217, 0.7);
     padding: 4px 13px;
     border-radius: 5px;
@@ -60,66 +71,86 @@
     gap: 10px;
     font-size: 14px;
 }
-.top-product{
+
+.top-product {
     width: 100%;
     margin-bottom: 30px;
     display: flex;
+    align-items: center;
     gap: 10px;
 }
-.top-product img{
-    width: 35px;
-    height: 35px;
-    border-radius: 5px;;
+
+.top-product img {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    ;
 }
-.top-product .right-content{
+
+.top-product .right-content {
     flex-grow: 1;
 }
-.top-product .right-content .name-percent-container{
-    display: flex;
+
+.top-product .right-content .name-percent-container {
+    /* display: flex; */
     justify-content: space-between;
     font-size: 14px;
 }
-.percent-container{
+
+.name{
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.percent-container {
     font-size: 11px;
     display: flex;
     align-items: center;
     gap: 5px;
+    
 }
-.percent{
+
+.percent {
     padding: 2px 10px;
     background-color: #F1F5FF;
-    color:  #115FFC;
+    color: #115FFC;
     border-radius: 5px;
 }
-.outer-bar{
+
+.outer-bar {
     width: 100%;
     height: 5px;
     background-color: #E8E6FC;
     margin-top: 5px;
     border-radius: 5px;
 }
-.inner-bar{
-    width: 50%;
+
+.inner-bar {
+    /* width: 50%; */
     height: 5px;
     background-color: #115FFC;
-    margin-top: 10px;
+    margin-top: 0px;
     border-radius: 5px;
 }
-.order-history{
+
+.order-history {
     margin-top: 10px;
 }
-.order-history-text{
+
+.order-history-text {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px;
 }
-.order-table-container{
+
+.order-table-container {
     background-color: white;
     width: 100%;
     border-radius: 5px;
     padding: 20px 30px;
 }
-.view-all-text{
+
+.view-all-text {
     font-size: 13px;
     margin-right: 12px;
     margin-left: auto;
@@ -130,28 +161,45 @@
     color: #115FFC;
     cursor: pointer;
 }
-.view-all-text:hover{
+
+.view-all-text:hover {
     color: #419FFC;
 }
-.order-table-head{
+
+.order-table-head {
     width: 100%;
     display: flex;
     border-bottom: 1px solid #F1F1F1;
     margin-bottom: 15px;
     padding: 15px 0;
 }
-.table-head-data{
-    /* flex-basis: 20%; */
+
+.table-head-data {
     color: #8F9395;
     font-size: 14px;
 }
-.total-order-number{
+#id-cell{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+#customer-cell, #payment-cell{
+    width: 25%;
+    text-align: center;
+}
+#amount-cell, #date-cell{
+    width: 15%;
+    text-align: center;
+}
+.total-order-number {
     font-size: 13px;
     margin-bottom: 10px;
     color: #8a8a8a;
     margin-left: auto;
 }
-.order-row{
+
+.order-row {
     width: 100%;
     display: flex;
     margin-bottom: 15px;
@@ -160,8 +208,92 @@
     padding-bottom: 15px;
     /* background-color: red; */
 }
-.order-row-data{
+
+.order-row-data {
     /* flex-basis: 20%; */
     font-size: 15px;
     color: #2F3944;
+}
+
+@media screen and (max-width: 990px) {
+    .overview-card-container {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 3px;
+    }
+    .overview-card-container::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .overview-card-container::-webkit-scrollbar-thumb {
+        background: #aaa;
+        border-radius: 4px;
+    }
+    
+    .overview-card-container::-webkit-scrollbar-thumb:hover {
+        background: #253656;
+    }
+
+    .lower-content {
+        flex-direction: column;
+    }
+
+    .chart-container {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .top-product-container {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 800px) {
+    #customer-cell{
+        display: none;
+    }
+    #id-cell{
+        width: 25%;
+    }
+    #payment-cell{
+        width: 30%;
+        text-align: center;
+    }
+    #amount-cell, #date-cell{
+        width: 22.5%;
+        text-align: center;
+    }
+}
+@media screen and (max-width: 750px) {
+    .overview-container {
+        padding: 30px 20px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .chart-container {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .overflow-container{
+        width: 100%;
+        overflow-x: auto;
+    }
+    .order-table-container{
+        width: 530px;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .overview-container {
+        padding: 20px 10px;
+    }
+    .top-product-box {
+        border-radius: 5px;
+    }
 }

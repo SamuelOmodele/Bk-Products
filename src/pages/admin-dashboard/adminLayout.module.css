@@ -7,6 +7,7 @@
 }
 .sidebar-container{
     width: 20%;
+    min-width: 250px;
     height: 100%;
     background-color: white;
 }
@@ -17,4 +18,16 @@
     width: 100%;
     height: calc(100% - 80px);
     overflow-y: scroll;
+}
+@media screen and (max-width: 1200px) {
+    .sidebar-container{
+        position: absolute;
+        width: 300px;
+        margin-left: -300px;
+        z-index: 400;
+        transition: .3s;
+    }
+    .outlet-container{
+        width: 100%;
+    }
 }

@@ -4,6 +4,18 @@ import Navbar from '../../components/navbar/navbar'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../../components/loader/loader';
 import { ToastContainer, toast } from 'react-toastify';
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
+} from '@chakra-ui/react';
+import { IoMdMailUnread } from "react-icons/io";
 
 const SignUp = () => {
 
@@ -16,9 +28,17 @@ const SignUp = () => {
   const [phoneNo, setPhoneNo] = useState('');
   const [role, setRole] = useState('');
 
+  // const [error, setError] = useState(false);
+  // const [status, setStatus] = useState('idle');
+  // const [errorMsg, setErrorMsg] = useState('');
+  // const [statusMsg, setStatusMsg] = useState('');
+  // const [loading, setLoading] = useState(false);
+
+  // --- API STATES ---
+  const [data, setData] = useState('');
   const [error, setError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -27,61 +47,63 @@ const SignUp = () => {
     });
   }
 
-  const signUp = async() => {
+  const signUp = async () => {
 
-    if (!firstName){
+    if (!firstName) {
       scrollToTop();
       setError(true);
-      setErrorMsg('Enter first name');
+      setMessage('Enter first name');
       return;
     }
-    if (!lastName){
+    if (!lastName) {
       scrollToTop();
       setError(true);
-      setErrorMsg('Enter last name ');
+      setMessage('Enter last name ');
       return;
     }
-    if (!email){
+    if (!email) {
       scrollToTop();
       setError(true);
-      setErrorMsg('Enter email ');
+      setMessage('Enter email ');
       return;
     }
-    if (!password){
+    if (!password) {
       scrollToTop();
       setError(true);
-      setErrorMsg('Enter password ');
+      setMessage('Enter password ');
       return;
     }
-    if (!confirmPassword){
+    if (!confirmPassword) {
       scrollToTop();
       setError(true);
-      setErrorMsg('Enter confirm password ');
+      setMessage('Enter confirm password ');
       return;
     }
-    if (!phoneNo){
+    if (!phoneNo) {
       scrollToTop();
       setError(true);
-      setErrorMsg('Enter phone number ');
+      setMessage('Enter phone number ');
       return;
     }
-    if (!role){
+    if (!role) {
       scrollToTop();
       setError(true);
-      setErrorMsg('Enter role ');
+      setMessage('Enter role ');
       return;
     }
-    if (password !== confirmPassword){
+    if (password !== confirmPassword) {
       scrollToTop();
       setError(true);
-      setErrorMsg("passwords do not match ");
+      setMessage("passwords do not match ");
       return;
     }
-
+    setData('');
     setError(false);
-    setErrorMsg('');
+    setMessage('');
+    console.log('Loading . . .')
+    setLoading(true);
 
-    try{
+    try {
       const formData = new FormData();
       formData.append('firstname', firstName);
       formData.append('lastname', lastName);
@@ -90,21 +112,19 @@ const SignUp = () => {
       formData.append('phone', phoneNo);
       formData.append('role', role);
 
-      console.log('Loading . . .')
-      setLoading(true);
-
-      const response = await fetch('https://bkproductsonline.com/backend/api/auth/register', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/auth/register`, {
         method: 'POST',
         body: formData
       })
 
       // --- error response ---
-      if (!response.ok){
+      if (!response.ok) {
         const errorData = await response.json();
         console.error("An error encountered: ", errorData);
-        const error_field = Object.keys(errorData.errors)[0]; 
+        const error_field = Object.keys(errorData.errors)[0];
+        setData('');
         setError(true);
-        setErrorMsg(errorData['errors'][error_field]);
+        setMessage(errorData['errors'][error_field]);
         setLoading(false);
         scrollToTop();
         return;
@@ -113,17 +133,22 @@ const SignUp = () => {
       // --- success response ---
       const responseData = await response.json();
       console.log("Signup Successful", responseData);
-      toast.success('Signup Successful', {
-        position: "bottom-right",
-        autoClose: 5000,
-      })
+      // toast.success(responseData.message, {
+      //   position: "bottom-right",
+      //   autoClose: 5000,
+      // })
+      setData(responseData);
+      setError(false);
+      setMessage('');
       setLoading(false)
+      onOpen();
       clearForm();
 
-    } catch (error){
+    } catch (error) {
       console.log(error);
+      setData('')
       setError(true);
-      setErrorMsg(error.message);
+      setMessage(error.message);
       setLoading(false);
       scrollToTop();
     }
@@ -138,7 +163,8 @@ const SignUp = () => {
     setPhoneNo('');
     setRole('');
   }
-  
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
 
   return (
@@ -148,7 +174,7 @@ const SignUp = () => {
         <div className={styles['form']}>
           <h4>Sign Up</h4>
           <p>Have an account already ? <span onClick={() => navigate('/sign-in')}>Sign in</span></p>
-          {error && <div className={styles["error-msg"]}>{errorMsg}</div>}
+          {error && <div className={styles["error-msg"]}>{message}</div>}
           <div className={styles['form-content']}>
             <div className={styles['half-input-box']}>
               <label htmlFor="">First Name</label>
@@ -164,15 +190,15 @@ const SignUp = () => {
             </div>
             <div className={styles['half-input-box']}>
               <label htmlFor="">Password</label>
-              <input type="password" placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+              <input type="password" placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)} />
             </div>
             <div className={styles['half-input-box']}>
               <label htmlFor="">Confirm Password</label>
-              <input type="password" placeholder='confirm password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
+              <input type="password" placeholder='confirm password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
             </div>
             <div className={styles['half-input-box']}>
               <label htmlFor="">Phone no.</label>
-              <input type="number" placeholder='Enter your phone number' value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)}/>
+              <input type="number" placeholder='Enter your phone number' value={phoneNo} onChange={(e) => setPhoneNo(e.target.value)} />
             </div>
             <div className={styles['half-input-box']}>
               <label htmlFor="">Role</label>
@@ -181,10 +207,29 @@ const SignUp = () => {
 
 
           </div>
-          <button onClick={signUp}>{!loading ? 'Sign up' : <Loader size={28} color={'white'}/>}</button>
+          <button onClick={signUp}>{!loading ? 'Sign up' : <Loader size={28} color={'white'} />}</button>
+          <div>
+            <p>Having trouble verifying email ? <span onClick={() => navigate('/resend-verification-link')}>Resend verification link</span></p>
+          </div>
         </div>
       </div>
-      <ToastContainer />
+      
+
+      <Modal isOpen={isOpen} onClose={onClose} >
+        <ModalOverlay />
+        <ModalContent margin={'auto'}>
+          <ModalHeader style={{ textAlign: 'center' }}> Verify Email </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <IoMdMailUnread className={styles['mail-icon']}/>
+            <p className={styles['modal-p']}>
+              {data?.message}
+              {/* Registration successful. A verification mail has been sent to your email/spam folder. */}
+            </p>
+            <button className={styles['modal-btn']} onClick={onClose}>Got it</button>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </div>
   )
 }

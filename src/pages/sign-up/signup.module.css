@@ -89,7 +89,33 @@
     text-decoration: underline;
     cursor: pointer;
 }
-
+.modal-p{
+    color: #333;
+    font-size: 14.5px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.mail-icon{
+    width: 130px;
+    height: 130px;
+    margin: auto;
+    background-color: #4caf50;
+    color: white;
+    padding: 20px 0;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+.modal-btn{
+    background-color: #115FFC;
+    color: white;
+    padding: 6.5px 20px;
+    /* width: 150px; */
+    border-radius: 5px;
+    margin: auto;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 10px;
+}
 @media screen and (max-width: 630px) {
     .content{
         padding: 80px 10px 0;

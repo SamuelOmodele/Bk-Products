@@ -53,6 +53,7 @@ p.active::before {
 }
 
 .signin-cart-box {
+    align-items: center;
     display: flex;
     gap: 15px;
 }
@@ -67,6 +68,25 @@ p.active::before {
     border-radius: 20px;
     font-size: 15px;
     transition: .2s ease;
+}
+.dashboard-account{
+    margin: auto;
+    border: 1.5px solid #115FFC;
+    padding: 5px 10px;
+    color: #115FFC;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    gap: 5px;
+    transition: .15s ease-in-out;
+    width: fit-content;
+}
+.dashboard-account:hover{
+    transform: scale(0.97);
 }
 
 .signin-cart-box button.signin {
