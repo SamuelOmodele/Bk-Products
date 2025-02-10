@@ -188,7 +188,7 @@ const AdminOverview = () => {
 
       </div> :
         // --- LOADER ---
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '15px' }}><Loader color={'#115ffc'} size={38} /> Loading . . .</div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '15px', margin: '50px 0'}}><Loader color={'#115ffc'} size={38} /> Loading . . .</div>
       }
     </>
   )
