@@ -56,7 +56,7 @@
     color: #354666;
     font-size: 14px;
     font-weight: 500;
-    border-radius: 5px;
+    border-radius: 25px;
     transition: .14s;
 }
 .product-card button:hover{
