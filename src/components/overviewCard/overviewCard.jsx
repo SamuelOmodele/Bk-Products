@@ -33,7 +33,7 @@ const OverviewCard = ({ name, amount }) => {
                 <p className={styles['card-amount-text']}>{amount}</p>
                 <div className={styles['card-small-text']}> <div className={styles['card-percent-text']}>+27%</div> since last month</div>
             </div>
-            <IoIosTrendingUp size={48} className={styles['trend']}/>
+            {/* <IoIosTrendingUp size={48} className={styles['trend']}/> */}
         </div>
     )
 }

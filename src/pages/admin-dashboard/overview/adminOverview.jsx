@@ -17,16 +17,11 @@ const AdminOverview = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = localStorage.getItem('accessToken');
+
   // --- data ---
   const [data, setData] = useState(null);
-  // const [totalProducts, setTotalProducts] = useState();
-  // const [totalOrders, setTotalOrders] = useState();
-  // const [totalRevenue, setTotalRevenue] = useState();
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [message, setMessage] = useState('');
-
 
   useEffect(() => {
     dispatch(setActiveSidebarMenu('overview'));
@@ -47,12 +42,15 @@ const AdminOverview = () => {
         "Content-Type": 'application/json'
       }
 
-      const [res1, res2] = await Promise.all([
+      const [res1, res2, res3, res4] = await Promise.all([
         fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/totalProducts`, { headers }).then(res => res.json()),
         fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/totalOrders`, { headers }).then(res => res.json()),
+        fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/ordersOverviewByMonth`, { headers }).then(res => res.json()),
+        fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/mostSellingProducts`, { headers }).then(res => res.json()),
       ])
 
-      setData({ totalProducts: res1['Total Products'], totalOrders: res2.totalOrders, totalRevenue: res2.totalRevenue });
+      console.log(res4);
+      setData({ totalProducts: res1['Total Products'], totalOrders: res2.totalOrders, totalRevenue: res2.totalRevenue, topProducts: res4 });
 
     } catch (error) {
       console.log('An Error Occured', error);
@@ -62,7 +60,7 @@ const AdminOverview = () => {
     }
   }
 
-
+  // --- hard coded data ---
   const chart_data = [
     { name: 'January', sales: 3000 },
     { name: 'February', sales: 2000 },
@@ -73,9 +71,9 @@ const AdminOverview = () => {
   ];
 
   const top_product_data = [
-    { image: wristWatch, product_name: 'SUN8 Generic Men Wrist Watch', fraction: '100 items sold', percentage: '60%' },
-    { image: wristWatch, product_name: 'SUN8 Generic Men Wrist Watch', fraction: '90 items sold', percentage: '50%' },
-    { image: wristWatch, product_name: 'SUN8 Generic Men Wrist Watch', fraction: '80 items sold', percentage: '40%' },
+    { image: wristWatch, product_name: 'SUN8 Generic Men Wrist Watch', total_sold: '100', percentage: '60%' },
+    { image: wristWatch, product_name: 'SUN8 Generic Men Wrist Watch', total_sold: '90', percentage: '50%' },
+    { image: wristWatch, product_name: 'SUN8 Generic Men Wrist Watch', total_sold: '80', percentage: '40%' },
     // { image: wristWatch, product_name: 'Wrist Watch', fraction: '70 items sold', percentage: '50%' },
   ];
 
@@ -85,7 +83,6 @@ const AdminOverview = () => {
     { order_id: 'TDGN2L6BMY', customer_name: 'Omodele Samuel', payment_status: 'verified', amount: '$17,800', date: 'Dec 12' },
 
   ]
-
 
 
   return (
@@ -98,11 +95,12 @@ const AdminOverview = () => {
         <div className={styles['overview-card-container']}>
           <OverviewCard name={'Products'} amount={data?.totalProducts || 0} />
           <OverviewCard name={'Orders'} amount={data?.totalOrders || 0} />
-          <OverviewCard name={'Sales'} amount={data?.totalRevenue || 0} />
+          <OverviewCard name={'Sales'} amount={Number(data?.totalRevenue).toLocaleString() || 0} />
         </div>
 
         {/* --- LOWER CONTENT --- */}
         <div className={styles['lower-content']}>
+
           {/* -- BAR CHART CONTAINER -- */}
           <div className={styles['chart-container']}>
             <p className={styles['orders-overview-text']}>Orders Overview</p>
@@ -134,14 +132,14 @@ const AdminOverview = () => {
               </div>
 
               {/* -- TOP PRODUCT LIST -- */}
-              {top_product_data.map((product, index) => (
+              {data?.topProducts.slice(0, 3).map((product, index) => (
                 <div className={styles["top-product"]} key={index}>
-                  <img src={product.image} alt="" />
+                  <img src={`${process.env.REACT_APP_BACKEND_BASE_URL}${product.product.productimage}`} alt="" />
                   <div className={styles["right-content"]}>
                     <div className={styles["name-percent-container"]}>
-                      <p className={styles["name"]}>{product.product_name}</p>
+                      <p className={styles["name"]}>{product.product.name}</p>
                       <div className={styles["percent-container"]}>
-                        <p>{product.fraction}</p>
+                        <p>{product.total_sold} items sold</p>
                         {/* <div className={styles["percent"]}>{product.percentage}</div> */}
                       </div>
                     </div>
@@ -154,6 +152,7 @@ const AdminOverview = () => {
 
             </div>
           </div>
+
         </div>
 
         {/* --- ORDER HISTORY --- */}
@@ -187,7 +186,10 @@ const AdminOverview = () => {
 
         </div>
 
-      </div> : <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '15px' }}><Loader color={'#115ffc'} size={38} /> Loading . . .</div>}
+      </div> :
+        // --- LOADER ---
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '15px' }}><Loader color={'#115ffc'} size={38} /> Loading . . .</div>
+      }
     </>
   )
 }

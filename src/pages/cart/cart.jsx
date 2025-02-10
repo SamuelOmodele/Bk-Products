@@ -14,6 +14,8 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setIsSignedIn, setRole } from '../../redux/authSlice';
 
 const Cart = () => {
 
@@ -23,32 +25,34 @@ const Cart = () => {
   const [selectedZoneName, setSelectedZoneName] = useState();
   const [zoneError, setZoneError] = useState(false);
 
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const deliveryZones = [
     {
       id: 1,
-      name: 'Ikeja, Lagos State', 
+      name: 'Ikeja, Lagos State',
       price: '20.00'
     },
     {
       id: 2,
-      name: 'Victoria Island, Lagos State', 
+      name: 'Victoria Island, Lagos State',
       price: '30.00'
     },
     {
       id: 3,
-      name: 'Ikorodu, Lagos State', 
+      name: 'Ikorodu, Lagos State',
       price: '25.00'
     },
     {
       id: 4,
-      name: 'Ikoyi, Lagos State', 
+      name: 'Ikoyi, Lagos State',
       price: '35.00'
     },
     {
       id: 5,
-      name: 'Ibadan, Oyo State', 
+      name: 'Ibadan, Oyo State',
       price: '50.00'
     },
   ]
@@ -64,6 +68,13 @@ const Cart = () => {
     setZoneError(false);
 
     onOpen();
+  }
+
+  const logout = () => {
+    localStorage.removeItem('accessToken');
+    dispatch(setRole(null));
+    dispatch(setIsSignedIn(false));
+    navigate('/sign-in')
   }
 
   return (
@@ -108,20 +119,21 @@ const Cart = () => {
                   <option key={index} value={zone.id}>{zone.name}</option>
                 ))}
               </select>
-              <div className={styles['delivery-fee']}>{selectedZoneId && <p>Delivery fee is <span className={styles['bold-blue']}>{`$${deliveryZones.find((zone) => zone.id === Number(selectedZoneId))?.price}` || "N/A"}</span></p>} {zoneError && !selectedZoneId && <p style={{color: 'red'}}>Select a Zone</p>}</div>
+              <div className={styles['delivery-fee']}>{selectedZoneId && <p>Delivery fee is <span className={styles['bold-blue']}>{`$${deliveryZones.find((zone) => zone.id === Number(selectedZoneId))?.price}` || "N/A"}</span></p>} {zoneError && !selectedZoneId && <p style={{ color: 'red' }}>Select a Zone</p>}</div>
               <button onClick={confirmCheckout}>Proceed to Checkout</button>
             </div>
           </div>
-          
+          <p onClick={logout} style={{marginTop: '10px', fontSize: '14px'}}>Logout</p>
+
         </div>
 
         {/* --- CHECK OUT MODAL --- */}
         <Modal isOpen={isOpen} onClose={onClose} isCentered>
           <ModalOverlay />
-          <ModalContent style={{padding: '0'}}>
-            <ModalHeader style={{textAlign: 'center'}}>Confirm Checkout</ModalHeader>
+          <ModalContent style={{ padding: '0' }}>
+            <ModalHeader style={{ textAlign: 'center' }}>Confirm Checkout</ModalHeader>
             <ModalCloseButton />
-            <ModalBody style={{padding: '0 10px 10px'}}>
+            <ModalBody style={{ padding: '0 10px 10px' }}>
               <div className={styles['cart-summary']}>
                 <h3>Cart Summary</h3>
                 <div><p>Cart Subtotal: </p><p>$1000.00</p></div>

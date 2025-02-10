@@ -52,9 +52,10 @@ const Navbar = ({ active }) => {
           <MdOutlineShoppingCart size={18} />
           Cart
         </button>
-        <button className={styles['signin']} onClick={() => navigate('/sign-in')}>Sign in</button>
-        {/* <div className={styles['dashboard-account']} onClick={() => navigate('/admin') }>Dashboard <LuSquareArrowOutUpRight size={16}/></div> */}
-        {/* <div className={styles['dashboard-account']} onClick={() => navigate('/admin') }>My Account <LuSquareArrowOutUpRight size={16}/></div> */}
+        {role ==='pending' && <Loader color={'#115ffc'} size={24} />}
+        {!role && <button className={styles['signin']} onClick={() => navigate('/sign-in')}>Sign in</button>}
+        {role === 'admin' && <div className={styles['dashboard-account']} onClick={() => navigate('/admin') }>Dashboard <LuSquareArrowOutUpRight size={16}/></div>}
+        {role === 'user' && <div className={styles['dashboard-account']} onClick={() => navigate('/cart') }>My Account <LuSquareArrowOutUpRight size={16}/></div>}
       </div>}
     </div>
   )

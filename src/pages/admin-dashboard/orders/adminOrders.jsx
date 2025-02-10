@@ -53,54 +53,56 @@ const AdminOrders = () => {
     <div className={styles['order-page']}>
 
       <div className={styles['order-tab']}>
-        <p className={orderTab === '1' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('1')}> <MdOutlinePendingActions size={22} />Pending Orders</p>
-        <p className={orderTab === '2' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('2')}> <FaArrowsRotate size={18} /> Processing Orders</p>
-        <p className={orderTab === '3' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('3')}> <AiOutlineFileDone size={22} /> Shipped Orders</p>
+        <p className={orderTab === '1' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('1')}> <MdOutlinePendingActions size={22} className={styles['order-tab-icon']}/>Pending <span className={styles['order-text']}>Orders</span> </p>
+        <p className={orderTab === '2' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('2')}> <FaArrowsRotate size={18} className={styles['order-tab-icon']}/> Processing <span className={styles['order-text']}>Orders</span></p>
+        <p className={orderTab === '3' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('3')}> <AiOutlineFileDone size={22} className={styles['order-tab-icon']}/> Delivered <span className={styles['order-text']}>Orders</span></p>
       </div>
 
       <p className={styles['main-text']}>Orders</p>
 
       {/* --- ORDER TABLE --- */}
 
-      <div className={styles['order-table-container']}>
+      <div className={styles['overflow-container']}>
+        <div className={styles['order-table-container']}>
 
-        {/* -- Filter --- */}
-        <div className={styles["order-filter-container"]}>
-          <div className={styles['filter-input']} style={{ backgroundColor: '#115FFC', color: 'white', border: 'none' }}> Type <MdKeyboardArrowDown size={20} /></div>
-          <div className={styles['filter-input']}> Status <MdKeyboardArrowDown size={20} /></div>
-          <div className={styles['filter-input']} style={{ width: '140' }}> Order date <MdKeyboardArrowDown size={20} /></div>
-          <p className={styles['total-order-number']}>Total : 50</p>
-        </div>
-
-        {/* --- Table Head --- */}
-        <div className={styles["order-table-head"]}>
-          <div className={styles["table-head-data"]} style={{ width: '20%', display: 'flex', alignItems: 'center', gap: '20px' }}><input type='checkbox' /> Order Id</div>
-          <div className={styles["table-head-data"]} style={{ width: '25%' }}>Customer</div>
-          <div className={styles["table-head-data"]} style={{ width: '20%' }}>Payment status</div>
-          <div className={styles["table-head-data"]} style={{ width: '20%' }}>Amount</div>
-          <div className={styles["table-head-data"]} style={{ width: '10%' }}>Date</div>
-        </div>
-        {/* #21A168 */}
-
-        {/* -- Order Data --- */}
-        {orders.map((order, index) => (
-          <div className={styles['order-row']} key={index}>
-            <div className={styles['order-row-data']} style={{ width: '20%', display: 'flex', alignItems: 'center', gap: '20px' }}> <input type="checkbox" name="" id="" />{order.order_id}</div>
-            <div className={styles['order-row-data']} style={{ width: '25%' }}>{order.customer_name}</div>
-            <div className={styles['order-row-data']} style={{ width: '20%', color: order.payment_status === 'verified' ? '#21A168' : '#F77C27', fontSize: '14px', fontWeight: '300' }}>{order.payment_status}</div>
-            <div className={styles['order-row-data']} style={{ width: '20%' }}>{order.amount}</div>
-            <div className={styles['order-row-data']} style={{ width: '10%' }}>{order.date}</div>
-            <div className={styles['order-row-data']} style={{ width: '5%', fontSize: '13px', color: '#115FFC', opacity: '0.7', cursor: 'pointer' }} onClick={onOpen}>view</div>
+          {/* -- Filter --- */}
+          <div className={styles["order-filter-container"]}>
+            <div className={styles['filter-input']} style={{ backgroundColor: '#115FFC', color: 'white', border: 'none' }}> Type <MdKeyboardArrowDown size={20} /></div>
+            <div className={styles['filter-input']}> Status <MdKeyboardArrowDown size={20} /></div>
+            <div className={styles['filter-input']} style={{ width: '140' }}> Order date <MdKeyboardArrowDown size={20} /></div>
+            <p className={styles['total-order-number']}>Total : 50</p>
           </div>
-        ))}
 
+          {/* --- Table Head --- */}
+          <div className={styles["order-table-head"]}>
+            <div className={styles["table-head-data"]} id={styles['order-id-cell']}><input type='checkbox' /> Order Id</div>
+            <div className={styles["table-head-data"]} id={styles['customer-cell']}>Customer</div>
+            <div className={styles["table-head-data"]} id={styles['payment-status-cell']}>Payment status</div>
+            <div className={styles["table-head-data"]} id={styles['amount-cell']}>Amount</div>
+            <div className={styles["table-head-data"]} id={styles['date-cell']}>Date</div>
+          </div>
+          {/* #21A168 */}
+
+          {/* -- Order Data --- */}
+          {orders.map((order, index) => (
+            <div className={styles['order-row']} key={index}>
+              <div className={styles['order-row-data']} id={styles['order-id-cell']}> <input type="checkbox" name="" id="" />{order.order_id}</div>
+              <div className={styles['order-row-data']} id={styles['customer-cell']}>{order.customer_name}</div>
+              <div className={styles['order-row-data']} id={styles['payment-status-cell']} style={{ color: order.payment_status === 'verified' ? '#21A168' : '#F77C27', fontSize: '14px', fontWeight: '300' }}>{order.payment_status}</div>
+              <div className={styles['order-row-data']} id={styles['amount-cell']}>{order.amount}</div>
+              <div className={styles['order-row-data']} id={styles['date-cell']}>{order.date}</div>
+              <div className={styles['order-row-data']} id={styles['view-cell']} onClick={onOpen}>view</div>
+            </div>
+          ))}
+
+        </div>
       </div>
 
 
       {/* --- ORDER MODAL --- */}
       <Modal isOpen={isOpen} onClose={onClose}  >
         <ModalOverlay />
-        <ModalContent sx={{ maxWidth: '450px' }} position="absolute" isCentered={false} right={4}>
+        <ModalContent sx={{ maxWidth: '450px' }} position="absolute" isCentered={false} className={styles['modal-content']} >
           <ModalHeader className={styles['modal-header']}>Order no. TDGN2L6BMY </ModalHeader>
           <ModalCloseButton className={styles['modal-close-button']} />
           <ModalBody>

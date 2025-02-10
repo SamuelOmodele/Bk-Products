@@ -76,7 +76,7 @@ const ProductInfo = () => {
                             <p>{selectedQuantity}</p>
                             <p><FiPlus onClick={incrementQuantity} className={styles['icon']} /></p>
                         </div>
-                        <p className={styles['stock']}> <span className={styles['stock-no']}>20 items</span> available in stock</p>
+                        <p className={styles['stock']}> <span className={styles['stock-no']}>20 items</span> left</p>
                     </div>
                     <div className={styles['cart-btn']}>
                         <button>Add to cart</button>
