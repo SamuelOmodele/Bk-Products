@@ -42,15 +42,20 @@ const AdminOverview = () => {
         "Content-Type": 'application/json'
       }
 
-      const [res1, res2, res3, res4] = await Promise.all([
+      const [res1, res2, res3, res4, res5] = await Promise.all([
         fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/totalProducts`, { headers }).then(res => res.json()),
         fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/totalOrders`, { headers }).then(res => res.json()),
         fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/ordersOverviewByMonth`, { headers }).then(res => res.json()),
         fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/mostSellingProducts`, { headers }).then(res => res.json()),
+        fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/orders`, { headers }).then(res => res.json()),
       ])
 
-      console.log(res4);
-      setData({ totalProducts: res1['Total Products'], totalOrders: res2.totalOrders, totalRevenue: res2.totalRevenue, topProducts: res4 });
+      // console.log('response 1: ', res1);
+      // console.log('response 2: ', res2);
+      // console.log('response 3: ', res3);
+      console.log('response 4: ', res4);
+      console.log('response 5: ', res5.orders.slice(-3).reverse());
+      setData({ totalProducts: res1, totalOrders: res2, totalRevenue: res2, topProducts: res4, orderList: res5.orders.reverse() });
 
     } catch (error) {
       console.log('An Error Occured', error);
@@ -84,6 +89,17 @@ const AdminOverview = () => {
 
   ]
 
+  const formatDate = (raw_date) => {
+    const date = new Date(raw_date);
+
+    const formattedDate = date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    });
+
+    return formattedDate;
+  }
+
 
   return (
     <>
@@ -93,9 +109,9 @@ const AdminOverview = () => {
 
         {/* --- OVERVIEW CARDS --- */}
         <div className={styles['overview-card-container']}>
-          <OverviewCard name={'Products'} amount={data?.totalProducts || 0} />
-          <OverviewCard name={'Orders'} amount={data?.totalOrders || 0} />
-          <OverviewCard name={'Sales'} amount={Number(data?.totalRevenue).toLocaleString() || 0} />
+          <OverviewCard name={'Products'} amount={data?.totalProducts.total_products || 0} this_month={data?.totalProducts.this_month || 0} />
+          <OverviewCard name={'Orders'} amount={data?.totalOrders.total_orders || 0} this_month={data?.totalOrders.this_month || 0}/>
+          <OverviewCard name={'Sales'} amount={Number(data?.totalRevenue.total_revenue).toLocaleString() || 0} this_month={Number(data?.totalRevenue.this_month_revenue).toLocaleString() || 0}/>
         </div>
 
         {/* --- LOWER CONTENT --- */}
@@ -132,9 +148,10 @@ const AdminOverview = () => {
               </div>
 
               {/* -- TOP PRODUCT LIST -- */}
-              {data?.topProducts.slice(0, 3).map((product, index) => (
+              {data?.topProducts.most_selling_products.slice(0, 3).map((product, index) => (
                 <div className={styles["top-product"]} key={index}>
-                  <img src={`${process.env.REACT_APP_BACKEND_BASE_URL}${product.product.productimage}`} alt="" />
+                  <img src={product.product.productimage} alt="" />
+                  {/* {console.log('product image url: ', product.product.productimage)} */}
                   <div className={styles["right-content"]}>
                     <div className={styles["name-percent-container"]}>
                       <p className={styles["name"]}>{product.product.name}</p>
@@ -171,13 +188,13 @@ const AdminOverview = () => {
               </div>
 
               {/* -- Order Data --- */}
-              {orders.map((order, index) => (
+              {data?.orderList.map((order, index) => (
                 <div className={styles['order-row']} key={index}>
                   <div className={styles['order-row-data']} id={styles['id-cell']}><input type="checkbox" name="" id="" />{order.order_id}</div>
-                  <div className={styles['order-row-data']} id={styles['customer-cell']}>{order.customer_name}</div>
-                  <div className={styles['order-row-data']} style={{ color: order.payment_status === 'verified' ? '#21A168' : '#F77C27', fontSize: '14px', fontWeight: '300' }} id={styles['payment-cell']}>{order.payment_status}</div>
-                  <div className={styles['order-row-data']} id={styles['amount-cell']}>{order.amount}</div>
-                  <div className={styles['order-row-data']} id={styles['date-cell']}>{order.date}</div>
+                  <div className={styles['order-row-data']} id={styles['customer-cell']}>{order.firstname} {order.lastname}</div>
+                  <div className={styles['order-row-data']} style={{ color: order.payment_status === 'Pending' ? '#F77C27' : order.payment_status === 'Submitted'? '#115FFC' : order.payment_status === "Verified" ? '#21A168' : 'red', fontSize: '14px', fontWeight: '300' }} id={styles['payment-cell']}>{order.payment_status}</div>
+                  <div className={styles['order-row-data']} id={styles['amount-cell']}>{Number(order.total_amount).toLocaleString()}</div>
+                  <div className={styles['order-row-data']} id={styles['date-cell']}>{formatDate(order.created_at)}</div>
                 </div>
               ))}
               <span onClick={() => navigate('/admin/orders')} className={styles['view-all-text']}>view all <FaLongArrowAltRight size={16} /></span>

@@ -14,7 +14,7 @@ const AdminLayout = () => {
         <AdminSidebar setShowSidebar={setShowSidebar} />
       </div>
       <div className={styles['outlet-container']}>
-        <AdminNavbar setShowSidebar={setShowSidebar} />
+        <div className={styles['navbar']}><AdminNavbar setShowSidebar={setShowSidebar} /></div>
         <div className={styles['component-container']}>
           <Outlet />
         </div>

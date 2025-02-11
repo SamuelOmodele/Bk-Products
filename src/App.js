@@ -78,7 +78,7 @@ function App() {
 
       // --- response is ok --
       const responseData = await response.json();
-      console.log(responseData);
+      // console.log(responseData);
       dispatch(setRole(responseData.role));
       dispatch(setIsSignedIn(true));
 

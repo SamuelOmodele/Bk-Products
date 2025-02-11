@@ -8,7 +8,7 @@ import { IoIosTrendingUp } from "react-icons/io";
 import { IoIosTrendingDown } from "react-icons/io";
 import { BsThreeDots } from "react-icons/bs";
 
-const OverviewCard = ({ name, amount }) => {
+const OverviewCard = ({ name, amount, this_month }) => {
     return (
         <div className={styles['overview-card']}>
             <BsThreeDots size={15} className={styles['dots']}/>
@@ -31,7 +31,7 @@ const OverviewCard = ({ name, amount }) => {
             <div>
                 <p className={styles['card-name-text']}>Total {name}</p>
                 <p className={styles['card-amount-text']}>{amount}</p>
-                <div className={styles['card-small-text']}> <div className={styles['card-percent-text']}>+27%</div> since last month</div>
+                <div className={styles['card-small-text']}> <div className={styles['card-percent-text']}>{this_month}</div>{name === 'Products' && 'products'}{name === 'Orders' && 'orders'} this month</div>
             </div>
             {/* <IoIosTrendingUp size={48} className={styles['trend']}/> */}
         </div>
