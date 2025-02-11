@@ -15,17 +15,12 @@
     position: relative;
     width: 80%;
     height: 100%;
-    overflow-y: auto;
-}
-.navbar{
-    width: 80%;
-    position: fixed;
-    z-index: 300;
-    /* margin-left: 10px; */
 }
 .component-container{
     width: 100%;
-    padding-top: 80px;
+    height: calc(100% - 80px);
+    overflow-y: auto;
+
 }
 @media screen and (max-width: 1200px) {
     .sidebar-container{
@@ -39,12 +34,10 @@
         margin-left: 0;
         width: 100%;
     }
-    .navbar{
-        width: 100%;
-    }
 }
 @media screen and (max-width: 500px) {
     .component-container{
-        padding-top: 65px;
+        height: calc(100% - 65px);
+        padding-bottom: 50px;
     }
 }

@@ -52,7 +52,10 @@ const AdminSidebar = ({setShowSidebar}) => {
         <Link to={'/admin/settings'} onClick={() => setShowSidebar(false)} className={(sidebarMenu ==='settings' ? styles['active'] : styles[''])}>
           <IoSettingsOutline size={22}/> Settings
         </Link>
-        <p className={styles['logout']} onClick={logout}>
+        <Link onClick={logout} id={styles['logout1']}>
+          <BiLogOutCircle size={22}/> Logout
+        </Link>
+        <p className={styles['logout']} onClick={logout} id={styles['logout2']}>
           <BiLogOutCircle size={22} /> Logout
         </p>
       </div>

@@ -58,8 +58,17 @@
     border-radius: 3px;
     padding: 1px;
 }
+#logout1{
+    display: none;
+}
 @media screen and (max-width: 1200px) {
     .close-icon{
         display: block;
+    }
+    #logout1{
+        display: flex;
+    }
+    #logout2{
+        display: none;
     }
 }

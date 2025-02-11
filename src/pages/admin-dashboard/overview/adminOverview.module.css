@@ -272,21 +272,22 @@
         padding: 30px 20px;
     }
 }
+@media screen and (max-width: 670px) {
+    .overflow-container{
+        width: 100%;
+        overflow-x: auto;
+    }
+    .order-table-container{
+        width: 670px;
+    }
+}
 @media screen and (max-width: 600px) {
     .chart-container {
         display: none;
     }
 }
 
-@media screen and (max-width: 550px) {
-    .overflow-container{
-        width: 100%;
-        overflow-x: auto;
-    }
-    .order-table-container{
-        width: 530px;
-    }
-}
+
 
 
 @media screen and (max-width: 500px) {
