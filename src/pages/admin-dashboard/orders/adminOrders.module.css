@@ -49,14 +49,70 @@
     border-radius: 10px;
     padding: 20px 30px;
 }
+.order-status{
+    margin-bottom: 5px;
+    color: #6e6e6e;
+    font-size: 13.5px;
+    padding: 5px 8px;
+    margin-top: 5px;
+    font-weight: 500;
+    border: 1.5px solid #cac9d9;
+    border-radius: 5px;
+    width: fit-content;
+    display: flex;
+    gap: 5px;
+}
+.pending{
+    color: #F77C27;
+}
+.processing{
+    color: #115FFC;
+}
+.delivered{
+    color: #21A168;
+}
+
+
 .order-filter-container{
     width: 100%;
     display: flex;
     align-items: center;
-    gap: 20px;
-    margin: 15px 0 5px;
+    justify-content: space-between;
+    margin: 15px 0 15px;
+    height: 35px;
+    /* background-color: red; */
 }
-.filter-input{
+.left{
+    display: flex;
+    gap: 20px;
+}
+.filter-input-field{
+    width: 400px;
+    position: relative;
+    height: 35px;
+}
+.filter-input-field input{
+    border: 1px solid #cac9d9;
+    width: 100%;
+    height: 100%;
+    padding: 0px 15px;
+    padding-right: 80px;
+    font-size: 13.5px;
+    outline: none;
+}
+.filter-input-field button{
+    position: absolute;
+    right: 2.5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #115FFC;
+    color: white;
+    font-size: 13.5px;
+    width: 70px;
+    height: 30px;
+    border-radius: 5px;
+}
+.filter-select-field{
     color: #1a1a1a;
     border: 1.5px dotted #8a8a8a;
     border-radius: 20px;
@@ -66,8 +122,11 @@
     align-items: center;
     justify-content: center;
     gap: 5px;
-    margin-bottom: 15px;
     width: fit-content;
+}
+.total-order-number{
+    font-size: 13px;
+    color: #8a8a8a;
 }
 .order-table-head{
     width: 100%;
@@ -81,12 +140,16 @@
     color: #8F9395;
     font-size: 14px;
 }
-.total-order-number{
-    font-size: 13px;
-    margin-bottom: 10px;
-    color: #8a8a8a;
-    margin-left: auto;
+.refresh-icon{
+    background-color: #F1F5FF;
+    color: #115FFC;
+    font-size: 26px;
+    padding: 3px;
+    border-radius: 50%;
+    cursor: pointer;
 }
+
+
 .order-row{
     width: 100%;
     display: flex;
@@ -251,7 +314,7 @@ button.verify{
         text-align: center;
     }
 }
-@media screen and (max-width: 670px){
+@media screen and (max-width: 730px){
     .overflow-container{
         width: 100%;
         overflow-y: auto;

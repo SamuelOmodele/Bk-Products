@@ -2,6 +2,10 @@
     width: 100%;
     padding: 30px;
 }
+.error-msg{
+    font-size: 14px;
+    color: red;
+}
 
 .section-name {
     color: #1D1D1D;
@@ -98,8 +102,8 @@
 }
 
 .name{
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 14.5px;
+    font-weight: 600;
 }
 
 .percent-container {
@@ -179,13 +183,21 @@
     font-size: 14px;
 }
 #id-cell{
-    width: 20%;
+    width: 15%;
     display: flex;
     align-items: center;
     gap: 20px;
 }
-#customer-cell, #payment-cell{
+#customer-cell{
     width: 25%;
+    text-align: center;
+}
+#payment-cell{
+    width: 15%;
+    text-align: center;
+}
+#order-status-cell{
+    width: 15%;
     text-align: center;
 }
 #amount-cell, #date-cell{
@@ -248,14 +260,20 @@
     .top-product-container {
         width: 100%;
     }
+    .overflow-container{
+        width: 100%;
+        overflow-x: auto;
+    }
+    .order-table-container{
+        width: 930px;
+    }
 }
 
 
 @media screen and (max-width: 800px) {
-    #customer-cell{
-        display: none;
-    }
-    #id-cell{
+
+    
+    /* #id-cell{
         width: 25%;
     }
     #payment-cell{
@@ -265,7 +283,7 @@
     #amount-cell, #date-cell{
         width: 22.5%;
         text-align: center;
-    }
+    } */
 }
 @media screen and (max-width: 750px) {
     .overview-container {
@@ -273,6 +291,28 @@
     }
 }
 @media screen and (max-width: 670px) {
+    #id-cell{
+        width: 23%;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    #payment-cell{
+        width: 21%;
+        text-align: center;
+    }
+    #order-status-cell{
+        width: 21%;
+        text-align: center;
+    }
+    #amount-cell{
+        width: 20%;
+        text-align: center;
+    }
+
+    #customer-cell{
+        display: none;
+    }
     .overflow-container{
         width: 100%;
         overflow-x: auto;

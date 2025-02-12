@@ -3,7 +3,6 @@ import styles from './adminOverview.module.css'
 import OverviewCard from '../../../components/overviewCard/overviewCard'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, } from 'recharts';
 import { BsThreeDots } from 'react-icons/bs';
-import { IoIosArrowDown } from 'react-icons/io';
 import wristWatch from '../../../assets/wrist-watch.jpg'
 import { useDispatch } from 'react-redux';
 import { setActiveSidebarMenu } from '../../../redux/sidebarSlice';
@@ -18,23 +17,24 @@ const AdminOverview = () => {
   const navigate = useNavigate();
   const accessToken = localStorage.getItem('accessToken');
 
-  // --- data ---
+  // --- states for endpoint ---
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  // --- set the active sidebar menu to overview ---
   useEffect(() => {
     dispatch(setActiveSidebarMenu('overview'));
   }, []);
 
+  // --- call the get dashboard statistic function ---
   useEffect(() => {
     getDashboardStatistic();
   }, []);
 
+  // --- get dashboard statistic function --
   const getDashboardStatistic = async () => {
-
     setLoading(true);
-    console.log('loading starts here ...');
 
     try {
       const headers = {
@@ -53,8 +53,8 @@ const AdminOverview = () => {
       // console.log('response 1: ', res1);
       // console.log('response 2: ', res2);
       // console.log('response 3: ', res3);
-      console.log('response 4: ', res4);
-      console.log('response 5: ', res5.orders.slice(-3).reverse());
+      // console.log('response 4: ', res4);
+      // console.log('response 5: ', res5.orders);
       setData({ totalProducts: res1, totalOrders: res2, totalRevenue: res2, topProducts: res4, orderList: res5.orders.reverse() });
 
     } catch (error) {
@@ -89,6 +89,7 @@ const AdminOverview = () => {
 
   ]
 
+  // --- format order date function ---
   const formatDate = (raw_date) => {
     const date = new Date(raw_date);
 
@@ -100,11 +101,10 @@ const AdminOverview = () => {
     return formattedDate;
   }
 
-
   return (
     <>
       {!loading ? <div className={styles['overview-container']}>
-        {error && <p style={{ fontSize: '14px', color: 'red' }}>{error}</p>}
+        {error && <p className={styles['error-msg']}>{error}</p>}
         <p className={styles['section-name']}>Overview</p>
 
         {/* --- OVERVIEW CARDS --- */}
@@ -150,8 +150,7 @@ const AdminOverview = () => {
               {/* -- TOP PRODUCT LIST -- */}
               {data?.topProducts.most_selling_products.slice(0, 3).map((product, index) => (
                 <div className={styles["top-product"]} key={index}>
-                  <img src={product.product.productimage} alt="" />
-                  {/* {console.log('product image url: ', product.product.productimage)} */}
+                  <img src={wristWatch} alt="" />
                   <div className={styles["right-content"]}>
                     <div className={styles["name-percent-container"]}>
                       <p className={styles["name"]}>{product.product.name}</p>
@@ -161,7 +160,7 @@ const AdminOverview = () => {
                       </div>
                     </div>
                     <div className={styles["outer-bar"]}>
-                      <div className={styles["inner-bar"]} style={{ width: product.percentage }}></div>
+                      <div className={styles["inner-bar"]} style={{ width: '50%' }}></div>
                     </div>
                   </div>
                 </div>
@@ -182,6 +181,7 @@ const AdminOverview = () => {
               <div className={styles["order-table-head"]}>
                 <div className={styles["table-head-data"]} id={styles['id-cell']}><input type="checkbox" name="" id="" />Order Id</div>
                 <div className={styles["table-head-data"]} id={styles['customer-cell']}>Customer</div>
+                <div className={styles["table-head-data"]} id={styles['order-status-cell']}>Order status</div>
                 <div className={styles["table-head-data"]} id={styles['payment-cell']}>Payment status</div>
                 <div className={styles["table-head-data"]} id={styles['amount-cell']}>Amount</div>
                 <div className={styles["table-head-data"]} id={styles['date-cell']}>Date</div>
@@ -192,6 +192,7 @@ const AdminOverview = () => {
                 <div className={styles['order-row']} key={index}>
                   <div className={styles['order-row-data']} id={styles['id-cell']}><input type="checkbox" name="" id="" />{order.order_id}</div>
                   <div className={styles['order-row-data']} id={styles['customer-cell']}>{order.firstname} {order.lastname}</div>
+                  <div className={styles['order-row-data']} id={styles['order-status-cell']} style={{ color: order.order_status === 'pending' ? '#F77C27' : order.order_status === 'processing'? '#115FFC' : order.order_status === "delivered" ? '#21A168' : '', fontSize: '14px', fontWeight: '300' }}>{order.order_status}</div>
                   <div className={styles['order-row-data']} style={{ color: order.payment_status === 'Pending' ? '#F77C27' : order.payment_status === 'Submitted'? '#115FFC' : order.payment_status === "Verified" ? '#21A168' : 'red', fontSize: '14px', fontWeight: '300' }} id={styles['payment-cell']}>{order.payment_status}</div>
                   <div className={styles['order-row-data']} id={styles['amount-cell']}>{Number(order.total_amount).toLocaleString()}</div>
                   <div className={styles['order-row-data']} id={styles['date-cell']}>{formatDate(order.created_at)}</div>
@@ -205,7 +206,7 @@ const AdminOverview = () => {
 
       </div> :
         // --- LOADER ---
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '15px', margin: '50px 0'}}><Loader color={'#115ffc'} size={38} /> Loading . . .</div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', gap: '10px', fontSize: '15px', margin: '80px 0'}}><Loader color={'#115ffc'} size={38} /> Loading . . .</div>
       }
     </>
   )

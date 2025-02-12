@@ -26,6 +26,8 @@ import { FaArrowsRotate } from 'react-icons/fa6';
 import { AiOutlineFileDone } from "react-icons/ai";
 import { useDispatch } from 'react-redux';
 import { setActiveSidebarMenu } from '../../../redux/sidebarSlice';
+import Loader from '../../../components/loader/loader';
+import { MdOutlineRefresh } from "react-icons/md";
 
 
 
@@ -35,7 +37,48 @@ const AdminOrders = () => {
 
   useEffect(() => {
     dispatch(setActiveSidebarMenu('orders'));
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  // --- states ---
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchOrders = async () => {
+
+    const accessToken = localStorage.getItem('accessToken');
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/orders`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.message);
+        console.log('Failed request', errorData.message)
+        return;
+      }
+
+      const successResponse = await response.json();
+      setData(successResponse.orders);
+      console.log(successResponse);
+
+    } catch (error) {
+      setError('an unknown error occured');
+      console.log('An Unknown Error occured: ', error)
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const orders = [
     { order_id: 'TDGN2L6BMY', customer_name: 'Omodele Samuel', payment_status: 'pending', amount: '$17,800', date: 'Dec 12' },
@@ -47,15 +90,34 @@ const AdminOrders = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [modalTab, setModalTab] = useState('1')
-  const [orderTab, setOrderTab] = useState('1')
+  const [orderStatus, setOrderStatus] = useState('pending')
+
+  // --- format order date function ---
+  const formatDate = (raw_date) => {
+    const date = new Date(raw_date);
+
+    const formattedDate = date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    });
+
+    return formattedDate;
+  }
+
+  const changeOrderStatus = (new_status) => {
+    setOrderStatus(new_status);
+  }
+
+  const checkState = () => {
+    console.log(orderStatus);
+  }
 
   return (
     <div className={styles['order-page']}>
-
       <div className={styles['order-tab']}>
-        <p className={orderTab === '1' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('1')}> <MdOutlinePendingActions size={22} className={styles['order-tab-icon']}/>Pending <span className={styles['order-text']}>Orders</span> </p>
-        <p className={orderTab === '2' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('2')}> <FaArrowsRotate size={18} className={styles['order-tab-icon']}/> Processing <span className={styles['order-text']}>Orders</span></p>
-        <p className={orderTab === '3' ? styles['active-order-tab'] : styles['']} onClick={() => setOrderTab('3')}> <AiOutlineFileDone size={22} className={styles['order-tab-icon']}/> Delivered <span className={styles['order-text']}>Orders</span></p>
+        <p className={orderStatus === 'pending' ? styles['active-order-tab'] : styles['']} onClick={() => changeOrderStatus('pending')}> <MdOutlinePendingActions size={22} className={styles['order-tab-icon']} />Pending <span className={styles['order-text']}>Orders</span> </p>
+        <p className={orderStatus === 'processing' ? styles['active-order-tab'] : styles['']} onClick={() => changeOrderStatus('processing')}> <FaArrowsRotate size={18} className={styles['order-tab-icon']} /> Processing <span className={styles['order-text']}>Orders</span></p>
+        <p className={orderStatus === 'delivered' ? styles['active-order-tab'] : styles['']} onClick={() => changeOrderStatus('delivered')}> <AiOutlineFileDone size={22} className={styles['order-tab-icon']} /> Delivered <span className={styles['order-text']}>Orders</span></p>
       </div>
 
       <p className={styles['main-text']}>Orders</p>
@@ -66,11 +128,22 @@ const AdminOrders = () => {
         <div className={styles['order-table-container']}>
 
           {/* -- Filter --- */}
+          <div className={styles['order-status']}>Order Status : <p className={ orderStatus === 'pending' ? styles['pending'] : orderStatus === 'processing' ? styles['processing'] : styles['delivered']}>{orderStatus}</p></div>
+
           <div className={styles["order-filter-container"]}>
-            <div className={styles['filter-input']} style={{ backgroundColor: '#115FFC', color: 'white', border: 'none' }}> Type <MdKeyboardArrowDown size={20} /></div>
-            <div className={styles['filter-input']}> Status <MdKeyboardArrowDown size={20} /></div>
-            <div className={styles['filter-input']} style={{ width: '140' }}> Order date <MdKeyboardArrowDown size={20} /></div>
-            <p className={styles['total-order-number']}>Total : 50</p>
+
+            <div className={styles['left']}>
+              <div className={styles["filter-input-field"]}>
+                <input type="text" placeholder='search by order id . . .' />
+                <button>search</button>
+              </div>
+
+              {orderStatus === 'pending'  && <div className={styles['filter-select-field']}> Payment status <MdKeyboardArrowDown size={20} /></div>}
+            </div>
+
+            <div className={styles['right']}>
+              <p className={styles['total-order-number']}>Total : 50</p>
+            </div>
           </div>
 
           {/* --- Table Head --- */}
@@ -80,24 +153,30 @@ const AdminOrders = () => {
             <div className={styles["table-head-data"]} id={styles['payment-status-cell']}>Payment status</div>
             <div className={styles["table-head-data"]} id={styles['amount-cell']}>Amount</div>
             <div className={styles["table-head-data"]} id={styles['date-cell']}>Date</div>
+            <div className={styles["table-head-data"]} ><MdOutlineRefresh className={styles['refresh-icon']} onClick={checkState}/></div>
           </div>
           {/* #21A168 */}
 
           {/* -- Order Data --- */}
-          {orders.map((order, index) => (
-            <div className={styles['order-row']} key={index}>
-              <div className={styles['order-row-data']} id={styles['order-id-cell']}> <input type="checkbox" name="" id="" />{order.order_id}</div>
-              <div className={styles['order-row-data']} id={styles['customer-cell']}>{order.customer_name}</div>
-              <div className={styles['order-row-data']} id={styles['payment-status-cell']} style={{ color: order.payment_status === 'verified' ? '#21A168' : '#F77C27', fontSize: '14px', fontWeight: '300' }}>{order.payment_status}</div>
-              <div className={styles['order-row-data']} id={styles['amount-cell']}>{order.amount}</div>
-              <div className={styles['order-row-data']} id={styles['date-cell']}>{order.date}</div>
-              <div className={styles['order-row-data']} id={styles['view-cell']} onClick={onOpen}>view</div>
-            </div>
-          ))}
+          {loading ?
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '15px', margin: '30px 0' }}><Loader color={'#115ffc'} size={28} /> Loading . . .</div>
+            :
+            <>
+              {data?.map((order, index) => (
+                <div className={styles['order-row']} key={index}>
+                  <div className={styles['order-row-data']} id={styles['order-id-cell']}> <input type="checkbox" name="" id="" />{order.order_id}</div>
+                  <div className={styles['order-row-data']} id={styles['customer-cell']}>{order.firstname} {order.lastname}</div>
+                  <div className={styles['order-row-data']} id={styles['payment-status-cell']} style={{ color: order.payment_status === 'Pending' ? '#F77C27' : order.payment_status === 'Submitted' ? '#115FFC' : order.payment_status === "Verified" ? '#21A168' : 'red', fontSize: '14px', fontWeight: '300' }}>{order.payment_status}</div>
+                  <div className={styles['order-row-data']} id={styles['amount-cell']}>{Number(order.total_amount).toLocaleString()}</div>
+                  <div className={styles['order-row-data']} id={styles['date-cell']}>{formatDate(order.created_at)}</div>
+                  <div className={styles['order-row-data']} id={styles['view-cell']} onClick={onOpen}>view</div>
+                </div>
+              ))}
+            </>
+          }
 
         </div>
       </div>
-
 
       {/* --- ORDER MODAL --- */}
       <Modal isOpen={isOpen} onClose={onClose}  >
@@ -210,8 +289,6 @@ const AdminOrders = () => {
           </ModalBody>
         </ModalContent>
       </Modal>
-
-
     </div>
   )
 }
