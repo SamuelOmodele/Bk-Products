@@ -75,25 +75,35 @@ const AdminOrderDetails = ({ order }) => {
 
                     <p className={styles['order-info-tab-label']}><span>Order ID</span> <span>{order.order_id}</span></p>
                     <p className={styles['order-info-tab-label']}><span>Order date</span> <span>{formatDate(order.created_at)}</span></p>
-                    <p className={styles['order-info-tab-label']}><span>Status</span> <span style={{ color: '#F77C27' }}>{order.order_status}</span></p>
+                    <p className={styles['order-info-tab-label']}><span>Status</span> <span style={{ color: order.order_status === 'pending' ? '#F77C27' : order.order_status === 'processing' ? '#115FFC' : order.order_status === "delivered" ? '#21A168' : '', fontSize: '14px', fontWeight: '300' }}>{order.order_status}</span></p>
                     <p className={styles['order-info-tab-label']}><span>Product Amount</span> <span>&#8358;{Number(order.total_product_amount).toLocaleString()}</span></p>
                     <p className={styles['order-info-tab-label']}><span>Shipping fee</span> <span>&#8358;{Number(order.shipping_fee).toLocaleString()}</span></p>
                     <p className={styles['order-info-tab-label']}><span>Total</span> <span>&#8358;{Number(order.total_amount).toLocaleString()}</span></p>
-                    <p className={styles['order-info-tab-label']}><span>Payment status</span> <span style={{ color: '#F77C27' }}>{order.payment_status}</span></p>
+                    <p className={styles['order-info-tab-label']}><span>Payment status</span> <span style={{ color: order.payment_status === 'pending' ? '#F77C27' : order.payment_status === 'submitted' ? '#115FFC' : order.payment_status === "verified" ? '#21A168' : 'red', fontSize: '14px', fontWeight: '300' }}>{order.payment_status}</span></p>
                 </div>
 
                 <div className={styles['order-info-tab-section']}>
                     <p className={styles['order-info-tab-heading']}>Payment Proof</p>
-                    <img src={payment_receipt} className={styles['payment-receipt-image']} alt="" />
+                    <img src={order.payment_receipt ? payment_receipt : null} className={styles['payment-receipt-image']} alt="" />
                 </div>
 
-                {(order.payment_status === 'submitted' || order.payment_status === 'rejected') &&
+                {(order.payment_status === 'submitted') &&
                     <div className={styles['validate-payment']}>
                         <p>Please validate payment receipt above </p>
                         <div className={styles['buttons']}>
                             <button>Mark verified</button>
                             <button>Mark rejected</button>
                         </div>
+                    </div>
+                }
+                {(order.payment_status === 'verified') &&
+                    <div style={{ color: '#21A168', fontSize: '14px', textAlign: 'center' }}>
+                        <p>Payment has been verified</p>
+                    </div>
+                }
+                {(order.payment_status === 'rejected') &&
+                    <div style={{ color: 'red', fontSize: '14px', textAlign: 'center' }}>
+                        <p>Payment was rejected</p>
                     </div>
                 }
 
@@ -132,12 +142,18 @@ const AdminOrderDetails = ({ order }) => {
                 <p style={{ fontSize: '13px', padding: '5px 0' }}>{order.delivery_zone.description} </p>
                 <p style={{ fontSize: '16px', fontWeight: '500', display: 'flex', justifyContent: 'space-between', borderTop: '1.5px solid #E6E6E6', padding: '10px 0', marginTop: '10px' }}><span>Delivery Fee</span><span>&#8358;{Number(order.shipping_fee).toLocaleString()}</span></p>
 
-                {
+                {order.order_status === 'processing' &&
                     <div className={styles['validate-payment']}>
                         <p>Please deliver the order items to the address above. </p>
                         <div className={styles['buttons']}>
-                            <button style={{backgroundColor: '#115ffc'}}>Mark delivered</button>
+                            <button style={{ backgroundColor: '#115ffc' }}>Mark delivered</button>
                         </div>
+                    </div>
+                }
+
+                {order.order_status === 'delivered' &&
+                    <div style={{ color: '#21A168', fontSize: '14px', textAlign: 'center' }}>
+                        <p>Order has been delivered successfully and closed.</p>
                     </div>
                 }
 
