@@ -22,10 +22,13 @@ const AdminOverview = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+
   // --- set the active sidebar menu to overview ---
   useEffect(() => {
     dispatch(setActiveSidebarMenu('overview'));
   }, []);
+
+  const timestamp = new Date().getTime();
 
   // --- call the get dashboard statistic function ---
   useEffect(() => {
@@ -53,7 +56,7 @@ const AdminOverview = () => {
       // console.log('response 1: ', res1);
       // console.log('response 2: ', res2);
       // console.log('response 3: ', res3);
-      // console.log('response 4: ', res4);
+      console.log('response 4: ', res4);
       // console.log('response 5: ', res5.orders);
       setData({ totalProducts: res1, totalOrders: res2, totalRevenue: res2, topProducts: res4, orderList: res5.orders.reverse() });
 
@@ -156,11 +159,11 @@ const AdminOverview = () => {
                       <p className={styles["name"]}>{product.product.name}</p>
                       <div className={styles["percent-container"]}>
                         <p>{product.total_sold} items sold</p>
-                        {/* <div className={styles["percent"]}>{product.percentage}</div> */}
+                        <div className={styles["percent"]}>{((Number(product.total_sold) / Number(data?.topProducts.total_items_sold_this_month)) * 100).toFixed(2)}%</div>
                       </div>
                     </div>
                     <div className={styles["outer-bar"]}>
-                      <div className={styles["inner-bar"]} style={{ width: '50%' }}></div>
+                      <div className={styles["inner-bar"]} style={{ width: `${((Number(product.total_sold) / Number(data?.topProducts.total_items_sold_this_month)) * 100).toFixed(2)}%` }}></div>
                     </div>
                   </div>
                 </div>
@@ -193,8 +196,8 @@ const AdminOverview = () => {
                   <div className={styles['order-row-data']} id={styles['id-cell']}><input type="checkbox" name="" id="" />{order.order_id}</div>
                   <div className={styles['order-row-data']} id={styles['customer-cell']}>{order.firstname} {order.lastname}</div>
                   <div className={styles['order-row-data']} id={styles['order-status-cell']} style={{ color: order.order_status === 'pending' ? '#F77C27' : order.order_status === 'processing'? '#115FFC' : order.order_status === "delivered" ? '#21A168' : '', fontSize: '14px', fontWeight: '300' }}>{order.order_status}</div>
-                  <div className={styles['order-row-data']} style={{ color: order.payment_status === 'Pending' ? '#F77C27' : order.payment_status === 'Submitted'? '#115FFC' : order.payment_status === "Verified" ? '#21A168' : 'red', fontSize: '14px', fontWeight: '300' }} id={styles['payment-cell']}>{order.payment_status}</div>
-                  <div className={styles['order-row-data']} id={styles['amount-cell']}>{Number(order.total_amount).toLocaleString()}</div>
+                  <div className={styles['order-row-data']} style={{ color: order.payment_status === 'pending' ? '#F77C27' : order.payment_status === 'submitted'? '#115FFC' : order.payment_status === "verified" ? '#21A168' : 'red', fontSize: '14px', fontWeight: '300' }} id={styles['payment-cell']}>{order.payment_status}</div>
+                  <div className={styles['order-row-data']} id={styles['amount-cell']}>&#8358;{Number(order.total_amount).toLocaleString()}</div>
                   <div className={styles['order-row-data']} id={styles['date-cell']}>{formatDate(order.created_at)}</div>
                 </div>
               ))}

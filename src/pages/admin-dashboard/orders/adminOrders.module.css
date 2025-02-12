@@ -87,7 +87,7 @@
     gap: 20px;
 }
 .filter-input-field{
-    width: 400px;
+    width: 500px;
     position: relative;
     height: 35px;
 }
@@ -114,15 +114,30 @@
 }
 .filter-select-field{
     color: #1a1a1a;
-    border: 1.5px dotted #8a8a8a;
-    border-radius: 20px;
-    padding: 4.5px 15px;
-    font-size: 14px;
+    border: 1.5px solid #cac9d9;
+    border-radius: 5px;
+    padding: 0 7px;
+    font-size: 13.5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    width: fit-content;
+    gap: 10px;
+    font-weight: 500;
+    position: relative;
+    
+}
+.filter-select-field select{
+    border-left: 1px solid #cac9d9;
+    outline: none;
+    cursor: pointer;
+    padding: 4.5px;
+}
+.select-arrow{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 .total-order-number{
     font-size: 13px;
@@ -311,7 +326,9 @@ button.verify{
     }
     #view-cell{
         width: 10%;
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 @media screen and (max-width: 730px){

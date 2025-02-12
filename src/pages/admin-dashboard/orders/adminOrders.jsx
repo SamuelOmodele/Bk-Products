@@ -28,7 +28,7 @@ import { useDispatch } from 'react-redux';
 import { setActiveSidebarMenu } from '../../../redux/sidebarSlice';
 import Loader from '../../../components/loader/loader';
 import { MdOutlineRefresh } from "react-icons/md";
-
+import AdminOrderDetails from '../../orders/components/orderDetails/adminOrderDetails';
 
 
 const AdminOrders = () => {
@@ -40,21 +40,37 @@ const AdminOrders = () => {
   }, []);
 
   useEffect(() => {
-    fetchOrders();
+    fetchOrders("pending", '');
   }, []);
 
-  // --- states ---
+  // --- STATES FOR FETCHING ALL ORDERS ---
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchOrders = async () => {
+  // --- STATES FOR FETCHING SINGLE ORDER ---
+  const [singleOrder, setSingleOrder] = useState(null);
+  const [loading2, setLoading2] = useState(false);
+  const [error2, setError2] = useState(null);
+
+  // --- OTHER STATES ---
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [orderStatus, setOrderStatus] = useState('pending');
+  const [paymentStatus, setPaymentStatus] = useState('');
+  const [search, setSearch] = useState('');
+  const [showRefresh, setShowRefresh] = useState(true);
+  const [showExitSearch, setShowExitSearch] = useState(false);
+
+  // --- FETCH ORDERS ---
+  const fetchOrders = async (order_status, payment_status) => {
+
+    setData(null);
 
     const accessToken = localStorage.getItem('accessToken');
     setLoading(true);
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/orders`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/orders?order_status=${order_status}&payment_status=${payment_status}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json'
@@ -80,17 +96,75 @@ const AdminOrders = () => {
     }
   }
 
-  const orders = [
-    { order_id: 'TDGN2L6BMY', customer_name: 'Omodele Samuel', payment_status: 'pending', amount: '$17,800', date: 'Dec 12' },
-    { order_id: 'TDGN2L6BMY', customer_name: 'Omodele Samuel', payment_status: 'pending', amount: '$17,800', date: 'Dec 12' },
-    { order_id: 'TDGN2L6BMY', customer_name: 'Omodele Samuel', payment_status: 'verified', amount: '$17,800', date: 'Dec 12' },
-    { order_id: 'TDGN2L6BMY', customer_name: 'Omodele Samuel', payment_status: 'pending', amount: '$17,800', date: 'Dec 12' },
-    { order_id: 'TDGN2L6BMY', customer_name: 'Omodele Samuel', payment_status: 'verified', amount: '$17,800', date: 'Dec 12' },
-  ]
+  // --- FETCH SINGLE ORDERS ---
+  const fetchSingleOrder = async (order_id) => {
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [modalTab, setModalTab] = useState('1')
-  const [orderStatus, setOrderStatus] = useState('pending')
+    const accessToken = localStorage.getItem('accessToken');
+    setSingleOrder(null);
+    setLoading2(true);
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/order/${order_id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError2(errorData.message);
+        console.log('Failed request in getting single order: ', errorData.message)
+        return;
+      }
+
+      const successResponse = await response.json();
+      setSingleOrder(successResponse);
+      console.log('single order retrieved', successResponse);
+
+    } catch (error) {
+      setError2('an unknown error occured');
+      console.log('An Unknown Error occured while fetching single order: ', error)
+    } finally {
+      setLoading2(false);
+    }
+  }
+
+  // --- SEARCH ORDER BY ID ---
+  const searchOrderbyId = async (search) => {
+    const accessToken = localStorage.getItem('accessToken');
+    setData(null);
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/orders/OrderById`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ order_id: search })
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.message);
+        console.log('Failed request in searching order ', errorData.message)
+        return;
+      }
+
+      const successResponse = await response.json();
+      setData(successResponse);
+      console.log('search successful', successResponse);
+
+    } catch (error) {
+      setError('an unknown error occured');
+      console.log('An Unknown Error occured while searching for order: ', error)
+    } finally {
+      setLoading(false);
+    }
+  }
+
 
   // --- format order date function ---
   const formatDate = (raw_date) => {
@@ -104,12 +178,53 @@ const AdminOrders = () => {
     return formattedDate;
   }
 
+  // --- change order status function
   const changeOrderStatus = (new_status) => {
     setOrderStatus(new_status);
+    setPaymentStatus('');
+    setSearch('');
+    setShowRefresh(true);
+    setShowExitSearch(false);
+    fetchOrders(new_status, '')
   }
 
-  const checkState = () => {
-    console.log(orderStatus);
+  // --- change payment status function ---
+  const changePaymentStatus = (new_status) => {
+    setPaymentStatus(new_status);
+    setSearch('');
+    fetchOrders('pending', new_status)
+  }
+
+  // --- view single order function ---
+  const viewOrder = (order_id) => {
+    console.log(order_id);
+    onOpen();
+    fetchSingleOrder(order_id);
+  }
+
+  // ---  refresh ---
+  const refresh = () => {
+    if (orderStatus === 'pending'){
+      fetchOrders(orderStatus, paymentStatus);
+      return;
+    }
+    fetchOrders(orderStatus, '');
+  }
+
+  // --- search order function ---
+  const searchOrder = () => {
+    setPaymentStatus('');
+    setShowRefresh(false);
+    setShowExitSearch(true);
+    searchOrderbyId(search);
+  }
+
+  // --- exit search function ---
+  const exitSearch = () => {
+    setPaymentStatus('');
+    setShowRefresh(true);
+    setShowExitSearch(false);
+    fetchOrders(orderStatus, '')
   }
 
   return (
@@ -128,21 +243,33 @@ const AdminOrders = () => {
         <div className={styles['order-table-container']}>
 
           {/* -- Filter --- */}
-          <div className={styles['order-status']}>Order Status : <p className={ orderStatus === 'pending' ? styles['pending'] : orderStatus === 'processing' ? styles['processing'] : styles['delivered']}>{orderStatus}</p></div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+            <div className={styles['order-status']}>Order Status : <p className={orderStatus === 'pending' ? styles['pending'] : orderStatus === 'processing' ? styles['processing'] : styles['delivered']}>{orderStatus}</p></div>
+            {orderStatus === 'pending' &&
+              <div className={styles['filter-select-field']}>
+                <p>Payment Status</p>
+                <select onChange={(e) => changePaymentStatus(e.target.value)}>
+                  <option value="">all</option>
+                  <option value="pending" selected={paymentStatus === 'pending'}>pending</option>
+                  <option value="submitted" selected={paymentStatus === 'submitted'}>submitted</option>
+                  <option value="rejected" selected={paymentStatus === 'rejected'}>rejected</option>
+                </select>
+                {/* <MdKeyboardArrowDown size={26} className={styles['select-arrow']} /> */}
+              </div>}
+          </div>
 
           <div className={styles["order-filter-container"]}>
 
             <div className={styles['left']}>
               <div className={styles["filter-input-field"]}>
-                <input type="text" placeholder='search by order id . . .' />
-                <button>search</button>
+                <input type="text" placeholder='search by order id . . .' value={search} onChange={(e) => setSearch(e.target.value)} />
+                <button onClick={searchOrder}>search</button>
               </div>
-
-              {orderStatus === 'pending'  && <div className={styles['filter-select-field']}> Payment status <MdKeyboardArrowDown size={20} /></div>}
+              {showExitSearch && <button style={{color: '#115ffc', fontWeight: '500', fontSize: '14px'}} onClick={exitSearch}>Exit search </button>}
             </div>
 
             <div className={styles['right']}>
-              <p className={styles['total-order-number']}>Total : 50</p>
+              <p className={styles['total-order-number']}>Total : {data?.length}</p>
             </div>
           </div>
 
@@ -153,7 +280,7 @@ const AdminOrders = () => {
             <div className={styles["table-head-data"]} id={styles['payment-status-cell']}>Payment status</div>
             <div className={styles["table-head-data"]} id={styles['amount-cell']}>Amount</div>
             <div className={styles["table-head-data"]} id={styles['date-cell']}>Date</div>
-            <div className={styles["table-head-data"]} ><MdOutlineRefresh className={styles['refresh-icon']} onClick={checkState}/></div>
+            {showRefresh && <div className={styles["table-head-data"]} id={styles['view-cell']}><MdOutlineRefresh className={styles['refresh-icon']} onClick={refresh}/></div>}
           </div>
           {/* #21A168 */}
 
@@ -166,10 +293,10 @@ const AdminOrders = () => {
                 <div className={styles['order-row']} key={index}>
                   <div className={styles['order-row-data']} id={styles['order-id-cell']}> <input type="checkbox" name="" id="" />{order.order_id}</div>
                   <div className={styles['order-row-data']} id={styles['customer-cell']}>{order.firstname} {order.lastname}</div>
-                  <div className={styles['order-row-data']} id={styles['payment-status-cell']} style={{ color: order.payment_status === 'Pending' ? '#F77C27' : order.payment_status === 'Submitted' ? '#115FFC' : order.payment_status === "Verified" ? '#21A168' : 'red', fontSize: '14px', fontWeight: '300' }}>{order.payment_status}</div>
+                  <div className={styles['order-row-data']} id={styles['payment-status-cell']} style={{ color: order.payment_status === 'pending' ? '#F77C27' : order.payment_status === 'submitted' ? '#115FFC' : order.payment_status === "verified" ? '#21A168' : 'red', fontSize: '14px', fontWeight: '300' }}>{order.payment_status}</div>
                   <div className={styles['order-row-data']} id={styles['amount-cell']}>{Number(order.total_amount).toLocaleString()}</div>
                   <div className={styles['order-row-data']} id={styles['date-cell']}>{formatDate(order.created_at)}</div>
-                  <div className={styles['order-row-data']} id={styles['view-cell']} onClick={onOpen}>view</div>
+                  <div className={styles['order-row-data']} id={styles['view-cell']} onClick={() => viewOrder(order.order_id)}>view</div>
                 </div>
               ))}
             </>
@@ -181,112 +308,121 @@ const AdminOrders = () => {
       {/* --- ORDER MODAL --- */}
       <Modal isOpen={isOpen} onClose={onClose}  >
         <ModalOverlay />
-        <ModalContent sx={{ maxWidth: '450px' }} position="absolute" isCentered={false} className={styles['modal-content']} >
-          <ModalHeader className={styles['modal-header']}>Order no. TDGN2L6BMY </ModalHeader>
+        <ModalContent sx={{ maxWidth: '450px' }} position="absolute" className={styles['modal-content']} >
+          <ModalHeader className={styles['modal-header']}>Order no. {singleOrder?.order_id} </ModalHeader>
           <ModalCloseButton className={styles['modal-close-button']} />
-          <ModalBody>
 
-            {/* --- MODAL TAB --- */}
-            <div className={styles['modal-tab-container']}>
-              <p className={modalTab === '1' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('1')}><FiInfo size={20} /> Order Info</p>
-              <p className={modalTab === '2' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('2')}> <FaBoxOpen size={20} />Products</p>
-              <p className={modalTab === '3' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('3')}> <FaShippingFast size={20} />Delivery</p>
-            </div>
-
-            {/* --- ORDER INFO TAB --- */}
-            {modalTab === '1' && <div>
-              <div className={styles['order-info-tab-section']}>
-                <p className={styles['order-info-tab-heading']}>Customer info</p>
-
-                <p className={styles['order-info-tab-label']}><span>Name</span> <span>Omodele Samuel</span></p>
-                <p className={styles['order-info-tab-label']}><span>Email</span> <span>abc@gmail.com</span></p>
-                <p className={styles['order-info-tab-label']}><span>Phone no.</span> <span>08012347890</span></p>
-              </div>
-              <div className={styles['order-info-tab-section']}>
-                <p className={styles['order-info-tab-heading']}>Order info</p>
-
-                <p className={styles['order-info-tab-label']}><span>Order date</span> <span>Dec 6, 2024, 10:00AM</span></p>
-                <p className={styles['order-info-tab-label']}><span>Status</span> <span style={{ color: '#F77C27' }}>pending</span></p>
-                <p className={styles['order-info-tab-label']}><span>Product Amount</span> <span>$75,000</span></p>
-                <p className={styles['order-info-tab-label']}><span>Shipping fee</span> <span>$400</span></p>
-                <p className={styles['order-info-tab-label']}><span>Total</span> <span>$75,400</span></p>
-                <p className={styles['order-info-tab-label']}><span>Payment status</span> <span style={{ color: '#F77C27' }}>submitted</span></p>
-              </div>
-
-              <div className={styles['order-info-tab-section']}>
-                <p className={styles['order-info-tab-heading']}>Payment Proof</p>
-                <img src={payment_receipt} className={styles['payment-receipt-image']} alt="" />
-                <div className={styles['validate-payment-container']}>
-                  <p className={styles['validate-payment-text']}>validate payment</p>
-                  <button className={styles['verify']}>Verify</button>
-                  <button className={styles['reject']}>Reject</button>
-                </div>
-              </div>
-
-            </div>}
-
-            {modalTab === '2' && <div>
-              <div className={styles['order-info-tab-section']}>
-                <p className={styles['order-info-tab-heading']}>Items</p>
+          {loading2 ? <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '15px', margin: '30px 0' }}><Loader color={'#115ffc'} size={28} /> Loading . . .</div>
+            :
+            <ModalBody>
+              <AdminOrderDetails order={singleOrder} />
+            </ModalBody>
 
 
-                <div className={styles['order-info-tab-label']} style={{ alignItems: 'center', marginBottom: '20px' }}>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <div style={{ width: '60px' }}><img src={watchImage} alt="" className={styles['product-image']} /></div>
+            // <ModalBody>
 
-                    <div>
-                      <p style={{ fontSize: '15px', fontWeight: '500' }}>Wrist Watch</p>
-                      <p style={{ fontSize: '13px' }}>Accessories</p>
-                      <p style={{ fontSize: '13.5px' }}>$2,500/unit</p>
-                    </div>
-                  </div>
-                  <p>2 units</p>
-                  <p>$5,000</p>
-                </div>
-                <div className={styles['order-info-tab-label']} style={{ alignItems: 'center', marginBottom: '20px' }}>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <div style={{ width: '60px' }}><img src={watchImage} alt="" className={styles['product-image']} /></div>
+            //   {/* --- MODAL TAB --- */}
+            //   <div className={styles['modal-tab-container']}>
+            //     <p className={modalTab === '1' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('1')}><FiInfo size={20} /> Order Info</p>
+            //     <p className={modalTab === '2' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('2')}> <FaBoxOpen size={20} />Products</p>
+            //     <p className={modalTab === '3' ? styles['active-modal-tab'] : styles['']} onClick={() => setModalTab('3')}> <FaShippingFast size={20} />Delivery</p>
+            //   </div>
 
-                    <div>
-                      <p style={{ fontSize: '15px', fontWeight: '500' }}>Wrist Watch</p>
-                      <p style={{ fontSize: '13px' }}>Accessories</p>
-                      <p style={{ fontSize: '13.5px' }}>$2,500/unit</p>
-                    </div>
-                  </div>
-                  <p>2 units</p>
-                  <p>$5,000</p>
-                </div>
-                <div className={styles['order-info-tab-label']} style={{ alignItems: 'center', marginBottom: '20px' }}>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <div style={{ width: '60px' }}><img src={watchImage} alt="" className={styles['product-image']} /></div>
+            //   {/* --- ORDER INFO TAB --- */}
+            //   {modalTab === '1' && <div>
+            //     <div className={styles['order-info-tab-section']}>
+            //       <p className={styles['order-info-tab-heading']}>Customer info</p>
 
-                    <div>
-                      <p style={{ fontSize: '15px', fontWeight: '500' }}>Wrist Watch</p>
-                      <p style={{ fontSize: '13px' }}>Accessories</p>
-                      <p style={{ fontSize: '13.5px' }}>$2,500/unit</p>
-                    </div>
-                  </div>
-                  <p>2 units</p>
-                  <p>$5,000</p>
-                </div>
+            //       <p className={styles['order-info-tab-label']}><span>Name</span> <span>Omodele Samuel</span></p>
+            //       <p className={styles['order-info-tab-label']}><span>Email</span> <span>abc@gmail.com</span></p>
+            //       <p className={styles['order-info-tab-label']}><span>Phone no.</span> <span>08012347890</span></p>
+            //     </div>
+            //     <div className={styles['order-info-tab-section']}>
+            //       <p className={styles['order-info-tab-heading']}>Order info</p>
 
-              </div>
-              <div className={styles['order-info-tab-label']} style={{ alignItems: 'center', fontSize: '15.5px', fontWeight: '500', marginBottom: '15px' }}>
-                <p>Total Product amount:</p>
-                <p>$15,000</p>
-              </div>
-            </div>}
+            //       <p className={styles['order-info-tab-label']}><span>Order date</span> <span>Dec 6, 2024, 10:00AM</span></p>
+            //       <p className={styles['order-info-tab-label']}><span>Status</span> <span style={{ color: '#F77C27' }}>pending</span></p>
+            //       <p className={styles['order-info-tab-label']}><span>Product Amount</span> <span>$75,000</span></p>
+            //       <p className={styles['order-info-tab-label']}><span>Shipping fee</span> <span>$400</span></p>
+            //       <p className={styles['order-info-tab-label']}><span>Total</span> <span>$75,400</span></p>
+            //       <p className={styles['order-info-tab-label']}><span>Payment status</span> <span style={{ color: '#F77C27' }}>submitted</span></p>
+            //     </div>
 
-            {modalTab === '3' && <div style={{ marginBottom: '15px', position: 'relative' }}>
-              <img src={map} alt="" style={{ height: '150px', width: '100%', borderRadius: '10px', marginBottom: '10px', border: '1.5px solid rgba(17, 95, 252, 0.2)' }} />
-              <img src={locationIcon} alt="" style={{ position: 'absolute', top: '30px', left: '150px', width: '80px' }} />
-              <p style={{ fontSize: '20px', fontWeight: '600' }}>Lagos State</p>
-              <p style={{ fontSize: '13px', padding: '5px 0' }}>Delivery takes 4 - 5 working days </p>
-              {/* <p style={{ fontSize: '13px', padding: '5px 0' }}>Delivery date: Jan 1 2025 (1:00PM)</p> */}
-              <p style={{ fontSize: '16px', fontWeight: '500', display: 'flex', justifyContent: 'space-between', borderTop: '1.5px solid #E6E6E6', padding: '10px 0', marginTop: '10px' }}><span>Shipping Fee</span><span>$450</span></p>
-            </div>}
+            //     <div className={styles['order-info-tab-section']}>
+            //       <p className={styles['order-info-tab-heading']}>Payment Proof</p>
+            //       <img src={payment_receipt} className={styles['payment-receipt-image']} alt="" />
+            //       <div className={styles['validate-payment-container']}>
+            //         <p className={styles['validate-payment-text']}>validate payment</p>
+            //         <button className={styles['verify']}>Verify</button>
+            //         <button className={styles['reject']}>Reject</button>
+            //       </div>
+            //     </div>
 
-          </ModalBody>
+            //   </div>}
+
+            //   {modalTab === '2' && <div>
+            //     <div className={styles['order-info-tab-section']}>
+            //       <p className={styles['order-info-tab-heading']}>Items</p>
+
+
+            //       <div className={styles['order-info-tab-label']} style={{ alignItems: 'center', marginBottom: '20px' }}>
+            //         <div style={{ display: 'flex', gap: '10px' }}>
+            //           <div style={{ width: '60px' }}><img src={watchImage} alt="" className={styles['product-image']} /></div>
+
+            //           <div>
+            //             <p style={{ fontSize: '15px', fontWeight: '500' }}>Wrist Watch</p>
+            //             <p style={{ fontSize: '13px' }}>Accessories</p>
+            //             <p style={{ fontSize: '13.5px' }}>$2,500/unit</p>
+            //           </div>
+            //         </div>
+            //         <p>2 units</p>
+            //         <p>$5,000</p>
+            //       </div>
+            //       <div className={styles['order-info-tab-label']} style={{ alignItems: 'center', marginBottom: '20px' }}>
+            //         <div style={{ display: 'flex', gap: '10px' }}>
+            //           <div style={{ width: '60px' }}><img src={watchImage} alt="" className={styles['product-image']} /></div>
+
+            //           <div>
+            //             <p style={{ fontSize: '15px', fontWeight: '500' }}>Wrist Watch</p>
+            //             <p style={{ fontSize: '13px' }}>Accessories</p>
+            //             <p style={{ fontSize: '13.5px' }}>$2,500/unit</p>
+            //           </div>
+            //         </div>
+            //         <p>2 units</p>
+            //         <p>$5,000</p>
+            //       </div>
+            //       <div className={styles['order-info-tab-label']} style={{ alignItems: 'center', marginBottom: '20px' }}>
+            //         <div style={{ display: 'flex', gap: '10px' }}>
+            //           <div style={{ width: '60px' }}><img src={watchImage} alt="" className={styles['product-image']} /></div>
+
+            //           <div>
+            //             <p style={{ fontSize: '15px', fontWeight: '500' }}>Wrist Watch</p>
+            //             <p style={{ fontSize: '13px' }}>Accessories</p>
+            //             <p style={{ fontSize: '13.5px' }}>$2,500/unit</p>
+            //           </div>
+            //         </div>
+            //         <p>2 units</p>
+            //         <p>$5,000</p>
+            //       </div>
+
+            //     </div>
+            //     <div className={styles['order-info-tab-label']} style={{ alignItems: 'center', fontSize: '15.5px', fontWeight: '500', marginBottom: '15px' }}>
+            //       <p>Total Product amount:</p>
+            //       <p>$15,000</p>
+            //     </div>
+            //   </div>}
+
+            //   {modalTab === '3' && <div style={{ marginBottom: '15px', position: 'relative' }}>
+            //     <img src={map} alt="" style={{ height: '150px', width: '100%', borderRadius: '10px', marginBottom: '10px', border: '1.5px solid rgba(17, 95, 252, 0.2)' }} />
+            //     <img src={locationIcon} alt="" style={{ position: 'absolute', top: '30px', left: '150px', width: '80px' }} />
+            //     <p style={{ fontSize: '20px', fontWeight: '600' }}>Lagos State</p>
+            //     <p style={{ fontSize: '13px', padding: '5px 0' }}>Delivery takes 4 - 5 working days </p>
+            //     {/* <p style={{ fontSize: '13px', padding: '5px 0' }}>Delivery date: Jan 1 2025 (1:00PM)</p> */}
+            //     <p style={{ fontSize: '16px', fontWeight: '500', display: 'flex', justifyContent: 'space-between', borderTop: '1.5px solid #E6E6E6', padding: '10px 0', marginTop: '10px' }}><span>Shipping Fee</span><span>$450</span></p>
+            //   </div>}
+
+            // </ModalBody>
+          }
         </ModalContent>
       </Modal>
     </div>

@@ -143,6 +143,25 @@ button.verify{
     justify-content: space-between;
     font-size: 15px;
 }
+.validate-payment p{
+    font-size: 13px;
+    color: #333;
+    margin-bottom: 10px;
+}
+.validate-payment .buttons{
+    display: flex;
+    gap: 10px;
+}
+.validate-payment button{
+    background-color: #115FFC;
+    color: white;
+    font-size: 13.5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.validate-payment button:last-child{
+    background-color: rgb(255, 0, 0, 0.7);
+}
 @media screen and (max-width: 500px) {
     .modal-tab-container p{
         font-size: 12px;
