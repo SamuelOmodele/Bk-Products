@@ -63,7 +63,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
+}
+
+.total-items-sold{
+    padding-bottom: 5px;
+    color: #555;
+    font-size: 13px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #cac9d9;
 }
 
 .month-box {
@@ -78,7 +86,7 @@
 
 .top-product {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -115,11 +123,12 @@
 }
 
 .percent {
-    padding: 2px 10px;
+    padding: 2.5px 7px;
     background-color: #F1F5FF;
     color: #115FFC;
     border-radius: 5px;
     margin-left: 5px;
+    font-size: 10px;
 }
 
 .outer-bar {

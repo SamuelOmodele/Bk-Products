@@ -138,7 +138,7 @@ const AdminOrders = () => {
 
     try {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/orders/OrderById`, {
-        method: "GET",
+        method: "POST",
         headers: {
           Authorization: `Bearer ${accessToken}`,
           'Content-Type': 'application/json'
@@ -154,7 +154,7 @@ const AdminOrders = () => {
       }
 
       const successResponse = await response.json();
-      setData(successResponse);
+      setData([successResponse]);
       console.log('search successful', successResponse);
 
     } catch (error) {
@@ -222,6 +222,7 @@ const AdminOrders = () => {
   // --- exit search function ---
   const exitSearch = () => {
     setPaymentStatus('');
+    setSearch('');
     setShowRefresh(true);
     setShowExitSearch(false);
     fetchOrders(orderStatus, '')
@@ -289,12 +290,13 @@ const AdminOrders = () => {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '15px', margin: '30px 0' }}><Loader color={'#115ffc'} size={28} /> Loading . . .</div>
             :
             <>
+            {!data?.length && <p style={{color: '#555'}}>No result </p>}
               {data?.map((order, index) => (
                 <div className={styles['order-row']} key={index}>
                   <div className={styles['order-row-data']} id={styles['order-id-cell']}> <input type="checkbox" name="" id="" />{order.order_id}</div>
                   <div className={styles['order-row-data']} id={styles['customer-cell']}>{order.firstname} {order.lastname}</div>
                   <div className={styles['order-row-data']} id={styles['payment-status-cell']} style={{ color: order.payment_status === 'pending' ? '#F77C27' : order.payment_status === 'submitted' ? '#115FFC' : order.payment_status === "verified" ? '#21A168' : 'red', fontSize: '14px', fontWeight: '300' }}>{order.payment_status}</div>
-                  <div className={styles['order-row-data']} id={styles['amount-cell']}>{Number(order.total_amount).toLocaleString()}</div>
+                  <div className={styles['order-row-data']} id={styles['amount-cell']}>&#8358;{Number(order.total_amount).toLocaleString()}</div>
                   <div className={styles['order-row-data']} id={styles['date-cell']}>{formatDate(order.created_at)}</div>
                   <div className={styles['order-row-data']} id={styles['view-cell']} onClick={() => viewOrder(order.order_id)}>view</div>
                 </div>
