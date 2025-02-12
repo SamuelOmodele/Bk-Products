@@ -308,7 +308,7 @@ const AdminOrders = () => {
       </div>
 
       {/* --- ORDER MODAL --- */}
-      <Modal isOpen={isOpen} onClose={onClose}  >
+      <Modal isOpen={isOpen} onClose={onClose} blockScrollOnMount={false} >
         <ModalOverlay />
         <ModalContent sx={{ maxWidth: '450px' }} position="absolute" className={styles['modal-content']} >
           <ModalHeader className={styles['modal-header']}>Order no. {singleOrder?.order_id} </ModalHeader>
