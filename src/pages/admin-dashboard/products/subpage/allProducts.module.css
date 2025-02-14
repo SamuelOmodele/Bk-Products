@@ -185,3 +185,11 @@
 .active-menu p:hover{
     background-color: #fafafa;
 }
+@media screen and (max-width: 780px) {
+    .sort-box{
+        display: none;
+    }
+    .search-box{
+        margin-right: 15px;
+    }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './orderDetails.module.css'
 import { FiInfo } from 'react-icons/fi';
 import { FaBoxOpen, FaShippingFast } from 'react-icons/fa';
@@ -6,8 +6,57 @@ import watchImage from '../../../../assets/wrist-watch.jpg'
 import payment_receipt from '../../../../assets/payment_receipt.jpg'
 import map from '../../../../assets/map2.jpg'
 import locationIcon from '../../../../assets/location-icon.png'
+import Loader from '../../../../components/loader/loader';
 
 const AdminOrderDetails = ({ order }) => {
+
+    useEffect(() => {
+        // console.log('Order fields:', order);
+    });
+
+    // --- STATES FOR FETCHING ALL ORDERS ---
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [success, setSuccess] = useState(false);
+
+    const changePaymentStatus = async (new_status) => {
+
+        console.log('payment id is ', order.payment_id);
+        console.log('new status is ', new_status);
+
+        const accessToken = localStorage.getItem('accessToken');
+        setLoading(true);
+        setError(false);
+        setSuccess(false);
+
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/payment/${order.payment_id}/status`, {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ status: new_status })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                setError(errorData.message);
+                console.log('Failed to change payment status', errorData.message)
+                return;
+            }
+
+            const successResponse = await response.json();
+            setSuccess(true);
+            console.log('Payment status updated: ', successResponse);
+
+        } catch (error) {
+            setError('an unknown error occured');
+            console.log('An Unknown Error occured while updating payment status: ', error)
+        } finally {
+            setLoading(false);
+        }
+    }
 
     const [modalTab, setModalTab] = useState('1');
 
@@ -51,6 +100,16 @@ const AdminOrderDetails = ({ order }) => {
         });
     };
 
+    const markSubmitted = () => {
+        changePaymentStatus('submitted');
+    }
+    const markVerified = () => {
+        changePaymentStatus('verified');
+    }
+    const markRejected = () => {
+        changePaymentStatus('rejected');
+    }
+
     return (
         <div >
 
@@ -82,7 +141,7 @@ const AdminOrderDetails = ({ order }) => {
                     <p className={styles['order-info-tab-label']}><span>Payment status</span> <span style={{ color: order.payment_status === 'pending' ? '#F77C27' : order.payment_status === 'submitted' ? '#115FFC' : order.payment_status === "verified" ? '#21A168' : 'red', fontSize: '14px', fontWeight: '300' }}>{order.payment_status}</span></p>
                 </div>
 
-                <div className={styles['order-info-tab-section']}>
+                <div className={styles['order-info-tab-section']} style={{ borderBottom: 'none' }}>
                     <p className={styles['order-info-tab-heading']}>Payment Proof</p>
                     <img src={order.payment_receipt ? payment_receipt : null} className={styles['payment-receipt-image']} alt="" />
                 </div>
@@ -91,8 +150,8 @@ const AdminOrderDetails = ({ order }) => {
                     <div className={styles['validate-payment']}>
                         <p>Please validate payment receipt above </p>
                         <div className={styles['buttons']}>
-                            <button>Mark verified</button>
-                            <button>Mark rejected</button>
+                            <button style={{ backgroundColor: 'green' }} onClick={markVerified}>Mark verified</button>
+                            <button onClick={markRejected}>Mark rejected</button>
                         </div>
                     </div>
                 }
@@ -102,9 +161,32 @@ const AdminOrderDetails = ({ order }) => {
                     </div>
                 }
                 {(order.payment_status === 'rejected') &&
-                    <div style={{ color: 'red', fontSize: '14px', textAlign: 'center' }}>
-                        <p>Payment was rejected</p>
-                    </div>
+                    <>
+                        <div style={{ color: 'red', fontSize: '14px', textAlign: 'center', marginTop: '10px', borderBottom: '1px solid #cac9d9', paddingBottom: '10px', marginBottom: '10px' }}>
+                            <p>Payment was rejected</p>
+                        </div>
+                        <div className={styles['validate-payment']}>
+                            <p>Please validate payment receipt above </p>
+                            {!loading ?
+                                <>
+                                    {!success ?
+                                        <>
+                                            {error && <p style={{color: 'red', textAlign: 'center'}}>{error}</p>}
+                                            <div className={styles['buttons']}>
+                                                <button style={{ backgroundColor: 'green' }} onClick={markVerified}>Mark verified</button>
+                                                <button style={{ backgroundColor: '#115ffc' }} onClick={markSubmitted}>Mark submitted</button>
+                                            </div>
+                                        </>
+                                        :
+                                        <p>payment status updated successfully</p>
+                                    }
+                                </>
+                                :
+                                <div><Loader color={'#115ffc'} size={28} /></div>
+                            }
+                        </div>
+
+                    </>
                 }
 
             </div>}

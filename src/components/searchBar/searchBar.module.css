@@ -14,17 +14,19 @@
     width: calc(100% - 50px);
     outline: none;
     border: 1px solid #cac9d9;
-    height: 50px;
+    height: 40px;
     padding: 0 20px;
+    border-radius: 20px 0 0 20px;
 }
 .search-icon{
     width: 50px;
     background-color: #115FFC;
     color: white;
-    height: 50px;
-    padding: 10px;
+    height: 40px;
+    padding: 7px;
     cursor: pointer;
     transition: .2s;
+    border-radius: 0 20px 20px 0;
 }
 .search-icon:hover{
     background-color: #217FFC;

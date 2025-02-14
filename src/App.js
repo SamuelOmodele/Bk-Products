@@ -97,9 +97,9 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/shop' element={<Shop />} />
         <Route path='/product-detail' element={<ProductDetails />} />
-        <Route path='/about' element={<About />} />
+        {/* <Route path='/about' element={<About />} /> */}
         <Route path='/search' element={<Search />} />
-        <Route path='/contact' element={<Contact />} />
+        {/* <Route path='/contact' element={<Contact />} /> */}
         <Route path='/cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
         <Route path='/orders' element={<ProtectedRoute><Orders /></ProtectedRoute>}>
           <Route index element={<AllOrders />} />

@@ -146,9 +146,13 @@ button.verify{
 .validate-payment p{
     font-size: 13px;
     color: #333;
+    margin: auto;
+    width: fit-content;
     margin-bottom: 10px;
 }
 .validate-payment .buttons{
+    width: fit-content;
+    margin: auto;
     display: flex;
     gap: 10px;
 }

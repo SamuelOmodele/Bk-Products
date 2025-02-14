@@ -4,6 +4,7 @@ import Footer from '../../components/footer/footer'
 import SearchBar from '../../components/searchBar/searchBar'
 import styles from './search.module.css'
 import no_result_search_img from '../../assets/no-result-search.jpg'
+import AllProducts from '../../components/allProducts/allProducts'
 
 const Search = () => {
 
@@ -17,8 +18,9 @@ const Search = () => {
         <div>
             <Navbar active={'shop'} />
             <div className={styles['content-page']}>
-                <SearchBar top='30px' focus={true}/>
-                <img src={no_result_search_img} alt="" className={styles['search-img']}/>
+                {/* <SearchBar top='30px' focus={true}/> */}
+                {/* <img src={no_result_search_img} alt="" className={styles['search-img']}/> */}
+                <AllProducts mode={'search'}/>
                 <Footer />
             </div>
         </div>

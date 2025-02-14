@@ -25,11 +25,12 @@ const ProductCard = () => {
         </div>
         <div className={styles['name-price']}>
             <p className={styles['name']}>SUN8 Generic Men Wrist Watch</p>
-            <div className={styles['category']}>gadgets</div>
+            {/* <div className={styles['category']}>gadgets</div> */}
         </div>
         <div className={styles['description']}>{cropDescription(product_description)}</div>
         
-        <p className={styles['price']}>$250.00</p>
+        <p className={styles['price']}>$250.00 <span>$280.00</span></p>
+        <p className={styles['quantity']}>Only 20 items left</p>
         <button onClick={() => navigate('/product-detail')}>View Product</button>
     </div>
   )

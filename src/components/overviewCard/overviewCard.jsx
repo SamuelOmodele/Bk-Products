@@ -29,7 +29,7 @@ const OverviewCard = ({ name, amount, this_month }) => {
                 
             {/* --- card text --- */}
             <div>
-                <p className={styles['card-name-text']}>Total {name}</p>
+                <p className={styles['card-name-text']}>Total {name === 'Orders' && <span>validated</span>} {name}</p>
                 <p className={styles['card-amount-text']}>{name === 'Sales' && <span>&#8358;</span>}{amount}</p>
                 <div className={styles['card-small-text']}> <div className={styles['card-percent-text']}>{name === 'Sales' && <span>&#8358;</span>}{this_month}</div>{name === 'Products' && 'products'}{name === 'Orders' && 'orders'} this month</div>
             </div>

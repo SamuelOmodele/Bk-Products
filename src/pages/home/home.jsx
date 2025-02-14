@@ -20,7 +20,7 @@ const Home = () => {
             <Navbar active={'home'}/>
             <div className={styles['content-page']}>
                 <Hero />
-                <div onClick={() => navigate('/search')}>
+                <div className={styles['search']}>
                     <SearchBar top='50px' />
                 </div>
                 

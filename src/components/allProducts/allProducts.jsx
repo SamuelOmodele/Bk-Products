@@ -7,7 +7,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 
-const AllProducts = () => {
+const AllProducts = ({mode = 'all-product'}) => {
 
   const navigate = useNavigate();
   const [lastPage, setLastPage] = useState(4);
@@ -30,20 +30,30 @@ const AllProducts = () => {
     <>
       <div className={styles['banner']}>Shop with us Today !</div>
 
-      <div onClick={() => navigate('/search')}>
+      <div className={styles['search']}>
         <SearchBar top='50px' />
       </div>
 
       <div className={styles['all-product']}>
-        <div className={styles['filter']}>
+        {mode === 'all-product' && <div className={styles['filter']}>
           <p>Filter by</p>
           <div>Category <IoIosArrowDown size={17.5} /></div>
           <div>Price <IoIosArrowDown size={17.5} /></div>
           <div className={styles['button']}>Filter</div>
-        </div>
+        </div>}
         <div className={styles['all-product-content']}>
-          <h3>Our Products</h3>
+          <h3>{mode ==='search' ? 'Search Result' : 'Our Products'}</h3>
           <div className={styles['product-container']}>
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
             <ProductCard />
             <ProductCard />
             <ProductCard />
