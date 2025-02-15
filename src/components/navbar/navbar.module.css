@@ -68,7 +68,22 @@ p.active::before {
     display: flex;
     gap: 15px;
 }
-
+.cart{
+    border-radius: 50%;
+    transition: .15s ease-in-out;
+    padding: 8px;
+    cursor: pointer;
+}
+.cart:hover{
+    background-color: #F2F2F2;
+    
+}
+.signin-cart-box button.help{
+    border-radius: 5px;
+    padding: 5.5px 12px;
+    font-size: 13px;
+    gap: 5px;
+}
 .signin-cart-box button {
     display: flex;
     align-items: center;

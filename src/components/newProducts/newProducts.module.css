@@ -22,6 +22,7 @@
     /* background-color: red; */
 }
 .view-all-text{
+    cursor: pointer;
     color: #354666;
     font-size: 15px;
     font-weight: 500;

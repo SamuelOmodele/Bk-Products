@@ -100,7 +100,7 @@ function App() {
         {/* <Route path='/about' element={<About />} /> */}
         <Route path='/search' element={<Search />} />
         {/* <Route path='/contact' element={<Contact />} /> */}
-        <Route path='/cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+        <Route path='/cart' element={<Cart />} />
         <Route path='/orders' element={<ProtectedRoute><Orders /></ProtectedRoute>}>
           <Route index element={<AllOrders />} />
           <Route path='open' element={<OpenOrders />} />

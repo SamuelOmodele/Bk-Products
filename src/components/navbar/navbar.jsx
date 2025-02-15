@@ -8,6 +8,7 @@ import { LuSquareArrowOutUpRight } from "react-icons/lu";
 import { useSelector } from 'react-redux';
 import Loader from '../loader/loader';
 import SearchBar from '../searchBar/searchBar';
+import { LuCircleHelp } from "react-icons/lu";
 
 const Navbar = ({ active }) => {
 
@@ -17,7 +18,7 @@ const Navbar = ({ active }) => {
 
   return (
     <div className={styles['navbar']}>
-      <div onClick={() => navigate('/')}>
+      <div onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
         <BkLogo imageSize={'50px'} headTextSize={'21px'} smallTextSize={'11px'} />
       </div>
 
@@ -33,14 +34,17 @@ const Navbar = ({ active }) => {
       </div>
 
       <div className={styles['signin-cart-box']}>
-        <button onClick={() => navigate('/cart')}>
-          <MdOutlineShoppingCart size={18} />
-          Cart
-        </button>
+        
+        <p onClick={() => navigate('/cart')} className={styles['cart']}>
+          <MdOutlineShoppingCart size={25} />
+        </p>
         {role === 'pending' && <Loader color={'#115ffc'} size={24} />}
         {!role && <button className={styles['signin']} onClick={() => navigate('/sign-in')}>Sign in</button>}
         {role === 'admin' && <div className={styles['dashboard-account']} onClick={() => navigate('/admin')}>Dashboard <LuSquareArrowOutUpRight size={16} /></div>}
         {role === 'user' && <div className={styles['dashboard-account']} onClick={() => navigate('/cart')}>My Account <LuSquareArrowOutUpRight size={16} /></div>}
+        <button onClick={() => navigate('/help')} className={styles['help']}>
+          <LuCircleHelp size={18} /> Help
+        </button>
       </div>
 
       <div className={styles['menu-icons']}>
@@ -56,7 +60,6 @@ const Navbar = ({ active }) => {
           <p onClick={() => navigate('/contact')} className={active === 'contact' ? styles['active'] : ''}>Contact</p> */}
           <button onClick={() => navigate('/cart')}>
             <MdOutlineShoppingCart size={18} />
-            Cart
           </button>
           {role === 'pending' && <Loader color={'#115ffc'} size={24} />}
           {!role && <button className={styles['signin']} onClick={() => navigate('/sign-in')}>Sign in</button>}
