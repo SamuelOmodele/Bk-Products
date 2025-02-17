@@ -62,6 +62,9 @@
     padding: 8px 15px;
     transition: .2s ease;
 }
+.add-btn:last-child{
+    display: none;
+}
 .add-btn:hover{
     transform: scale(0.95);
 }
@@ -127,6 +130,32 @@
     
     font-size: 14.5px;
 }
+#info-column{
+    width: 28%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+#category-column{
+    width: 15%;
+}
+#price-column, #date-column{
+    width: 10%;
+    text-align: center;
+}
+#status-column{
+    width: 17%;
+    text-align: center;
+}
+#stock-column{
+    width: 12%;
+    text-align: center;
+}
+#action-column{
+    width: 8%;
+    display: flex;
+    justify-content: center;
+}
 .product-row{
     width: 100%;
     display: flex;
@@ -185,11 +214,53 @@
 .active-menu p:hover{
     background-color: #fafafa;
 }
+@media screen and (max-width: 900px) {
+    #category-column{
+        display: none;
+    }
+    #info-column{
+        width: 35%;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    #price-column, #date-column{
+        width: 14%;
+        text-align: center;
+    }
+}
 @media screen and (max-width: 780px) {
     .sort-box{
         display: none;
     }
     .search-box{
         margin-right: 15px;
+    }
+    #price-field{
+        display: none;
+    }
+}
+@media screen and (max-width: 730px) {
+    .product-table-container-overflow{
+        width: 100%;
+        overflow: auto;
+    }
+    .product-table-container{
+        width: 670px;
+    }
+    
+}
+@media screen and (max-width: 680px) {
+    .add-btn{
+        display: none;
+    }
+    .add-btn:last-child{
+        display: flex;
+    }
+    .lower-section{
+        display: none;
+    }
+    .upper-section{
+        border-bottom: none;
     }
 }

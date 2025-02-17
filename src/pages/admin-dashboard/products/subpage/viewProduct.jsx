@@ -29,7 +29,7 @@ const ViewProduct = () => {
     <div className={styles['product-form']}>
       <div className={styles['product-form-head']}>
         <p className={styles['product-form-head-text']}> <IoArrowBack onClick={() => navigate('/admin/products')} size={26} className={styles['back']} />Product</p>
-        <button onClick={() => navigate('/admin/products/edit')}><RiEditLine size={20} />Edit Product</button>
+        <button id={styles['desktop-add-btn']} onClick={() => navigate('/admin/products/edit')}><RiEditLine size={20} />Edit Product</button>
       </div>
       <div className={styles['product-form-body']}>
         <div className={styles['product-form-body-left']}>
@@ -51,8 +51,6 @@ const ViewProduct = () => {
                   <li key={index}>{feature}</li>
                 ))}
               </div>}
-
-
             </div>
             
           </div>
@@ -97,6 +95,10 @@ const ViewProduct = () => {
               </select>
               {/* <button className={styles['add-category']}>Add Category</button> */}
             </div>
+          </div>
+
+          <div className={styles['product-form-head']} >
+            <button id={styles['mobile-add-btn']} onClick={() => navigate('/admin/products/edit')}><RiEditLine size={20} />Edit Product</button>
           </div>
 
         </div>

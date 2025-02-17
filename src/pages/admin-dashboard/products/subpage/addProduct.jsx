@@ -45,7 +45,7 @@ const AddProduct = () => {
       {/* -- Form header -- */}
       <div className={styles['product-form-head']}>
         <p className={styles['product-form-head-text']}> <IoArrowBack onClick={() => navigate('/admin/products')} size={26} className={styles['back']} /> Add Product</p>
-        <button ><MdOutlineDone size={20} />Add Product</button>
+        <button id={styles['desktop-add-btn']}><MdOutlineDone size={20} />Add Product</button>
       </div>
 
       {/* -- Form Body -- */}
@@ -124,6 +124,10 @@ const AddProduct = () => {
               </select>
               <button className={styles['add-category']} onClick={onOpen}>Add Category</button>
             </div>
+          </div>
+
+          <div className={styles['product-form-head']} >
+            <button id={styles['mobile-add-btn']}><MdOutlineDone size={20} />Add Product</button>
           </div>
 
           {/* --- ADD CATEGORY MODAL --- */}

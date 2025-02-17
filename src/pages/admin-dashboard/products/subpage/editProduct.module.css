@@ -36,6 +36,10 @@
     padding: 8px 15px;
     border-radius: 20px;
     font-size: 14px;
+    display: none;
+}
+button#desktop-add-btn{
+    display: flex;
 }
 .product-form-body{
     display: flex;
@@ -182,4 +186,27 @@ button.add-category{
     color: white;
     border-radius: 20px;
     font-size: 14px;
+}
+@media screen and (max-width: 700px) {
+    .product-form-body{
+        flex-direction: column;
+    }
+    .product-form-body-left{
+        width: 100%;
+    }
+    .product-form-body-right{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 500px) {
+    button#desktop-add-btn{
+        display: none;
+    }
+    button#mobile-add-btn{
+        display: flex;
+    }
+    .product-form{
+        padding: 15px 10px;
+        border-radius: 5px;
+    }
 }

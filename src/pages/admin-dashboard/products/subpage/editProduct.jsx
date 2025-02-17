@@ -29,7 +29,7 @@ const EditProduct = () => {
     <div className={styles['product-form']}>
       <div className={styles['product-form-head']}>
         <p className={styles['product-form-head-text']}> <IoArrowBack onClick={() => navigate('/admin/products')} size={26} className={styles['back']} /> Edit Product</p>
-        <button >Save </button>
+        <button id={styles['desktop-add-btn']}>Save </button>
       </div>
       <div className={styles['product-form-body']}>
         <div className={styles['product-form-body-left']}>
@@ -99,6 +99,9 @@ const EditProduct = () => {
             </div>
           </div>
 
+          <div className={styles['product-form-head']} >
+            <button id={styles['mobile-add-btn']}>Save</button>
+          </div>
         </div>
 
       </div>
