@@ -1,17 +1,20 @@
-.delivery-page{
+.delivery-page {
     padding: 30px;
 }
-.main-text{
+
+.main-text {
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 20px;
 }
-.delivery-container{
+
+.delivery-container {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
 }
-.delivery-container-header{
+
+.delivery-container-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -19,11 +22,13 @@
     border-bottom: 1px solid #EDEDED;
     padding-bottom: 20px;
 }
-.delivery-container-header p{
+
+.delivery-container-header p {
     font-size: 19px;
     font-weight: 500;
 }
-.delivery-container-header button{
+
+.delivery-container-header button {
     font-size: 14px;
     border: 1.5px dashed rgba(17, 95, 252, 0.3);
     color: #1a1a1a;
@@ -33,24 +38,31 @@
     padding: 8px 15px;
     transition: .2s ease;
 }
-.delivery-container-header button:hover{
+.delivery-container-header button#add-short {
+    display: none;
+}
+
+.delivery-container-header button:hover {
     color: rgba(17, 95, 252, 0.8);
 }
-.filter-box{
+
+.filter-box {
     display: flex;
     margin: 30px 0;
     gap: 20px;
 }
-.filter-box input{
+
+.filter-box input {
     border: 1px solid #EDEDED;
     border-radius: 5px;
     padding: 7px 15px;
-    width: 250px;
+    width: 400px;
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
     outline: none;
 }
-.filter-box button{
+
+.filter-box button {
     background-color: #115FFC;
     color: white;
     padding: 7px 20px;
@@ -58,13 +70,16 @@
     font-size: 15px;
     transition: .2s;
 }
-.filter-box button:hover{
+
+.filter-box button:hover {
     background-color: #317FFC;
 }
-.delivery-content-box{
+
+.delivery-content-box {
     margin-top: 20px;
 }
-.single-delivery-box{
+
+.single-delivery-box {
     width: 100%;
     padding: 20px;
     border: 1px solid #eae9f9;
@@ -75,52 +90,65 @@
     gap: 20px;
     position: relative;
 }
-.single-delivery-box img{
+
+.single-delivery-box img {
     width: 200px;
     border-radius: 5px;
 }
-img.location-icon{
+
+img.location-icon {
     position: absolute;
     top: 50%;
     left: 80px;
     transform: translateY(-45%);
     width: 65px;
 }
-.single-delivery-action-box{
+
+.single-delivery-action-box {
     position: absolute;
     top: 20px;
     right: 20px;
     display: flex;
     gap: 10px;
 }
-.delivery-title{
+
+.delivery-title {
     font-size: 22px;
     font-weight: 500;
     margin-bottom: 5px;
 }
-.delivery-description{
+
+.delivery-description {
     color: #555;
     font-size: 13px;
     margin-bottom: 5px;
 }
-.delivery-price{
+
+.delivery-price {
     font-size: 16px;
     font-weight: 500;
 }
-.form-field-box{
+
+.form-field-box {
     width: 100%;
     margin-bottom: 10px;
 }
-.form-field-box label{
+
+.form-field-box label {
     margin-bottom: 5px;
     display: block;
     font-size: 14px;
 }
-.form-field-box span{
+
+.form-field-box span {
     font-size: 14px;
     margin-left: 5px;
 }
-.form-field-box input[type="text"], .form-field-box input[type="number"], .form-field-box textarea, .form-field-box select{
+
+.form-field-box input[type="text"],
+.form-field-box input[type="number"],
+.form-field-box textarea,
+.form-field-box select {
     border: 1px solid #DDDDDD;
     width: 100%;
     font-size: 14px;
@@ -130,13 +158,21 @@ img.location-icon{
     resize: none;
     appearance: none;
 }
-.form-field-box input[type="text"]:focus, .form-field-box input[type="number"]:focus, .form-field-box textarea:focus, .form-field-box select:focus{
+
+.form-field-box input[type="text"]:focus,
+.form-field-box input[type="number"]:focus,
+.form-field-box textarea:focus,
+.form-field-box select:focus {
     border: 1.5px solid rgba(17, 95, 252, 0.5);
 }
-.form-field-box input[type="text"]::placeholder, .form-field-box input[type="number"]::placeholder, .form-field-box textarea::placeholder{
+
+.form-field-box input[type="text"]::placeholder,
+.form-field-box input[type="number"]::placeholder,
+.form-field-box textarea::placeholder {
     color: #555;
 }
-.modal-button{
+
+.modal-button {
     margin-top: 20px;
     margin-bottom: 10px;
     display: block;
@@ -146,11 +182,98 @@ img.location-icon{
     border-radius: 5px;
     font-size: 14px;
 }
-.action-icon{
+
+.action-icon {
     padding: 5px;
     border-radius: 5px;
     cursor: pointer;
 }
-.action-icon:hover{
+
+.action-icon:hover {
     background-color: #efefef;
+}
+.error-msg{
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: red;
+}
+.success-msg{
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: green;
+}
+button.ok-btn{
+    background-color: #115FFC;
+    color: white;
+    font-size: 14px;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 50px;
+}
+.refresh-icon{
+    background-color: #F1F5FF;
+    color: #115FFC;
+    font-size: 26px;
+    padding: 3px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 650px) {
+    .single-delivery-action-box {
+        top: 10px;
+        right: 10px;
+    } 
+    .single-delivery-box img {
+        width: 150px;
+    }
+    img.location-icon {
+        position: absolute;
+        top: 50%;
+        left: 65px;
+        transform: translateY(-50%);
+        width: 55px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .single-delivery-box img {
+        display: none;
+    }
+}
+@media screen and (max-width: 500px) {
+
+    .single-delivery-box {
+        padding: 10px;
+    }
+    
+    .delivery-page {
+        padding: 15px 10px;
+    }
+    .delivery-title {
+        font-size: 17px;
+        font-weight: 600;
+    }
+    .delivery-price {
+        font-size: 14px;
+    }
+    .delivery-container-header button{
+        display:  none;
+    }
+    .delivery-container-header button#add-short {
+        display: block;
+    }
+    .filter-box input {
+        width: 70%;
+    }
+    
+    .filter-box button {
+        width: 30%;
+        background-color: #115FFC;
+        color: white;
+        padding: 5px 14px;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: .2s;
+    }
 }

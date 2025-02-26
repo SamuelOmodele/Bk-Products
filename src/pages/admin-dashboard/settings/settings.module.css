@@ -178,3 +178,31 @@
 .add-admin-button:hover{
     background-color: #4482fd;
 }
+.all-admin-box{
+    margin-top: 40px;
+
+}
+.all-admin-box > p{
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+.single-admin{
+    border-bottom: 1px solid #EDEDED;
+    display: grid;
+    grid-template-columns: 70% 20% 10%;
+    padding: 10px;
+    padding-left: 0;
+    align-items: center;
+    font-size: 14.5px;
+}
+.delete-icon{
+    font-size: 36px;
+    color: red;
+    cursor: pointer;
+    padding: 8px 0;
+    border-radius: 50%;
+}
+.delete-icon:hover{
+    background-color: #f8f8f8;
+}

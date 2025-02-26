@@ -31,6 +31,8 @@ import { useDispatch } from 'react-redux';
 import { setIsSignedIn, setRole } from './redux/authSlice';
 import ProtectedRoute from './components/protectedRoute/protectedRoute';
 import AdminProtectedRoute from './components/adminProtectedRoute/adminProtectedRoute';
+import ProductInfo from './components/productInfo/productInfo';
+import ProductInfoAdmin from './components/productInfo/ProductInfoAdmin';
 
 
 
@@ -114,8 +116,8 @@ function App() {
           <Route path='products' element={<AdminProducts />}>
             <Route index element={<AllProducts />} />
             <Route path='add' element={<AddProduct />} />
-            <Route path='view' element={<ViewProduct />} />
-            <Route path='edit' element={<EditProduct />} />
+            <Route path='view/:id' element={<ViewProduct />} />
+            <Route path='edit/:id' element={<EditProduct />} />
           </Route>
           <Route path='delivery' element={<Delivery />} />
           <Route path='settings' element={<Settings />} />

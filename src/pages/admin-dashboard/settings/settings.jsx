@@ -19,6 +19,8 @@ import { RiBankFill } from "react-icons/ri";
 import { FaRegUserCircle } from "react-icons/fa";
 import { RiAdminLine } from "react-icons/ri";
 
+import { FaRegTrashAlt } from "react-icons/fa";
+
 const Settings = () => {
 
     const dispatch = useDispatch();
@@ -41,10 +43,10 @@ const Settings = () => {
                 <div className={styles['settings-sidebar']}>
                     <p className={settingsTab === 'profile' ? styles['active'] : styles['']} onClick={() => setSettingsTab('profile')}> <FaRegUserCircle size={20} /> Profile</p>
                     <p className={settingsTab === 'bank-details' ? styles['active'] : styles['']} onClick={() => setSettingsTab('bank-details')}><RiBankFill size={20} /> Bank Details</p>
-                    <p className={settingsTab === 'add-admin' ? styles['active'] : styles['']} onClick={() => setSettingsTab('add-admin')}><RiAdminLine size={20} /> Add Admin</p>
+                    <p className={settingsTab === 'manage-admin' ? styles['active'] : styles['']} onClick={() => setSettingsTab('manage-admin')}><RiAdminLine size={20} /> Manage Admin</p>
                 </div>
                 <div className={styles['settings-content']}>
-                    <p className={styles['profile-text']}>{settingsTab === 'profile' && 'My Profile'} {settingsTab === 'bank-details' && 'Bank Details'} {settingsTab === 'add-admin' && 'Add Admin'} </p>
+                    <p className={styles['profile-text']}>{settingsTab === 'profile' && 'My Profile'} {settingsTab === 'bank-details' && 'Bank Details'} {settingsTab === 'manage-admin' && 'Manage Admin'} </p>
                     <div className={styles['content-box']}>
 
                         {/* --- Profile / Personal Information --- */}
@@ -110,11 +112,35 @@ const Settings = () => {
                         {(settingsTab === 'bank-details') && <p style={{ color: '#ED3E4B', fontSize: '12px', fontWeight: '400', marginTop: '15px' }}>Bank details can only be modified by a super-admin</p>}
 
                         {/* --- Add Admin --- */}
-                        {(settingsTab === 'add-admin') && <div className={styles['box1']}>
-                            <p className={styles['box-text']}>Add Admin</p>
-                            <input type="text" placeholder='Enter Email' className={styles['add-admin-input']} />
-                            <button className={styles['add-admin-button']}>Add Admin</button>
-                        </div>}
+                        {(settingsTab === 'manage-admin') &&
+                            <>
+                                <div className={styles['box1']}>
+                                    <p className={styles['box-text']}>Add Admin</p>
+                                    <input type="text" placeholder='Enter Email' className={styles['add-admin-input']} />
+                                    <button className={styles['add-admin-button']}>Add Admin</button>
+                                </div>
+                                <div className={styles['all-admin-box']}>
+                                    <p>All Admin</p>
+                                    <div className={styles['admin-list']}>
+                                        <div className={styles['single-admin']}>
+                                            <p>bkproduct@gmail.com</p>
+                                            <p>admin</p>
+                                            <FaRegTrashAlt className={styles['delete-icon']} />
+                                        </div>
+                                        <div className={styles['single-admin']}>
+                                            <p>bkproduct@gmail.com</p>
+                                            <p>admin</p>
+                                            <FaRegTrashAlt className={styles['delete-icon']} />
+                                        </div>
+                                        <div className={styles['single-admin']}>
+                                            <p>bkproduct@gmail.com</p>
+                                            <p>admin</p>
+                                            <FaRegTrashAlt className={styles['delete-icon']} />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </>}
                     </div>
                 </div>
             </div>

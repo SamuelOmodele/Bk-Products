@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './viewProduct.module.css'
 import { useNavigate } from 'react-router-dom'
 import { MdOutlineDone } from "react-icons/md";
@@ -6,109 +6,118 @@ import product_image from '../../../../assets/cloth.png'
 import { IoAdd, IoCloseCircle } from "react-icons/io5";
 import { IoArrowBack } from "react-icons/io5";
 import { RiEditLine } from 'react-icons/ri';
+import { useParams } from 'react-router-dom';
+import Loader from '../../../../components/loader/loader';
+import product_image1 from '../../../../assets/wrist-watch.jpg'
+import product_image2 from '../../../../assets/watch2.jpeg'
+import product_image3 from '../../../../assets/watch3.avif'
+import product_image4 from '../../../../assets/watch4.webp'
+import product_image5 from '../../../../assets/watch5.jpg'
 
 const ViewProduct = () => {
 
   const navigate = useNavigate();
+  const { id } = useParams();
 
-    const [feature, setFeature] = useState('');
-    const [featureList, setFeatureList] = useState(['feature1', 'feature2', 'feature3']);
-  
-    const addFeature = () => {
-      if (feature) {
-        setFeatureList(currentFeatures => [...currentFeatures, feature]);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetchSingleProduct();
+  }, []);
+
+  const fetchSingleProduct = async () => {
+
+    setData(null)
+    setLoading(true);
+    setError(null);
+    const accessToken = localStorage.getItem('accessToken');
+    console.log('loading starts ')
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/products/${id}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.message);
+        console.log('Failed request', errorData.message)
+        return;
       }
-      setFeature('');
+
+      const successResponse = await response.json();
+      setData(successResponse);
+      console.log(successResponse);
+
+    } catch (err) {
+      setError('an unknown error occured');
+      console.log('An Unknown Error occured: ', err)
+    } finally {
+      setLoading(false);
     }
-  
-    const removeFeature = (index) => {
-      setFeatureList(featureList.filter((_, i) => i !== index));
-    };
+  }
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0
+    });
+  }, []);
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   return (
-    <div className={styles['product-form']}>
-      <div className={styles['product-form-head']}>
-        <p className={styles['product-form-head-text']}> <IoArrowBack onClick={() => navigate('/admin/products')} size={26} className={styles['back']} />Product</p>
-        <button id={styles['desktop-add-btn']} onClick={() => navigate('/admin/products/edit')}><RiEditLine size={20} />Edit Product</button>
-      </div>
-      <div className={styles['product-form-body']}>
-        <div className={styles['product-form-body-left']}>
-          <div className={styles['form-group']}>
-            <p className={styles['form-group-text']}>General Information</p>
-            <div className={styles['form-field-box']}>
-              <label htmlFor="">Product Name</label>
-              <input type="text" placeholder='Product Name' value={'T shirt'} />
-            </div>
-            <div className={styles['form-field-box']}>
-              <label htmlFor="">Product Description</label>
-              <textarea name="" id="" placeholder='Product description' value={'Good quality T shirt'} rows={8}></textarea>
-            </div>
+    <>
+      {loading ?
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '15px', margin: '30px 0' }}><Loader color={'#115ffc'} size={28} /> Loading . . .</div>
+        :
+        error ?
+          <p style={{ fontSize: '15px', color: 'red' }}>{error}</p>
+          :
+          <div>
+            <div className={styles['product-info-section']} style={{ width: '100%' }}>
+              <div className={styles['left-section']}>
+                <p style={{ display: 'flex', alignItems: 'center', gap: '5px' }}><IoArrowBack onClick={() => navigate('/admin/products')} size={26} className={styles['back']} /> {data?.category.name}</p>
+                <div className={styles['product-images']}>
+                  <img src={data?.media[currentImageIndex].media_url} alt="" className={styles['main-image']} />
+                  <div className={styles['smaller-images']}>
+                    {data?.media.map((image, index) => (
+                      <img src={image.media_url} key={index} alt="" onClick={() => setCurrentImageIndex(index)} style={{ border: (currentImageIndex === index) ? "2px solid #354666" : '' }} />
+                    ))}
 
-            <p className={styles['form-group-text']}>Product Features</p>
-            <div className={styles['form-field-box']}>
-              {featureList && <div className={styles['features-list']}>
-                {featureList.map((feature, index) => (
-                  <li key={index}>{feature}</li>
-                ))}
-              </div>}
-            </div>
-            
-          </div>
-          <div className={styles['form-group']}>
-            <p className={styles['form-group-text']}>Pricing and Stock</p>
-            <div className={styles['form-field-box']}>
-              <label htmlFor="">Price</label>
-              <input type="text" placeholder='Price' value={'$300'}/>
-            </div>
-            <div className={styles['form-field-box']}>
-              <label htmlFor="">Stock</label>
-              <input type="number" placeholder='Stock amount' value={'58'} />
-            </div>
-          </div>
+                  </div>
+                </div>
+              </div>
+              <div className={styles['right-section']}>
+                <h3 className={styles['product-name']}>{data?.name}</h3>
+                <p className={styles['product-description']}>
+                  {data?.description} <br />
+                  {data?.description.length < 20 && <span>Stay powered up wherever you go with this 10,000mAh power bank, designed for convenience and efficiency. With a sleek and lightweight design, it easily fits into your pocket or bag, making it perfect for travel, work, or daily use.
+                  Perfect for travelers, professionals, and anyone on the go, this 10,000mAh power bank ensures you never run out of battery when you need it most!</span>}
+                </p>
+                <div className={styles['product-features']}>
+                  <p className={styles['features-head']}>Features</p>
+                  {data?.features.map((feature, index) => (
+                    <li key={index} className={styles['each-feature']}>{feature}</li>
+                  ))}
 
-          {/* <div className={styles['form-group']}>
-            
-          </div> */}
+                </div>
+                <p className={styles['product-price']}>
+                  ${Number(data?.price).toLocaleString()}
+                  <span className={styles['per-unit-text']}> per unit</span>
+                </p>
+                <p className={styles['stock']}> <span className={styles['stock-no']}>{data?.stock} items</span> left</p>
 
-        </div>
-        <div className={styles['product-form-body-right']}>
-          <div className={styles['form-group']}>
-            <p className={styles['form-group-text']}>Product Image</p>
-            <div className={styles['active-product-image']}>
-              <img src={product_image} alt="" />
-            </div>
-            
-            <div className={styles['small-product-image-container']}>
-              <div className={styles['small-product-image']}><img src={product_image} alt="" /></div>
-              <div className={styles['small-product-image']}><img src={product_image} alt="" /></div>
-              {/* <div className={styles['add-icon-container']}><IoAdd size={28} className={styles['add-icon']}/></div> */}
-            </div>
-            
-          </div>
-          <div className={styles['form-group']}>
-            <p className={styles['form-group-text']}>Category</p>
-            <div className={styles['form-field-box']}>
-              <label htmlFor="Product Category">Product Category</label>
-              <select name="" id="">
-                <option value="">Accessories</option>
-                <option value="" selected>Clothing</option>
-              </select>
-              {/* <button className={styles['add-category']}>Add Category</button> */}
+              </div>
             </div>
           </div>
+      }
 
-          <div className={styles['product-form-head']} >
-            <button id={styles['mobile-add-btn']} onClick={() => navigate('/admin/products/edit')}><RiEditLine size={20} />Edit Product</button>
-          </div>
-
-        </div>
-
-      </div>
-
-
-
-
-    </div>
+    </>
   )
 }
 
