@@ -200,7 +200,7 @@ const Delivery = () => {
                     <button onClick={() => openModal('add')}><IoAdd size={20} /> Add Delivery Zone</button>
                     <button onClick={() => openModal('add')} id={styles['add-short']}><IoAdd size={20} /></button>
                 </div>
-                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+                <div className={styles['filter-container']}>
                     <div className={styles['filter-box']}>
                         <input type="text" name="" id="" placeholder='Search delivery zone . . . ' />
                         <button>Search</button>
