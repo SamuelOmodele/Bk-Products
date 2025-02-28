@@ -30,6 +30,10 @@ const Delivery = () => {
     const [addLoading, setAddLoading] = useState(false);
     const [addError, setAddError] = useState(null);
 
+    const [editData, setEditData] = useState(null);
+    const [editLoading, setEditLoading] = useState(false);
+    const [editError, setEditError] = useState(null);
+
     const [deleteData, setDeleteData] = useState(null);
     const [deleteLoading, setDeleteLoading] = useState(false);
     const [deleteError, setDeleteError] = useState(null);
@@ -42,7 +46,10 @@ const Delivery = () => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
 
-    const openModal = (action, zone_id) => {
+    const openModal = (action, zone_id, form_title, form_description, form_price) => {
+        setTitle(form_title);
+        setDescription(form_description);
+        setPrice(form_price);
         setCurrentZoneId(zone_id);
         setModalAction(action);
         onOpen();
@@ -170,10 +177,14 @@ const Delivery = () => {
         }
     }
 
-    const closeModal = () => {
+    const closeModal = (refresh) => {
         onClose();
         clearAddFeatureStates();
+        clearEditFeatureStates();
         clearDeleteFeatureStates();
+        if (refresh) {
+            fetchDelizeryZones();
+        }
     }
 
     const clearAddFeatureStates = () => {
@@ -189,6 +200,52 @@ const Delivery = () => {
         setDeleteData(null);
         setDeleteLoading(false);
         setDeleteError(null);
+    }
+
+    const clearEditFeatureStates = () => {
+        setEditData(null);
+        setEditLoading(false);
+        setEditError(null);
+    }
+
+    const editDeliveryZone = async (id) => {
+        setEditData(null)
+        setEditLoading(true);
+        setEditError(null);
+        const accessToken = localStorage.getItem('accessToken');
+        console.log('loading starts ')
+
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/admin/shipping-zones/${id}`, {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'title': title,
+                    'description': description,
+                    'price': price,
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                setEditError(errorData.message);
+                console.log('Failed request', errorData)
+                return;
+            }
+
+            const successResponse = await response.json();
+            setEditData(successResponse);
+            console.log(successResponse);
+
+        } catch (err) {
+            setEditError('an unknown error occured');
+            console.log('An Unknown Error occured: ', err)
+        } finally {
+            setEditLoading(false);
+        }
     }
 
     return (
@@ -227,7 +284,7 @@ const Delivery = () => {
                                         <p className={styles['delivery-price']}>Delivery fee: ${Number(zone.price).toLocaleString()}</p>
                                     </div>
                                     <div className={styles['single-delivery-action-box']}>
-                                        <RiEditLine size={28} className={styles['action-icon']} onClick={() => openModal('edit', zone.id)} />
+                                        <RiEditLine size={28} className={styles['action-icon']} onClick={() => openModal('edit', zone.id, zone.title, zone.description, zone.price)} />
                                         <RiDeleteBin6Line size={28} className={styles['action-icon']} onClick={() => openModal('delete', zone.id)} />
                                     </div>
                                 </div>
@@ -243,14 +300,14 @@ const Delivery = () => {
                 <ModalOverlay />
                 {(modalAction === 'add') && <ModalContent>
                     <ModalHeader className={styles['modal-header']}>Add Delivery Zone</ModalHeader>
-                    <ModalCloseButton onClick={closeModal} />
+                    <ModalCloseButton onClick={() => closeModal(false)} />
                     <ModalBody>
                         {addError && <p className={styles['error-msg']}>{addError}</p>}
                         {addData ?
 
                             <>
                                 <p className={styles['success-msg']}>Zone created successfully</p>
-                                <button className={styles['ok-btn']} onClick={closeModal} style={{ borderRadius: '5px' }}>Ok</button>
+                                <button className={styles['ok-btn']} onClick={() => closeModal(true)} style={{ borderRadius: '5px' }}>Ok</button>
                             </>
                             :
                             <>
@@ -276,20 +333,29 @@ const Delivery = () => {
                     <ModalHeader className={styles['modal-header']}>Edit Delivery Zone</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
+                        {editError && <p className={styles['error-msg']}>{editError}</p>}
+                        {editData ?
+                            <>
+                                <p className={styles['success-msg']}>Zone edited successfully</p>
+                                <button className={styles['ok-btn']} onClick={() => closeModal(true)} style={{ borderRadius: '5px' }}>Ok</button>
+                            </>
+                            :
+                            <>
 
-                        <div className={styles['form-field-box']}>
-                            <label htmlFor="">Title</label>
-                            <input type="text" placeholder='Enter Title' />
-                        </div>
-                        <div className={styles['form-field-box']}>
-                            <label htmlFor="">Description</label>
-                            <input type="text" placeholder='Enter Description' />
-                        </div>
-                        <div className={styles['form-field-box']}>
-                            <label htmlFor="">Price</label>
-                            <input type="number" placeholder='Enter Price' />
-                        </div>
-                        <button className={styles['modal-button']}>Save Changes</button>
+                                <div className={styles['form-field-box']}>
+                                    <label htmlFor="">Title</label>
+                                    <input type="text" placeholder='Enter Title' value={title} onChange={(e) => setTitle(e.target.value)} />
+                                </div>
+                                <div className={styles['form-field-box']}>
+                                    <label htmlFor="">Description</label>
+                                    <input type="text" placeholder='Enter Description' value={description} onChange={(e) => setDescription(e.target.value)} />
+                                </div>
+                                <div className={styles['form-field-box']}>
+                                    <label htmlFor="">Price</label>
+                                    <input type="number" placeholder='Enter Price' value={price} onChange={(e) => setPrice(e.target.value)} />
+                                </div>
+                                <button className={styles['modal-button']} onClick={() => editDeliveryZone(currentZoneId)}>{editLoading ? <Loader size={24} /> : 'Save Changes'}</button>
+                            </>}
 
                     </ModalBody>
                 </ModalContent>}
@@ -302,7 +368,7 @@ const Delivery = () => {
                         {deleteData ?
                             <>
                                 <p className={styles['success-msg']}>{deleteData}</p>
-                                <button className={styles['ok-btn']} onClick={closeModal} style={{ borderRadius: '5px' }}>Ok</button>
+                                <button className={styles['ok-btn']} onClick={() => closeModal(true)} style={{ borderRadius: '5px' }}>Ok</button>
                             </>
                             :
                             <>

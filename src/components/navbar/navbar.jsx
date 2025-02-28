@@ -32,9 +32,7 @@ const Navbar = ({ active }) => {
       <div className={styles['search']}>
         <SearchBar width={'100%'} />
       </div>
-
       <div className={styles['signin-cart-box']}>
-        
         <p onClick={() => navigate('/cart')} className={styles['cart']}>
           <MdOutlineShoppingCart size={25} />
         </p>
@@ -58,13 +56,21 @@ const Navbar = ({ active }) => {
           <p onClick={() => navigate('/shop')} className={active === 'shop' ? styles['active'] : ''}>Shop</p>
           <p onClick={() => navigate('/about')} className={active === 'about' ? styles['active'] : ''}>About</p>
           <p onClick={() => navigate('/contact')} className={active === 'contact' ? styles['active'] : ''}>Contact</p> */}
-          <button onClick={() => navigate('/cart')}>
+          {/* <button onClick={() => navigate('/cart')}>
             <MdOutlineShoppingCart size={18} />
-          </button>
+          </button> */}
+
+
+          <p onClick={() => navigate('/cart')} className={styles['cart']} style={{margin: 'auto', width: '50px', height: '50px', marginBottom: '10px'}}>
+            <MdOutlineShoppingCart size={25} />
+          </p>
           {role === 'pending' && <Loader color={'#115ffc'} size={24} />}
           {!role && <button className={styles['signin']} onClick={() => navigate('/sign-in')}>Sign in</button>}
           {role === 'admin' && <div className={styles['dashboard-account']} onClick={() => navigate('/admin')}>Dashboard <LuSquareArrowOutUpRight size={16} /></div>}
           {role === 'user' && <div className={styles['dashboard-account']} onClick={() => navigate('/cart')}>My Account <LuSquareArrowOutUpRight size={16} /></div>}
+          <button onClick={() => navigate('/help')} className={styles['help']} style={{marginBottom: '0px'}}>
+            <LuCircleHelp size={18} /> Help
+          </button>
         </div>}
     </div>
   )

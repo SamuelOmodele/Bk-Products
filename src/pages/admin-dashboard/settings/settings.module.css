@@ -10,6 +10,7 @@
     width: 100%;
     border-radius: 10px;
     background-color: white;
+    border: 1.5px solid #DBDEE2CC;
     padding: 30px 25px;
     display: flex;
     justify-content: space-between;

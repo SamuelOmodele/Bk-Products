@@ -73,6 +73,9 @@ p.active::before {
     transition: .15s ease-in-out;
     padding: 8px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .cart:hover{
     background-color: #F2F2F2;

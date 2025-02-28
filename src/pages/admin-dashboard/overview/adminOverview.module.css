@@ -46,10 +46,12 @@
     background-color: white;
     padding: 15px;
     border-radius: 10px;
+    border: 1.5px solid #DBDEE2CC;
 }
 
 .top-product-container {
     width: 32%;
+    
     /* margin-bottom: 20px; */
 }
 
@@ -57,6 +59,7 @@
     background-color: white;
     padding: 20px 20px 5px;
     border-radius: 10px;
+    border: 1.5px solid #DBDEE2CC;
 }
 
 .top-product-box .head-section {
@@ -158,6 +161,7 @@
 }
 
 .order-table-container {
+    border: 1.5px solid #DBDEE2CC;
     background-color: white;
     width: 100%;
     border-radius: 5px;

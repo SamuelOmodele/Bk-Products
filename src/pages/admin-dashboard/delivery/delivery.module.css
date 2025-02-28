@@ -10,6 +10,7 @@
 
 .delivery-container {
     background-color: white;
+    border: 1.5px solid #DBDEE2CC;
     padding: 20px;
     border-radius: 10px;
 }
@@ -60,12 +61,12 @@
 }
 
 .filter-box input {
-    border: 1px solid #EDEDED;
+    border: 1.5px solid rgb(202, 201, 217, 0.5);
     border-radius: 5px;
-    padding: 7px 15px;
+    padding: 9px 15px;
     width: 400px;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
+    font-size: 14.5px;
     outline: none;
 }
 
