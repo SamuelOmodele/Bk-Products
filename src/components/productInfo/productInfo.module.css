@@ -165,6 +165,7 @@
     width: 1000px;
     margin: auto;
 }
+
 .similar-product-container h3 {
     font-size: 30px;
     font-weight: 600;
@@ -179,15 +180,25 @@
 }
 
 @media screen and (max-width: 1100px) {
-    .product-info-section, .similar-product-container {
+
+    .product-info-section,
+    .similar-product-container {
         width: 100%;
     }
+
     .product-info-section {
         display: grid;
         grid-template-columns: 420px calc(100% - 470px);
-    
+
+    }
+
+    .similar-product-card-container {
+        display: grid;
+        grid-template-columns: calc((100% - 45px)/4) calc((100% - 45px)/4) calc((100% - 45px)/4) calc((100% - 45px)/4);
+        gap: 15px;
     }
 }
+
 @media screen and (max-width: 1000px) {
     .right-section .product-name {
         width: 100%;
@@ -196,16 +207,18 @@
     .right-section .product-description {
         padding-right: 0;
     }
+
     .product-images img.main-image {
         border-radius: 10px;
     }
-    
+
 }
 
 @media screen and (max-width: 980px) {
     .similar-product-card-container {
+        display: grid;
+        grid-template-columns: calc((100% - 30px)/3) calc((100% - 30px)/3) calc((100% - 30px)/3);
         gap: 15px;
-        grid-template-columns: auto auto auto;
     }
 
     .product-info-section {
@@ -213,22 +226,26 @@
         gap: 0px;
     }
 }
+
 @media screen and (max-width: 800px) {
-    .product-info-section, .similar-product-container {
+
+    .product-info-section,
+    .similar-product-container {
         padding: 20px;
-    }    
+    }
 }
 
 @media screen and (max-width: 700px) {
     .product-info-page {
         padding: 25px 25px 50px;
     }
+
     .similar-product-container h3 {
         font-size: 24px;
     }
 
     .similar-product-card-container {
-        grid-template-columns: auto auto;
+        grid-template-columns: calc((100% - 15px)/2) calc((100% - 15px)/2);
     }
 }
 
@@ -237,9 +254,11 @@
     .product-info-page {
         padding: 25px 10px 50px;
     }
-    .product-info-section, .similar-product-container {
+
+    .product-info-section,
+    .similar-product-container {
         padding: 20px 10px;
-    } 
+    }
 
     .product-images .smaller-images {
         grid-template-columns: calc((100% - 40px)/5) calc((100% - 40px)/5) calc((100% - 40px)/5) calc((100% - 40px)/5) calc((100% - 40px)/5);
@@ -291,6 +310,7 @@
         margin: 0;
     }
 }
+
 @media screen and (max-width: 400px) {
     .product-info-page {
         padding: 0 0 0;
