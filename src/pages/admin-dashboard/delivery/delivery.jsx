@@ -45,7 +45,8 @@ const Delivery = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-
+    const [search, setSearch] = useState('');
+    
     const openModal = (action, zone_id, form_title, form_description, form_price) => {
         setTitle(form_title);
         setDescription(form_description);
@@ -248,6 +249,48 @@ const Delivery = () => {
         }
     }
 
+    const searchDeliveryZone = async () => {
+        if (!search){
+            fetchDelizeryZones();
+            return;
+        }
+        setData(null)
+        setLoading(true);
+        setError(null);
+        const accessToken = localStorage.getItem('accessToken');
+        console.log('loading starts ')
+
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/shipping-zones/search`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'name' : search,
+                })
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                setError(errorData.message);
+                console.log('Failed request', errorData)
+                return;
+            }
+
+            const successResponse = await response.json();
+            setData([successResponse]);
+            console.log(successResponse);
+
+        } catch (err) {
+            setError('an unknown error occured');
+            console.log('An Unknown Error occured: ', err)
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return (
         <div className={styles['delivery-page']}>
             <p className={styles['main-text']}>Delivery</p>
@@ -259,8 +302,8 @@ const Delivery = () => {
                 </div>
                 <div className={styles['filter-container']}>
                     <div className={styles['filter-box']}>
-                        <input type="text" name="" id="" placeholder='Search delivery zone . . . ' />
-                        <button>Search</button>
+                        <input type="text" name="" id="" placeholder='Search delivery zone . . . ' value={search} onChange={(e) => setSearch(e.target.value)} />
+                        <button onClick={searchDeliveryZone}>Search</button>
                     </div>
                     <MdOutlineRefresh className={styles['refresh-icon']} onClick={fetchDelizeryZones} />
                 </div>
