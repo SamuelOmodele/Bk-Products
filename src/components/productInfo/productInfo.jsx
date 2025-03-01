@@ -69,7 +69,7 @@ const ProductInfo = () => {
                         ))}
                         
                     </p>
-                    <p className={styles['product-price']}>$250.00 <span className={styles['per-unit-text']}>per unit</span></p>
+                    <p className={styles['product-price']}>&#8358;250.00 <span className={styles['per-unit-text']}>per unit</span></p>
                     <div className={styles['quantity-stock']}>
                         <div className={styles['quantity']}>
                             <p><FiMinus onClick={decrementQuantity} className={styles['icon']} /></p>
@@ -87,6 +87,7 @@ const ProductInfo = () => {
             <div className={styles['similar-product-container']}>
                 <h3>Similar Products</h3>
                 <div className={styles['similar-product-card-container']}>
+                    <ProductCard />
                     <ProductCard />
                     <ProductCard />
                     <ProductCard />

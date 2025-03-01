@@ -53,7 +53,7 @@ const ProductInfoAdmin = () => {
 
                     </p>
                     <p className={styles['product-price']}>
-                        $250.00
+                    &#8358;250.00
                         <span className={styles['per-unit-text']}>per unit</span>
                     </p>
                     <p className={styles['stock']}> <span className={styles['stock-no']}>20 items</span> left</p>

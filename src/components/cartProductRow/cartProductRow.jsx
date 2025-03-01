@@ -31,14 +31,14 @@ const CartProductRow = () => {
                     <p className={styles['stock-amount']}><span>{availableQuantity} items</span> left</p>
                 </div>
             </div>
-            <div className={styles['product-price']}>$250.00</div>
+            <div className={styles['product-price']}>&#8358;250.00</div>
             <div className={styles['product-quantity']}>
                 <FiMinus className={styles['quantity-icon']} onClick={decrementQuantity}/>
                 {selectedQuantity}
                 <FiPlus className={styles['quantity-icon']} onClick={incrementQuantity}/>
                 {selectedQuantity !== initialQuantity && <button className={styles['save']}>Save</button>}
             </div>
-            <div className={styles['product-total-price']}>$500.00</div>
+            <div className={styles['product-total-price']}>&#8358;500.00</div>
         </div>
     )
 }

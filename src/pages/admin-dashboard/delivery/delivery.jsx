@@ -324,7 +324,7 @@ const Delivery = () => {
                                     <div>
                                         <p className={styles['delivery-title']}>{zone.title}</p>
                                         <p className={styles['delivery-description']}>{zone.description}</p>
-                                        <p className={styles['delivery-price']}>Delivery fee: ${Number(zone.price).toLocaleString()}</p>
+                                        <p className={styles['delivery-price']}>Delivery fee: &#8358;{Number(zone.price).toLocaleString()}</p>
                                     </div>
                                     <div className={styles['single-delivery-action-box']}>
                                         <RiEditLine size={28} className={styles['action-icon']} onClick={() => openModal('edit', zone.id, zone.title, zone.description, zone.price)} />
