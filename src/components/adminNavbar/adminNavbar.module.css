@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     padding: 0 30px;
-    border-bottom: 2px solid #EDEDED;
+    border-bottom: 1.5px solid #DBDEE2CC;
     z-index: 300;
     /* box-shadow: 3px 3px 5px  rgba(0, 0, 0, 0.1); */
 }

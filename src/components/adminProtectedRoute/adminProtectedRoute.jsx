@@ -23,7 +23,7 @@ const AdminProtectedRoute = ({ children }) => {
     }
 
     if (isSignedIn) {
-        if (role === 'admin'){
+        if (role === 'admin' || role ==='super-admin'){
             return children
         }
         if (role === 'user'){

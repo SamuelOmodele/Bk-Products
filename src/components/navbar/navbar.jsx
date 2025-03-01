@@ -38,7 +38,7 @@ const Navbar = ({ active }) => {
         </p>
         {role === 'pending' && <Loader color={'#115ffc'} size={24} />}
         {!role && <button className={styles['signin']} onClick={() => navigate('/sign-in')}>Sign in</button>}
-        {role === 'admin' && <div className={styles['dashboard-account']} onClick={() => navigate('/admin')}>Dashboard <LuSquareArrowOutUpRight size={16} /></div>}
+        {role === 'admin' || role === 'super-admin' && <div className={styles['dashboard-account']} onClick={() => navigate('/admin')}>Dashboard <LuSquareArrowOutUpRight size={16} /></div>}
         {role === 'user' && <div className={styles['dashboard-account']} onClick={() => navigate('/cart')}>My Account <LuSquareArrowOutUpRight size={16} /></div>}
         <button onClick={() => navigate('/help')} className={styles['help']}>
           <LuCircleHelp size={18} /> Help
@@ -66,7 +66,7 @@ const Navbar = ({ active }) => {
           </p>
           {role === 'pending' && <Loader color={'#115ffc'} size={24} />}
           {!role && <button className={styles['signin']} onClick={() => navigate('/sign-in')}>Sign in</button>}
-          {role === 'admin' && <div className={styles['dashboard-account']} onClick={() => navigate('/admin')}>Dashboard <LuSquareArrowOutUpRight size={16} /></div>}
+          {role === 'admin' || role === 'super-admin' && <div className={styles['dashboard-account']} onClick={() => navigate('/admin')}>Dashboard <LuSquareArrowOutUpRight size={16} /></div>}
           {role === 'user' && <div className={styles['dashboard-account']} onClick={() => navigate('/cart')}>My Account <LuSquareArrowOutUpRight size={16} /></div>}
           <button onClick={() => navigate('/help')} className={styles['help']} style={{marginBottom: '0px'}}>
             <LuCircleHelp size={18} /> Help
