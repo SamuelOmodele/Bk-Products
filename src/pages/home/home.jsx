@@ -25,7 +25,7 @@ const Home = () => {
                 </div>
 
                 {/* Lazy load the non-critical components */}
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense>
                     <FeaturedProducts />
                     <NewProducts />
                     <AboutUs />
