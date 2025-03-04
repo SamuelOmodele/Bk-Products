@@ -5,26 +5,120 @@ import ProductCard from '../productCard/productCard'
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Loader from '../loader/loader'
+import { IoArrowBackOutline } from 'react-icons/io5';
 
-const AllProducts = ({mode = 'all-product'}) => {
+const AllProducts = ({ mode = 'all-product' }) => {
 
   const navigate = useNavigate();
-  const [lastPage, setLastPage] = useState(4);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [lastPage, setLastPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [prevPageUrl, setPrevPageUrl] = useState(null);
+  const [nextPageUrl, setNextPageUrl] = useState(null);
+
+  const { searchTerm } = useParams();
 
   const nextPage = () => {
-    setCurrentPage(currentPage => currentPage < lastPage ? currentPage + 1 : currentPage)
+    if (nextPageUrl) {
+      fetchProducts(nextPageUrl)
+    }
   }
   const prevPage = () => {
-    setCurrentPage(currentPage => currentPage > 1 ? currentPage - 1 : currentPage)
+    if (prevPageUrl) {
+      fetchProducts(prevPageUrl)
+    }
+  }
+  const scrollUp = () => {
+    window.scrollTo({
+      top: 0,
+    })
   }
 
-  useEffect(() => (
-    window.scrollTo({
-      top: 0
-    })
-  ), []);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    scrollUp();
+    console.log('mode', mode)
+    if (mode === 'search') {
+      searchProduct(searchTerm);
+    } else {
+      fetchProducts(`${process.env.REACT_APP_BACKEND_BASE_URL}/products`);
+    }
+  }, [searchTerm]);
+
+  const fetchProducts = async (url) => {
+    scrollUp();
+    setData(null)
+    setLoading(true);
+    setError(null);
+    console.log('loading starts')
+
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.message);
+        console.log('Failed request', errorData);
+        return;
+      }
+
+      const successResponse = await response.json();
+      setData(successResponse);
+      setCurrentPage(successResponse.current_page)
+      setLastPage(successResponse.last_page)
+      setPrevPageUrl(successResponse.prev_page_url);
+      setNextPageUrl(successResponse.next_page_url);
+      console.log(successResponse);
+
+    } catch (err) {
+      setError('an unknown error occured');
+      console.log('An Unknown Error occured: ', err)
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const searchProduct = async (search_text) => {
+    console.log(search_text);
+    scrollUp();
+    setData(null)
+    setLoading(true);
+    setError(null);
+    console.log('loading starts')
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/products/search`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query: search_text }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.message);
+        console.log('Failed request', errorData);
+        return;
+      }
+
+      const successResponse = await response.json();
+      setData(successResponse);
+      console.log('search response', successResponse);
+
+    } catch (err) {
+      setError('an unknown error occured');
+      console.log('An Unknown Error occured: ', err)
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <>
@@ -42,33 +136,27 @@ const AllProducts = ({mode = 'all-product'}) => {
           <div className={styles['button']}>Filter</div>
         </div>}
         <div className={styles['all-product-content']}>
-          <h3>{mode ==='search' ? 'Search Result' : 'Our Products'}</h3>
+          <h3><IoArrowBackOutline onClick={mode === 'search' ? () => navigate('/shop') : () => navigate('/')} size={26} style={{cursor: 'pointer'}} /> {mode === 'search' ? 'Search Result' : 'Our Products'}</h3>
           <div className={styles['product-container']}>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            {error && <p style={{ fontSize: '14px', color: 'red', marginBottom: '20px' }}>{error}</p>}
+            {loading ?
+              <div style={{ display: 'flex', alignItems: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '16px', margin: '10px 0' }}>
+                <Loader size={35} color={'#115ffc'} /> Loading . . .
+              </div>
+              :
+              <>
+                {data?.data.map((product, index) => (
+                  <ProductCard key={index} id={product.id} image={product.productimage} name={product.name} category={product.category} description={product.description} price={product.price} stock={product.stock} />
+                ))}
+                {(data?.data.length === 0 && !error) && <p>No product available</p>}
+              </>
+            }
           </div>
 
           {/* --- PAGINATION --- */}
+          {mode === 'all-product' && 
           <div className={styles['pagination']}>
-            <IoIosArrowBack size={24} onClick={prevPage} />
+            <IoIosArrowBack size={24} onClick={prevPage} style={{ cursor: 'pointer' }} />
 
             {lastPage === 1 && <div className={styles['pagination-content']}>
               <div className={styles['page-number-box']} id={currentPage === 1 ? styles['active-page-number-box'] : ''}>1</div>
@@ -80,17 +168,17 @@ const AllProducts = ({mode = 'all-product'}) => {
             </div>}
 
             {lastPage >= 3 && <div className={styles['pagination-content']}>
-              <div className={styles['page-number-box']} id={currentPage === 1 ? styles['active-page-number-box'] : ''}>1</div>
+              <div className={styles['page-number-box']} style={{ cursor: 'pointer' }} id={currentPage === 1 ? styles['active-page-number-box'] : ''} onClick={() => fetchProducts(`${process.env.REACT_APP_BACKEND_BASE_URL}/products?page=1`)}>1</div>
               <p>. . .</p>
               {currentPage > 1 && currentPage < lastPage && <div className={styles['pagination-content']}>
                 <div className={styles['page-number-box']} id={styles['active-page-number-box']}>{currentPage}</div>
                 <p>. . .</p>
               </div>}
-              <div className={styles['page-number-box']} id={currentPage === lastPage ? styles['active-page-number-box'] : ''}>{lastPage}</div>
+              <div className={styles['page-number-box']} style={{ cursor: 'pointer' }} id={currentPage === lastPage ? styles['active-page-number-box'] : ''} onClick={() => fetchProducts(`${process.env.REACT_APP_BACKEND_BASE_URL}/products?page=${lastPage}`)}>{lastPage}</div>
             </div>}
 
-            <IoIosArrowForward size={24} onClick={nextPage} />
-          </div>
+            <IoIosArrowForward size={24} onClick={nextPage} style={{ cursor: 'pointer' }} />
+          </div>}
         </div>
       </div>
     </>

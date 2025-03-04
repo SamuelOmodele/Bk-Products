@@ -5,7 +5,7 @@ import product_img from '../../assets/wrist-watch.jpg'
 import { useNavigate } from 'react-router-dom';
 import { MdAddShoppingCart } from "react-icons/md";
 
-const ProductCard = ({ image, name, category, description, price, stock }) => {
+const ProductCard = ({ id, image, name, category, description, price, stock }) => {
 
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const ProductCard = ({ image, name, category, description, price, stock }) => {
       <p className={styles['price']}>&#8358;{Number(price).toLocaleString()} </p>
       <p className={styles['quantity']}>{stock} items left</p>
       <div className={styles['button-cart']}>
-        <button onClick={() => navigate('/product-detail')}>View Product</button>
+        <button onClick={() => navigate(`/product-detail/${id}`)}>View Product</button>
         <div >
           <MdAddShoppingCart size={24} className={styles['cart']} />
         </div>

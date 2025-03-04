@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './cart.module.css'
 import Navbar from '../../components/navbar/navbar'
 import CartProductRow from '../../components/cartProductRow/cartProductRow'
@@ -28,6 +28,12 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+
+  useEffect(() => (
+    window.scrollTo({
+      top: 0
+    })
+  ), []);
 
   const deliveryZones = [
     {
@@ -123,7 +129,7 @@ const Cart = () => {
               <button onClick={confirmCheckout}>Proceed to Checkout</button>
             </div>
           </div>
-          <p onClick={logout} style={{marginTop: '10px', fontSize: '14px'}}>Logout</p>
+          <p onClick={logout} style={{ marginTop: '10px', fontSize: '14px' }}>Logout</p>
 
         </div>
 

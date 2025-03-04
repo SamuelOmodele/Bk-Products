@@ -58,7 +58,7 @@ const FeaturedProducts = () => {
           <GoArrowRight size={22} />
         </div>
       </div>
-      <div className={styles['product-card-container']}>
+      <div className={styles['product-card-container']} style={{ marginBottom: loading ? '30px' : '' }}>
         {error && <p style={{ fontSize: '14px', color: 'red', marginBottom: '20px' }}>{error}</p>}
         {loading ?
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '16px', margin: '10px 0' }}>
@@ -67,7 +67,7 @@ const FeaturedProducts = () => {
           :
           <>
             {data?.data.map((product, index) => (
-              <ProductCard key={index} image={product.productimage} name={product.name} category={product.category} description={product.description} price={product.price} stock={product.stock} />
+              <ProductCard key={index} id={product.id} image={product.productimage} name={product.name} category={product.category} description={product.description} price={product.price} stock={product.stock} />
             ))}
             {(data?.data.length === 0 && !error) && <p>No product available</p>}
           </>

@@ -6,7 +6,7 @@ import ProductInfo from '../../components/productInfo/productInfo'
 
 const ProductDetails = () => {
     return (
-        <div>
+        <div style={{minHeight: '100vh' }}>
             <Navbar active={''} />
             <div className={styles['content-page']}>
                 <ProductInfo />

@@ -44,6 +44,9 @@
     width: 100%;
 }
 .all-product-content h3{
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-top: 30px;
     margin-bottom: 30px;
     font-size: 26px;
@@ -54,11 +57,12 @@
     display: grid;
     grid-template-columns: calc((100% - 60px)/5) calc((100% - 60px)/5) calc((100% - 60px)/5) calc((100% - 60px)/5) calc((100% - 60px)/5);
     gap: 15px;
+    margin-bottom: 90px;
 }
 .pagination{
     display: flex;
     width: 45%;
-    margin: 50px auto 90px;
+    margin: -40px auto 90px;
     align-items: center;
     justify-content: space-between;
     font-size: 15px;

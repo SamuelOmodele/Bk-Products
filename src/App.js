@@ -99,8 +99,10 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/shop' element={<Shop />} />
         <Route path='/product-detail' element={<ProductDetails />} />
+        <Route path='/product-detail/:id' element={<ProductDetails />} />
         {/* <Route path='/about' element={<About />} /> */}
         <Route path='/search' element={<Search />} />
+        <Route path='/search/:searchTerm' element={<Search />} />
         {/* <Route path='/contact' element={<Contact />} /> */}
         <Route path='/cart' element={<Cart />} />
         <Route path='/orders' element={<ProtectedRoute><Orders /></ProtectedRoute>}>

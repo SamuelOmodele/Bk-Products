@@ -251,7 +251,7 @@ const AddProduct = () => {
             </div>
             <div className={styles['form-field-box']}>
               <label htmlFor="">Stock</label>
-              <input type="number" placeholder='Stock amount' value={stock} onChange={(e) => setStock(e.target.value)} />
+              <input type="text" placeholder='Stock amount' value={stock} onChange={(e) => setStock(e.target.value)} />
             </div>
           </div>
 

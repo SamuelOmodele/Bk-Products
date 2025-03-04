@@ -35,9 +35,15 @@ span.bold-blue{
     border-radius: 5px;
 }
 .lower-content{
+    /* display: grid;
+    grid-template-columns: 67% auto; */
+    /* display: block; */
+    /* gap: 50px; */
+}
+.lower-content{
     display: grid;
-    grid-template-columns: 67% auto;
-    gap: 50px;
+    grid-template-columns: auto;
+    gap: 30px;
 }
 .product-container{
     width: 100%;
@@ -71,7 +77,7 @@ span.bold-blue{
     float: right;
 }
 .checkout-container{
-    width: 100%;
+    width:350px;
     height: fit-content;
     background-color: white;
     border-radius: 15px;
