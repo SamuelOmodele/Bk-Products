@@ -52,7 +52,7 @@ const FeaturedProducts = () => {
     <div className={styles['featured-product-container']}>
       <div className={styles['featured-head-text']}>
 
-        <h2>Best Selling Products</h2>
+        <h2>Top Products</h2>
         <div className={styles['view-all-text']} onClick={() => navigate('/shop')}>
           View all Products
           <GoArrowRight size={22} />

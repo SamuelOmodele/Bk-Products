@@ -17,10 +17,11 @@
 }
 .product-card-container{
     display: grid;
-    /* grid-template-columns: auto auto auto auto; */
-    grid-template-columns: calc((100% - 60px)/5) calc((100% - 60px)/5) calc((100% - 60px)/5) calc((100% - 60px)/5) calc((100% - 60px)/5);
-    gap: 15px;
-    /* background-color: red; */
+    grid-template-columns: calc((100% - 90px)/4) calc((100% - 90px)/4) calc((100% - 90px)/4) calc((100% - 90px)/4);
+
+    /* grid-template-columns: calc((100% - 60px)/5) calc((100% - 60px)/5) calc((100% - 60px)/5) calc((100% - 60px)/5) calc((100% - 60px)/5); */
+    row-gap: 40px;
+    column-gap: 30px;
 }
 .view-all-text{
     cursor: pointer;
