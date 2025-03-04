@@ -10,7 +10,7 @@ const SearchBar = ({ top = '0px', focus, width }) => {
     const searchInputRef = useRef(null);
     const searchFormRef = useRef(null);
 
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTermValue, setsearchTermValue] = useState('');
 
     useEffect(() => {
         const handleResize = () => setIsLargeScreen(window.innerWidth > 500);
@@ -19,8 +19,13 @@ const SearchBar = ({ top = '0px', focus, width }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    useEffect(() => {
+    const { searchTerm } = useParams();
 
+    useEffect(() => {
+        setsearchTermValue(searchTerm);
+    }, [searchTerm]);
+
+    useEffect(() => {
         if (searchInputRef.current && focus) {
             searchInputRef.current.focus();
         }
@@ -30,10 +35,10 @@ const SearchBar = ({ top = '0px', focus, width }) => {
 
     const handleSearch = (e) => {
         e.preventDefault();
-        // if (searchTerm.trim()) {
-        //     navigate(`/search/${searchTerm}`);
+        // if (searchTermValue.trim()) {
+        //     navigate(`/search/${searchTermValue}`);
         // }
-        navigate(`/search/${searchTerm}`);
+        navigate(`/search/${searchTermValue}`);
 
     }
 
@@ -46,7 +51,7 @@ const SearchBar = ({ top = '0px', focus, width }) => {
     return (
         <div className={styles['search-container']} style={{ marginTop: isLargeScreen ? top : '30px' }}>
             <form ref={searchFormRef} onSubmit={handleSearch} className={styles['search-box']} style={{ width: width }}>
-                <input type="text" placeholder='Search Product . . .' ref={searchInputRef} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+                <input type="text" placeholder='Search Product . . .' ref={searchInputRef} value={searchTermValue} onChange={(e) => setsearchTermValue(e.target.value)} />
                 <IoIosSearch className={styles['search-icon']} onClick={handleIconClick} />
             </form>
         </div>
