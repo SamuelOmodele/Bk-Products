@@ -59,7 +59,7 @@ const FeaturedProducts = () => {
         </div>
       </div>
       <div className={styles['product-card-container']} style={{ marginBottom: loading ? '30px' : '' }}>
-        {error && <p style={{ fontSize: '14px', color: 'red', marginBottom: '20px' }}>{error}</p>}
+        {error && <p style={{ fontSize: '14px', color: 'red', marginBottom: '20px', width: '200%' }}>{error}</p>}
         {loading ?
           <div style={{ display: 'flex', alignItems: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '16px', margin: '10px 0' }}>
             <Loader size={35} color={'#115ffc'} /> Loading . . .

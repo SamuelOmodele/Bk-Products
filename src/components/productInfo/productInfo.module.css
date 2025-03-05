@@ -27,7 +27,7 @@
 .product-images img.main-image {
     width: 100%;
     border-radius: 0px;
-    border: 1.5px solid #ededed;
+    border: 1.5px solid #cac9d9;;
 }
 
 .product-images .smaller-images {
@@ -42,7 +42,7 @@
 .product-images .smaller-images img {
     border-radius: 10px;
     cursor: pointer;
-    border: 2px solid #F8F8F8;
+    border: 2px solid #ededed;
 }
 
 .right-section {

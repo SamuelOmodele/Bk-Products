@@ -127,12 +127,13 @@
 @media screen and (max-width: 500px){
     .hero-section{
         padding: 100px 10px 70px;
+        background-position: -50px -50px ;
     }
     
 }
 @media screen and (max-width: 450px){
     .hero-section .hero-text h2{
-        font-size: 32px;
+        font-size: 31px;
     }
     .hero-section .hero-text p{
         font-size: 14px;
