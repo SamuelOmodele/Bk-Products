@@ -16,6 +16,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setIsSignedIn, setRole } from '../../redux/authSlice';
+import Loader from '../../components/loader/loader';
 
 const Cart = () => {
 
@@ -29,11 +30,51 @@ const Cart = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => (
+  useEffect(() => {
+
     window.scrollTo({
       top: 0
-    })
-  ), []);
+    });
+    fetchCart();
+  }, []);
+
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const fetchCart = async () => {
+    setData(null)
+    setLoading(true);
+    setError(null);
+    console.log('loading starts')
+    const accessToken = localStorage.getItem('accessToken')
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/cart/view`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.message);
+        console.log('Failed request', errorData);
+        return;
+      }
+
+      const successResponse = await response.json();
+      setData(successResponse);
+      console.log(successResponse);
+
+    } catch (err) {
+      setError('an unknown error occured');
+      console.log('An Unknown Error occured: ', err)
+    } finally {
+      setLoading(false);
+    }
+  }
 
   const deliveryZones = [
     {
@@ -87,51 +128,61 @@ const Cart = () => {
     <div>
       <Navbar />
       <div className={styles['content-page']}>
-        <div className={styles['cart-page']}>
-
-          {/* --- Head content --- */}
-          <div className={styles['head-container']}>
-            <div className={styles['left']}>
-              <h3>Shopping Cart</h3>
-              <p><span className={styles['bold-blue']}>2 items</span> in your cart.</p>
-            </div>
-            <button onClick={() => navigate('/orders')}>My Orders</button>
+        {loading ?
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', gap: '10px', fontSize: '16px', margin: '40px 0' }}>
+            <Loader size={35} color={'#115ffc'} /> Loading . . .
           </div>
+          :
+          error ?
+            <p className={styles['error-msg']}>{error}</p>
+            :
+            <div className={styles['cart-page']}>
 
-          {/* --- Lower content --- */}
-          <div className={styles['lower-content']}>
-            <div className={styles['product-overflow-container']}>
-              <div className={styles['product-container']}>
+              {/* --- Head content --- */}
+              <div className={styles['head-container']}>
+                <div className={styles['left']}>
+                  <h3>My Cart</h3>
+                  <p><span className={styles['bold-blue']}>{data?.cart_items.length} items</span> in your cart.</p>
+                </div>
+                <button onClick={() => navigate('/orders')}>My Orders</button>
+              </div>
 
-                <div className={styles['product-container-head']}>
-                  <p>Product</p>
-                  <p>Price</p>
-                  <p>Quantity</p>
-                  <p>Total Price</p>
+              {/* --- Lower content --- */}
+              <div className={styles['lower-content']}>
+                <div className={styles['product-overflow-container']}>
+                  <div className={styles['product-container']}>
+
+                    <div className={styles['product-container-head']}>
+                      <p>Product</p>
+                      <p>Price</p>
+                      <p>Quantity</p>
+                      <p>Total Price</p>
+                    </div>
+
+                    {data?.cart_items.map((cartItem, index) => (
+                      <CartProductRow key={index} cartItem={cartItem} fetchCart={fetchCart} />
+                    ))}
+                    {data && <p>Total : <span className={styles['total-amount']}>&#8358;{Number(data?.total_price).toLocaleString()}</span></p>}
+                    {!data?.cart_items.length && <p>No Data</p>}
+
+                  </div>
                 </div>
 
-                <CartProductRow />
-                <CartProductRow />
-                <p>Total : <span className={styles['total-amount']}>$1000.00</span></p>
-
+                <div className={styles['checkout-container']}>
+                  <h3>Add Delivery Zone</h3>
+                  <select name="" id="" onChange={(e) => setSelectedZoneId(e.target.value)}>
+                    <option value="">-- Select --</option>
+                    {deliveryZones.map((zone, index) => (
+                      <option key={index} value={zone.id}>{zone.name}</option>
+                    ))}
+                  </select>
+                  <div className={styles['delivery-fee']}>{selectedZoneId && <p>Delivery fee is <span className={styles['bold-blue']}>{`$${deliveryZones.find((zone) => zone.id === Number(selectedZoneId))?.price}` || "N/A"}</span></p>} {zoneError && !selectedZoneId && <p style={{ color: 'red' }}>Select a Zone</p>}</div>
+                  <button onClick={confirmCheckout}>Proceed to Checkout</button>
+                </div>
               </div>
-            </div>
+              <p onClick={logout} style={{ marginTop: '10px', fontSize: '14px' }}>Logout</p>
 
-            <div className={styles['checkout-container']}>
-              <h3>Add Delivery Zone</h3>
-              <select name="" id="" onChange={(e) => setSelectedZoneId(e.target.value)}>
-                <option value="">-- Select --</option>
-                {deliveryZones.map((zone, index) => (
-                  <option key={index} value={zone.id}>{zone.name}</option>
-                ))}
-              </select>
-              <div className={styles['delivery-fee']}>{selectedZoneId && <p>Delivery fee is <span className={styles['bold-blue']}>{`$${deliveryZones.find((zone) => zone.id === Number(selectedZoneId))?.price}` || "N/A"}</span></p>} {zoneError && !selectedZoneId && <p style={{ color: 'red' }}>Select a Zone</p>}</div>
-              <button onClick={confirmCheckout}>Proceed to Checkout</button>
-            </div>
-          </div>
-          <p onClick={logout} style={{ marginTop: '10px', fontSize: '14px' }}>Logout</p>
-
-        </div>
+            </div>}
 
         {/* --- CHECK OUT MODAL --- */}
         <Modal isOpen={isOpen} onClose={onClose} isCentered>

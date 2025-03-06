@@ -104,7 +104,7 @@ function App() {
         <Route path='/search' element={<Search />} />
         <Route path='/search/:searchTerm' element={<Search />} />
         {/* <Route path='/contact' element={<Contact />} /> */}
-        <Route path='/cart' element={<Cart />} />
+        <Route path='/cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
         <Route path='/orders' element={<ProtectedRoute><Orders /></ProtectedRoute>}>
           <Route index element={<AllOrders />} />
           <Route path='open' element={<OpenOrders />} />

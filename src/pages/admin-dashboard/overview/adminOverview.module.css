@@ -99,7 +99,7 @@
     width: 60px;
     height: 60px;
     border-radius: 5px;
-    ;
+    border: 1px solid #cac9d9;
 }
 
 .top-product .right-content {

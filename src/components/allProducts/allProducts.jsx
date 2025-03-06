@@ -39,6 +39,10 @@ const AllProducts = ({ mode = 'all-product' }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [categoryData, setCategoryData] = useState(null);
+  const [categoryLoading, setCategoryLoading] = useState(false);
+  const [categoryError, setCategoryError] = useState(null);
+
   useEffect(() => {
     scrollUp();
     console.log('mode', mode)
@@ -46,6 +50,7 @@ const AllProducts = ({ mode = 'all-product' }) => {
       searchProduct(searchTerm);
     } else {
       fetchProducts(`${process.env.REACT_APP_BACKEND_BASE_URL}/products`);
+      fetchCategories();
     }
   }, [searchTerm]);
 
@@ -83,6 +88,38 @@ const AllProducts = ({ mode = 'all-product' }) => {
       setLoading(false);
     }
   }
+
+  const fetchCategories = async () => {
+    setCategoryData(null)
+    setCategoryLoading(true);
+    setCategoryError(null);
+    console.log('loading starts')
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/categories`, {
+        method: 'GET',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setCategoryError(errorData.message);
+        console.log('Failed request', errorData);
+        return;
+      }
+
+      const successResponse = await response.json();
+      setCategoryData(successResponse);
+      console.log(successResponse);
+
+    } catch (err) {
+      setCategoryError('an unknown error occured');
+      console.log('An Unknown Error occured: ', err)
+    } finally {
+      setCategoryLoading(false);
+    }
+  }
+
+
 
   const searchProduct = async (search_text) => {
     console.log(search_text);
@@ -130,13 +167,30 @@ const AllProducts = ({ mode = 'all-product' }) => {
 
       <div className={styles['all-product']}>
         {mode === 'all-product' && <div className={styles['filter']}>
-          <p>Filter by</p>
-          <div>Category <IoIosArrowDown size={17.5} /></div>
-          <div>Price <IoIosArrowDown size={17.5} /></div>
-          <div className={styles['button']}>Filter</div>
+          {/* <p>Filter by</p> */}
+          <div>
+            <select name="category" id="category"
+              onChange={(e) => {
+                const selectedValue = e.target.value;
+                const url =
+                  selectedValue === "all"
+                    ? `${process.env.REACT_APP_BACKEND_BASE_URL}/products`
+                    : `${process.env.REACT_APP_BACKEND_BASE_URL}/products/filter?category_id=${selectedValue}`;
+                fetchProducts(url);
+              }}
+            >
+              <option value="all">All</option>
+              {categoryData?.map((category) => (
+                <option value={category.id} key={category.id}>{category.name}</option>
+              ))}
+            </select>
+            <IoIosArrowDown className={styles['icon']} size={17.5} />
+          </div>
+          {/* <div>Price <IoIosArrowDown size={17.5} /></div> */}
+          {/* <div className={styles['button']}>Filter</div> */}
         </div>}
         <div className={styles['all-product-content']}>
-          <h3><IoArrowBackOutline onClick={mode === 'search' ? () => navigate('/shop') : () => navigate('/')} size={26} style={{cursor: 'pointer'}} /> {mode === 'search' ? 'Search Result' : 'Our Products'}</h3>
+          <h3><IoArrowBackOutline onClick={mode === 'search' ? () => navigate('/shop') : () => navigate('/')} size={26} style={{ cursor: 'pointer' }} /> {mode === 'search' ? 'Search Result' : 'Our Products'}</h3>
           <div className={styles['product-container']}>
             {error && <p style={{ fontSize: '14px', color: 'red', marginBottom: '20px' }}>{error}</p>}
             {loading ?
@@ -154,31 +208,31 @@ const AllProducts = ({ mode = 'all-product' }) => {
           </div>
 
           {/* --- PAGINATION --- */}
-          {mode === 'all-product' && 
-          <div className={styles['pagination']}>
-            <IoIosArrowBack size={24} onClick={prevPage} style={{ cursor: 'pointer' }} />
+          {mode === 'all-product' &&
+            <div className={styles['pagination']}>
+              <IoIosArrowBack size={24} onClick={prevPage} style={{ cursor: 'pointer' }} />
 
-            {lastPage === 1 && <div className={styles['pagination-content']}>
-              <div className={styles['page-number-box']} id={currentPage === 1 ? styles['active-page-number-box'] : ''}>1</div>
-            </div>}
-
-            {lastPage === 2 && <div className={styles['pagination-content']}>
-              <div className={styles['page-number-box']} id={currentPage === 1 ? styles['active-page-number-box'] : ''}>1</div>
-              <div className={styles['page-number-box']} id={currentPage === 2 ? styles['active-page-number-box'] : ''}>2</div>
-            </div>}
-
-            {lastPage >= 3 && <div className={styles['pagination-content']}>
-              <div className={styles['page-number-box']} style={{ cursor: 'pointer' }} id={currentPage === 1 ? styles['active-page-number-box'] : ''} onClick={() => fetchProducts(`${process.env.REACT_APP_BACKEND_BASE_URL}/products?page=1`)}>1</div>
-              <p>. . .</p>
-              {currentPage > 1 && currentPage < lastPage && <div className={styles['pagination-content']}>
-                <div className={styles['page-number-box']} id={styles['active-page-number-box']}>{currentPage}</div>
-                <p>. . .</p>
+              {lastPage === 1 && <div className={styles['pagination-content']}>
+                <div className={styles['page-number-box']} id={currentPage === 1 ? styles['active-page-number-box'] : ''}>1</div>
               </div>}
-              <div className={styles['page-number-box']} style={{ cursor: 'pointer' }} id={currentPage === lastPage ? styles['active-page-number-box'] : ''} onClick={() => fetchProducts(`${process.env.REACT_APP_BACKEND_BASE_URL}/products?page=${lastPage}`)}>{lastPage}</div>
-            </div>}
 
-            <IoIosArrowForward size={24} onClick={nextPage} style={{ cursor: 'pointer' }} />
-          </div>}
+              {lastPage === 2 && <div className={styles['pagination-content']}>
+                <div className={styles['page-number-box']} id={currentPage === 1 ? styles['active-page-number-box'] : ''}>1</div>
+                <div className={styles['page-number-box']} id={currentPage === 2 ? styles['active-page-number-box'] : ''}>2</div>
+              </div>}
+
+              {lastPage >= 3 && <div className={styles['pagination-content']}>
+                <div className={styles['page-number-box']} style={{ cursor: 'pointer' }} id={currentPage === 1 ? styles['active-page-number-box'] : ''} onClick={() => fetchProducts(`${process.env.REACT_APP_BACKEND_BASE_URL}/products?page=1`)}>1</div>
+                <p>. . .</p>
+                {currentPage > 1 && currentPage < lastPage && <div className={styles['pagination-content']}>
+                  <div className={styles['page-number-box']} id={styles['active-page-number-box']}>{currentPage}</div>
+                  <p>. . .</p>
+                </div>}
+                <div className={styles['page-number-box']} style={{ cursor: 'pointer' }} id={currentPage === lastPage ? styles['active-page-number-box'] : ''} onClick={() => fetchProducts(`${process.env.REACT_APP_BACKEND_BASE_URL}/products?page=${lastPage}`)}>{lastPage}</div>
+              </div>}
+
+              <IoIosArrowForward size={24} onClick={nextPage} style={{ cursor: 'pointer' }} />
+            </div>}
         </div>
       </div>
     </>

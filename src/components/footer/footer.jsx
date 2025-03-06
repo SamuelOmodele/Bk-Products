@@ -25,15 +25,13 @@ const Footer = () => {
                         <p><IoLocationSharp size={18} /> Lagos, Nigeria</p>
                     </div>
                     <div className={styles['links']}>
-                        <p>Quick Links</p>
-                        <p>Home</p>
-                        <p>About</p>
-                        <p>Shop</p>
-                        <p>Contact</p>
+                        <p>Get Help</p>
+                        <p>Online shopping giude</p>
+                        <p>Customer support</p>
                     </div>
 
                     <div className={styles['links']}>
-                        <p>Social Media</p>
+                        <p>Follow us</p>
                         <p><FaFacebook size={22} /> Facebook</p>
                         <p><FaInstagram size={22} /> Instagram</p>
                         <p><FaXTwitter size={22} />Twitter</p>

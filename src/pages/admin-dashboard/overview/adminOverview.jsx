@@ -56,7 +56,7 @@ const AdminOverview = () => {
       // console.log('response 1: ', res1);
       // console.log('response 2: ', res2);
       console.log('response 3: ', res3);
-      // console.log('response 4: ', res4);
+      console.log('response 4: ', res4);
       // console.log('response 5: ', res5.orders);
       const order_chart_data = prepareOrderOverview(res3);
       const sales_chart_data = prepareSalesOverview(res3);
@@ -177,7 +177,7 @@ const AdminOverview = () => {
               {/* -- TOP PRODUCT LIST -- */}
               {data?.topProducts.most_selling_products.slice(0, 3).map((product, index) => (
                 <div className={styles["top-product"]} key={index}>
-                  <img src={wristWatch} alt="" />
+                  <img src={product.product.productimage} alt="" />
                   <div className={styles["right-content"]}>
                     <div className={styles["name-percent-container"]}>
                       <p className={styles["name"]}>{product.product.name} </p>

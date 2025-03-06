@@ -22,7 +22,9 @@ const SearchBar = ({ top = '0px', focus, width }) => {
     const { searchTerm } = useParams();
 
     useEffect(() => {
-        setsearchTermValue(searchTerm);
+        if (searchTerm) {
+            setsearchTermValue(searchTerm);
+        }
     }, [searchTerm]);
 
     useEffect(() => {
