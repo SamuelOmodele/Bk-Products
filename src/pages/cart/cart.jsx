@@ -162,7 +162,7 @@ const Cart = () => {
                     {data?.cart_items.map((cartItem, index) => (
                       <CartProductRow key={index} cartItem={cartItem} fetchCart={fetchCart} />
                     ))}
-                    {data && <p>Total : <span className={styles['total-amount']}>&#8358;{Number(data?.total_price).toLocaleString()}</span></p>}
+                    {data && <p style={{marginBottom: '10px'}}>Total : <span className={styles['total-amount']}>&#8358;{Number(data?.total_price).toLocaleString()}</span></p>}
                     {!data?.cart_items.length && <p>No Data</p>}
 
                   </div>

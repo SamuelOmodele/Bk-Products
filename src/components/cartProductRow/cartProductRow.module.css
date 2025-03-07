@@ -173,8 +173,8 @@ p.modal-head-text{
     /* flex-direction: row-reverse; */
 }
 .mobile-product-price{
-    font-weight: 600;
-    font-size: 17px;
+    font-weight: 500;
+    font-size: 15px;
 }
 @media screen and (max-width: 800px) {
     .product-data img{
