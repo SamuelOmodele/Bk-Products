@@ -39,7 +39,7 @@ const Cart = () => {
   }, []);
 
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const fetchCart = async () => {
@@ -153,10 +153,10 @@ const Cart = () => {
                   <div className={styles['product-container']}>
 
                     <div className={styles['product-container-head']}>
-                      <p>Product</p>
-                      <p>Price</p>
-                      <p>Quantity</p>
-                      <p>Total Price</p>
+                      <p>Cart items</p>
+                      {/* <p id={styles['price-head-text']}>Price</p>
+                      <p id={styles['quantity-head-text']}>Quantity</p>
+                      <p id={styles['total-price-head-text']}>Total Price</p> */}
                     </div>
 
                     {data?.cart_items.map((cartItem, index) => (

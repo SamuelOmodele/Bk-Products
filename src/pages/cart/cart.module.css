@@ -1,65 +1,76 @@
-.content-page{
+.content-page {
     padding: 80px 0 0px;
     min-height: 100vh;
     background-color: #F3F3F3;
 }
-.cart-page{
+
+.cart-page {
     width: 100%;
     background-color: #F3F3F3;
     min-height: calc(100vh - 80px);
     padding: 30px 50px;
 }
-.error-msg{
+
+.error-msg {
     color: red;
     font-size: 14px;
     margin: 50px;
 }
-.head-container{
+
+.head-container {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 30px;
 }
-.head-container .left h3{
+
+.head-container .left h3 {
     font-size: 25px;
     font-weight: 600;
     margin-bottom: 5px;
     color: #253656;
 }
-.head-container .left p{
+
+.head-container .left p {
     font-size: 15px;
 }
-span.bold-blue{
+
+span.bold-blue {
     font-weight: 600;
     color: #115ffc;
 }
-.head-container button{
+
+.head-container button {
     background-color: #115ffc;
     color: white;
     padding: 6px 15px;
     font-size: 14.5px;
     border-radius: 5px;
 }
-.lower-content{
+
+.lower-content {
     display: grid;
     grid-template-columns: calc(100% - 380px) auto;
     gap: 30px;
 }
+
 /* .lower-content{
     display: grid;
     grid-template-columns: auto;
     gap: 30px;
 } */
-.product-container{
+.product-container {
     width: 100%;
     padding: 30px;
     background-color: white;
     border-radius: 4px;
     /* border: 1px solid #cac9d9; */
-    box-shadow: 0 0 2px 0.5px rgba(0, 0, 0, 0.15);
+    border: 1.5px solid #DBDEE2CC;
+    /* box-shadow: 0 0 2px 0.5px rgba(0, 0, 0, 0.15); */
 }
-.product-container-head{
+
+.product-container-head {
     display: grid;
     grid-template-columns: 47.5% 12.5% 25% 15%;
     font-weight: 600;
@@ -68,13 +79,16 @@ span.bold-blue{
     border-bottom: 1.5px solid #F2F2F2;
     padding-bottom: 25px;
 }
-.product-container-head > p {
+
+.product-container-head>p {
     text-align: center;
 }
-.product-container-head > p:first-child {
+
+.product-container-head>p:first-child {
     text-align: left;
 }
-.total-amount{
+
+.total-amount {
     /* width: 15%; */
     /* background-color: red; */
     text-align: center;
@@ -83,7 +97,8 @@ span.bold-blue{
     color: #354666;
     float: right;
 }
-.checkout-container{
+
+.checkout-container {
     width: 350px;
     height: fit-content;
     background-color: white;
@@ -91,12 +106,14 @@ span.bold-blue{
     box-shadow: 0.5px 0.5px 3px 1px rgba(0, 0, 0, 0.15);
     padding: 20px;
 }
-.checkout-container h3{
+
+.checkout-container h3 {
     font-size: 19px;
     font-weight: 500;
     margin-bottom: 10px;
 }
-.checkout-container select{
+
+.checkout-container select {
     width: 100%;
     font-size: 15px;
     padding: 8px 20px;
@@ -106,10 +123,12 @@ span.bold-blue{
     appearance: none;
     outline: none;
 }
-.checkout-container select:focus{
+
+.checkout-container select:focus {
     border: 1.5px solid #115FFC;
 }
-.checkout-container button{
+
+.checkout-container button {
     width: 100%;
     padding: 8px 20px;
     border-radius: 5px;
@@ -117,27 +136,30 @@ span.bold-blue{
     color: white;
     font-size: 15px;
 }
-.delivery-fee{
+
+.delivery-fee {
     color: #333;
     margin: 15px 0;
     font-size: 13px;
     font-weight: 500;
 }
 
-.cart-summary{
+.cart-summary {
     width: 100%;
     border-radius: 10px;
     background-color: #F3F3F3;
-    padding:  10px;
+    padding: 10px;
 }
-.cart-summary h3{
+
+.cart-summary h3 {
     color: #253656;
     font-weight: 600;
     font-size: 18px;
     /* text-align: center; */
     margin-bottom: 10px;
 }
-.cart-summary > div{
+
+.cart-summary>div {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -145,7 +167,8 @@ span.bold-blue{
     font-size: 14px;
     font-weight: 500;
 }
-div.total{
+
+div.total {
     border-top: 1.5px solid #cac9d9;
     margin-top: 10px;
     padding-top: 10px;
@@ -153,7 +176,7 @@ div.total{
     font-weight: 600;
 }
 
-.cart-summary > button{
+.cart-summary>button {
     margin-top: 5px;
     width: 100%;
     padding: 9px 0;
@@ -164,72 +187,113 @@ div.total{
 }
 
 @media screen and (max-width: 1100px) {
-    .lower-content{
+    .lower-content {
         grid-template-columns: auto;
         gap: 30px;
     }
-    .checkout-container{
+
+    .checkout-container {
         width: 400px;
     }
 }
 
 @media screen and (max-width: 800px) {
-    .product-container-head{
+    .product-container-head {
         font-size: 15.5px;
     }
 }
 
 @media screen and (max-width: 700px) {
-    .cart-page{
+    .cart-page {
         padding: 30px;
     }
-    .error-msg{
+
+    .error-msg {
         margin: 30px;
     }
-    .product-container{
+
+    .product-container {
         padding: 20px 15px;
     }
 }
 
 @media screen and (max-width: 650px) {
 
-    .product-container{
+    .product-container {
         min-width: 590px;
         box-shadow: none;
     }
-    .product-overflow-container{
+
+    .product-overflow-container {
         overflow-x: auto;
     }
 }
 
+@media screen and (max-width: 650px) {
+
+    .product-container {
+        min-width: 100%;
+        width: 100%;
+        box-shadow: none;
+        padding: 10px;
+    }
+
+    .product-container-head {
+        /* display: none; */
+        padding-top: 5px;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    /* display: grid;
+    grid-template-columns: 47.5% 12.5% 25% 15%;
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 20px;
+    border-bottom: 1.5px solid #F2F2F2; */
+    #price-head-text,
+    #quantity-head-text,
+    #total-price-head-text {
+        display: none;
+    }
+}
+
 @media screen and (max-width: 500px) {
-    .content-page{
+    .content-page {
         padding: 65px 0 0;
     }
-    .cart-page{
+
+    .cart-page {
         padding: 20px 10px;
     }
-    .error-msg{
+
+    .error-msg {
         margin: 20px 10px;
     }
-    .head-container .left h3{
+
+    .head-container .left h3 {
         font-size: 20px;
     }
-    .head-container .left p{
+
+    .head-container .left p {
         font-size: 13px;
     }
-    .head-container button{
+
+    .head-container button {
         font-size: 14px;
     }
-    .lower-content{
+
+    .lower-content {
         gap: 20px;
     }
-    .checkout-container h3{
+
+    .checkout-container h3 {
         font-size: 16px;
     }
 }
+
 @media screen and (max-width: 460px) {
-    .checkout-container{
+    .checkout-container {
         width: 100%;
     }
 }
