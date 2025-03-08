@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './orderContent.module.css'
 import { useNavigate } from 'react-router-dom'
 import SingleOrderBox from './singleOrderBox';
+import Loader from '../../../../components/loader/loader';
 
 const OpenOrders = () => {
 
@@ -46,6 +47,48 @@ const OpenOrders = () => {
 
     const navigate = useNavigate();
 
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        fetchOrders();
+    }, []);
+
+    const fetchOrders = async () => {
+        setData(null)
+        setLoading(true);
+        setError(null);
+        console.log('loading starts')
+        const accessToken = localStorage.getItem('accessToken')
+
+        try {
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/openOrders`, {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                setError(errorData.message);
+                console.log('Failed request', errorData);
+                return;
+            }
+
+            const successResponse = await response.json();
+            setData(successResponse);
+            console.log(successResponse);
+
+        } catch (err) {
+            setError('an unknown error occured');
+            console.log('An Unknown Error occured: ', err)
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return (
         <div className={styles['orders-content-page']}>
             <div className={styles['orders-nav']}>
@@ -54,11 +97,19 @@ const OpenOrders = () => {
                 <p onClick={() => navigate('/orders/closed')}>Closed</p>
             </div>
             <h3>Open Orders</h3>
-            <div className={styles['orders-box']}>
-                {orders.map((order, index) => (
-                    <SingleOrderBox order={order} key={index} />
-                ))}
-            </div>
+            {loading ?
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', gap: '10px', fontSize: '15px', margin: '30px 0' }}><Loader color={'#115ffc'} size={28} /> Loading . . .</div>
+                :
+                error ?
+                    <p style={{ color: 'red', fontSize: '14px', margin: '10px 0' }}>{error}</p>
+                    :
+                    <div className={styles['orders-box']}>
+                        {data?.open_orders.map((order, index) => (
+                            <SingleOrderBox order={order} key={index} />
+                        ))}
+
+                    </div>
+            }
         </div>
     )
 }

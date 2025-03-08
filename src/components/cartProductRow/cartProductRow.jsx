@@ -126,7 +126,7 @@ const CartProductRow = ({ cartItem, fetchCart }) => {
 
     return (
         <>
-            <div className={styles['product-row']}>
+            {/* <div className={styles['product-row']}>
                 <div className={styles['product-data']}>
                     <img src={cartItem?.productimage} alt="" />
                     <div>
@@ -157,34 +157,36 @@ const CartProductRow = ({ cartItem, fetchCart }) => {
                 </div>
                 <div className={styles['product-total-price']}>&#8358;{Number(cartItem?.total_price).toLocaleString()}</div>
                 <FaTrashAlt className={styles['trash']} onClick={onOpen} />
-            </div>
+            </div> */}
             <div className={styles['mobile-product-row']}>
                 <img src={cartItem?.productimage} alt="" />
-                <p className={styles['mobile-product-name']} onClick={() => navigate(`/product-detail/${cartItem?.product_id}`)}>{cartItem?.product_name}</p>
-                <p className={styles['stock-amount']} style={{ margin: '3px 0 7px', fontSize: '14px' }}><span>{cartItem?.stock} items</span> left</p>
-                <div className={styles['bottom']}>
-                    <div className={styles['product-quantity']}>
-                        <FiMinus className={styles['quantity-icon']} onClick={decrementQuantity} />
-                        {selectedQuantity}
-                        <FiPlus className={styles['quantity-icon']} onClick={incrementQuantity} />
-                        {selectedQuantity !== cartItem?.quantity &&
-                            <div className={styles['save']}>
-                                {editMessage ?
-                                    <p style={{ color: 'green', fontSize: '12px', fontWeight: '500', textAlign: 'center' }}>update successful</p>
-                                    :
-                                    <>
-                                        {editError && <p style={{ color: 'red', fontSize: '12px', fontWeight: '500' }}>{editError}</p>}
-                                        <button className={styles['save-btn']} onClick={editCartItem}>
-                                            {editLoading ? <Loader size={20} /> : 'save'}
-                                        </button>
-                                    </>
-                                }
-                            </div>
-                        }
+                <div className={styles['mobile-product-details']}>
+                    <p className={styles['mobile-product-name']} onClick={() => navigate(`/product-detail/${cartItem?.product_id}`)}>{cartItem?.product_name}</p>
+                    <p className={styles['stock-amount']} style={{ margin: '3px 0 7px', fontSize: '14px' }}><span>{cartItem?.stock} items</span> left</p>
+                    <div className={styles['bottom']}>
+                        <div className={styles['product-quantity']}>
+                            <FiMinus className={styles['quantity-icon']} onClick={decrementQuantity} />
+                            {selectedQuantity}
+                            <FiPlus className={styles['quantity-icon']} onClick={incrementQuantity} />
+                            {selectedQuantity !== cartItem?.quantity &&
+                                <div className={styles['save']}>
+                                    {editMessage ?
+                                        <p style={{ color: 'green', fontSize: '12px', fontWeight: '500', textAlign: 'center' }}>update successful</p>
+                                        :
+                                        <>
+                                            {editError && <p style={{ color: 'red', fontSize: '12px', fontWeight: '500' }}>{editError}</p>}
+                                            <button className={styles['save-btn']} onClick={editCartItem}>
+                                                {editLoading ? <Loader size={20} /> : 'save'}
+                                            </button>
+                                        </>
+                                    }
+                                </div>
+                            }
+                        </div>
+                        <div className={styles['mobile-product-price']}>&#8358;{Number(cartItem?.total_price).toLocaleString()}</div>
                     </div>
-                    <div className={styles['mobile-product-price']}>&#8358;{Number(cartItem?.total_price).toLocaleString()}</div>
                 </div>
-                <FaTrashAlt className={styles['trash']} style={{right: '0'}} onClick={onOpen} />
+                <FaTrashAlt className={styles['trash']} style={{ right: '0' }} onClick={onOpen} />
 
             </div>
             <Modal isOpen={isOpen} onClose={onClose} >

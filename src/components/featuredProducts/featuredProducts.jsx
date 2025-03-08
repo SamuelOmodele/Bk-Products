@@ -25,7 +25,7 @@ const FeaturedProducts = () => {
     console.log('loading starts')
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/products`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/topSellingProducts`, {
         method: 'GET',
       });
 
@@ -37,7 +37,7 @@ const FeaturedProducts = () => {
       }
 
       const successResponse = await response.json();
-      setData(successResponse);
+      setData(successResponse.most_selling_products);
       console.log(successResponse);
 
     } catch (err) {
@@ -66,10 +66,10 @@ const FeaturedProducts = () => {
           </div>
           :
           <>
-            {data?.data.map((product, index) => (
+            {data?.map((product, index) => (
               <ProductCard key={index} id={product.id} image={product.productimage} name={product.name} category={product.category} description={product.description} price={product.price} stock={product.stock} />
             ))}
-            {(data?.data.length === 0 && !error) && <p>No product available</p>}
+            {(data?.length === 0 && !error) && <p>No product available</p>}
           </>
         }
 

@@ -177,10 +177,10 @@ const AdminOverview = () => {
               {/* -- TOP PRODUCT LIST -- */}
               {data?.topProducts.most_selling_products.slice(0, 3).map((product, index) => (
                 <div className={styles["top-product"]} key={index}>
-                  <img src={product.product.productimage} alt="" />
+                  <img src={product.productimage} alt="" />
                   <div className={styles["right-content"]}>
                     <div className={styles["name-percent-container"]}>
-                      <p className={styles["name"]}>{product.product.name} </p>
+                      <p className={styles["name"]}>{product.name} </p>
                       <div className={styles["percent-container"]}>
                         <p>{product.total_sold} items sold</p>
                         <div className={styles["percent"]}>{((Number(product.total_sold) / Number(data?.topProducts.total_items_sold_this_month)) * 100).toFixed(2)}%</div>
